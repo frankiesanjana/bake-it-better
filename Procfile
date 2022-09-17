@@ -1,0 +1,1 @@
+web: gunicorn bakeitbetter.wsgi
