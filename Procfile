@@ -1,1 +1,1 @@
-web: gunicorn bakeitbetter.wsgi
+web: gunicorn bake-it-better.wsgi
