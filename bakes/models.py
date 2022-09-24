@@ -18,7 +18,7 @@ class Bake(models.Model):
     description = models.TextField(max_length=500, blank=True)
     slug = AutoSlugField(populate_from=['title', 'description'])
     difficulty = models.IntegerField(choices=[1, 2, 3, 4, 5], default=3)
-    equipment = models.TextField(max_length=200)
+    equipment = models.TextField(max_length=300)
     ingredients = models.TextField()
     method = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
@@ -45,9 +45,49 @@ class Comment(models.Model):
     """
        Defines the model for comments
     """
+    bake = models.ForeignKey(Bake, on_delete=models.CASCADE, related_name='comments')
+    name = models.CharField(max_length=100)
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(default=False)
+
+    class Meta:
+        """
+        Orders the comments by the order in which they were made,
+        oldest first
+        """
+        ordering = ['created_on']
+
+        def __str__(self):
+            return f"Comment {self.body} by {self.name}"
 
 
 class BestFor(models.Model):
     """
        Defines the model for Best For bakes
     """
+    # Defines the choices for Best For bakes
+    BEST_FOR_CHOICES = [
+        (1, 'Brunch'),
+        (2, 'Kids'),
+        (3, 'Parties'),
+        (4, 'Sharing'),
+        (5, 'Birthdays'),
+        (6, 'Christmas'),
+        (7, 'Weekend Baking'),
+        (8, 'Simple Baking'),
+    ]
+
+    best_for = models.IntegerField(choices=BEST_FOR_CHOICES, default=1)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    bake = models.ForeignKey(Bake, on_delete=models.CASCADE)
+
+    class Meta:
+        """
+        Orders the Best For bakes
+        """
+        ordering = ['best_for']
+
+        def __str__(self):
+            return f"Bake selected as Best For {self.best_for} by {self.user}"
+            
