@@ -6,19 +6,19 @@ from django.contrib.auth.models import User
 from django_extensions.db.fields import AutoSlugField
 from cloudinary.models import CloudinaryField
 
-STATUS = ((0, "Draft"), (1, "Published")
+STATUS = ((0, "Draft"), (1, "Published"))
 
 
 class Bake(models.Model):
-     """
-       Defines the main class of model for bakes
+    """
+       Defines the main model for bakes
     """
     title = models.CharField(max_length=200, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(max_length=500, blank=True)
     slug = AutoSlugField(populate_from=['title', 'description'])
     difficulty = models.IntegerField(choices=[1, 2, 3, 4, 5], default=3)
-    equipment = models.TextField(max_length = 200)
+    equipment = models.TextField(max_length=200)
     ingredients = models.TextField()
     method = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
@@ -41,6 +41,13 @@ class Bake(models.Model):
             return self.stars.count()
 
 
+class Comment(models.Model):
+    """
+       Defines the model for comments
+    """
 
 
-     
+class BestFor(models.Model):
+    """
+       Defines the model for Best For bakes
+    """
