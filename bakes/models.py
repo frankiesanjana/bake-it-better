@@ -13,11 +13,17 @@ class Bake(models.Model):
     """
        Defines the main model for bakes
     """
+    LEVEL = [
+        (1, 'easy'),
+        (2, 'moderate'),
+        (3, 'challenging'),
+    ]
+
     title = models.CharField(max_length=200, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(max_length=500, blank=True)
     slug = AutoSlugField(populate_from=['title', 'description'])
-    difficulty = models.IntegerField(choices=[1, 2, 3, 4, 5], default=3)
+    difficulty = models.IntegerField(choices=LEVEL, default=1)
     equipment = models.TextField(max_length=300)
     ingredients = models.TextField()
     method = models.TextField()
@@ -37,15 +43,19 @@ class Bake(models.Model):
         def __str__(self):
             return self.title
 
-        def number_of_stars(self):
-            return self.stars.count()
+    def number_of_stars(self):
+        """
+        Shows how many users have starred the bake
+        """
+        return self.stars.count()
 
 
 class Comment(models.Model):
     """
        Defines the model for comments
     """
-    bake = models.ForeignKey(Bake, on_delete=models.CASCADE, related_name='comments')
+    bake = models.ForeignKey(Bake, on_delete=models.CASCADE,
+                             related_name='comments')
     name = models.CharField(max_length=100)
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
@@ -90,4 +100,3 @@ class BestFor(models.Model):
 
         def __str__(self):
             return f"Bake selected as Best For {self.best_for} by {self.user}"
-            
