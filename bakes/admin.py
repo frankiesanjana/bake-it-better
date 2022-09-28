@@ -28,6 +28,10 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ('name', 'body', 'created_on', 'approved')
     list_filter = ('approved', 'created_on')
     search_fields = ('name', 'body')
+    actions = ['approve_comments']
+
+    def approve_comments(self, request, queryset):
+        queryset.update(approved=True)
 
 
 @admin.register(BestFor)
