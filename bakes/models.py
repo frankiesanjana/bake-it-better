@@ -20,9 +20,9 @@ class Bake(models.Model):
     ]
 
     title = models.CharField(max_length=200, unique=True)
+    slug = AutoSlugField(populate_from='title', unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(max_length=500, blank=True)
-    slug = AutoSlugField(populate_from=['title', 'description'])
     difficulty = models.IntegerField(choices=LEVEL, default=1)
     equipment = models.TextField(max_length=300)
     ingredients = models.TextField()
@@ -40,8 +40,8 @@ class Bake(models.Model):
         """
         ordering = ['-created_on']
 
-        def __str__(self):
-            return self.title
+    def __str__(self):
+        return f"{self.title}"
 
     def number_of_stars(self):
         """
@@ -68,8 +68,8 @@ class Comment(models.Model):
         """
         ordering = ['created_on']
 
-        def __str__(self):
-            return f"Comment {self.body} by {self.name}"
+    def __str__(self):
+        return f"Comment {self.body} by {self.name}"
 
 
 class BestFor(models.Model):
@@ -98,5 +98,5 @@ class BestFor(models.Model):
         """
         ordering = ['best_for']
 
-        def __str__(self):
-            return f"Bake selected as Best For {self.best_for} by {self.user}"
+    def __str__(self):
+        return f"Bake selected as Best For {self.best_for} by {self.user}"
