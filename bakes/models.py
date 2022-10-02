@@ -24,7 +24,7 @@ class Bake(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(max_length=500, blank=True)
     difficulty = models.IntegerField(choices=LEVEL, default=1)
-    equipment = models.TextField(max_length=300)
+    equipment = models.TextField()
     ingredients = models.TextField()
     method = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
