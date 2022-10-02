@@ -27,7 +27,12 @@
                                 <p class="card-text">{{ bake.description|safe }}</p>
                             </a>
                             <hr />
-                            <p class="card-text text-muted h6">{{ bake.created_on}} <i class="fa-regular fa-star"></i>
+                            <p class="card-text text-muted h6">{{ bake.created_on}} 
+                                {% if bake.number_of_stars > 0 %}
+                                <i class="fa-solid fa-star"></i>
+                                {% else %}
+                                <i class="fa-regular fa-star"></i>
+                                {% endif %}
                                 {{ bake.number_of_stars }}
                             </p>
                         </div>
