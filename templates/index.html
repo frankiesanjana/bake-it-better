@@ -13,7 +13,8 @@
                             <div class="image-container">
                                 {% if "placeholder" in bake.featured_image.url %}
                                 <img class="card-img-top"
-                                    src="static/images/cookie-cutter-shapes.jpg" alt="Dough with cookie shapes cut out">
+                                    src="https://res.cloudinary.com/frankiesanjana/image/upload/v1664720616/cookie-cutter-shapes_wfmdht.jpg" 
+                                        alt="Dough with cookie shapes cut out">
                                 {% else %}
                                 <img class="card-img-top" src=" {{ bake.featured_image.url }}" alt="{{ bake.title }}">
                                 {% endif %}
@@ -27,7 +28,8 @@
                             </a>
                             <hr />
                             <p class="card-text text-muted h6">{{ bake.created_on}} <i class="fa-regular fa-star"></i>
-                                {{ bake.number_of_stars }}</p>
+                                {{ bake.number_of_stars }}
+                            </p>
                         </div>
                     </div>
                 {% endfor %}
