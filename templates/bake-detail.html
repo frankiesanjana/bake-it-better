@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="bake-title">{{ bake.title }}</h1>
+            <p class="bake-subtitle">{{ bake.author }} | {{ bake.created_on }}</p>
+        </div>
+        <div class="col-md-6">
+            {% if "placeholder" in bake.featured_image.url %}
+            <img class="card-img-top"
+                src="https://res.cloudinary.com/frankiesanjana/image/upload/v1664720616/cookie-cutter-shapes_wfmdht.jpg" 
+                    alt="Dough with cookie shapes cut out">
+            {% else %}
+            <img class="card-img-top" src=" {{ bake.featured_image.url }}" alt="{{ bake.title }}">
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}

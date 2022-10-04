@@ -22,7 +22,7 @@
                                     <p class="author">Author: {{ bake.author }}</p>
                                 </div>
                             </div>
-                            <a href="#" class="post-link">
+                            <a href="{% url 'bake-detail' bake.slug %}" class="bake-link">
                                 <h2 class="card-title">{{ bake.title }}</h2>
                                 <p class="card-text">{{ bake.description|safe }}</p>
                             </a>
