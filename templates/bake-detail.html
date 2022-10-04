@@ -38,7 +38,7 @@
                     {{ bake.description | safe }}
                 </p>
                 <p class="card-text">
-                    {{ bake.difficulty | safe }}
+                    {{ bake.get_difficulty_display | safe }}
                 </p>
                 <p class="card-text">
                     {{ bake.equipment | safe }}
