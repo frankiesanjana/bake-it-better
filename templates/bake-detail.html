@@ -2,13 +2,14 @@
 
 {% block content %}
 
-
+<!-- Page adapted from post-detail template in Code Institute's I Think Therefore I Blog project -->
 <div class="container">
     <div class="row">
         <div class="col-md-6">
             <h1 class="bake-title">{{ bake.title }}</h1>
             <p class="bake-subtitle">{{ bake.author }} | {{ bake.created_on }}</p>
         </div>
+        <hr>
         <div class="col-md-6">
             {% if "placeholder" in bake.featured_image.url %}
             <img class="card-img-top"
@@ -21,7 +22,65 @@
     </div>
 </div>
 
-
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card-body">
+                <strong class="card-text text-muted h6">{{ bake.created_on}} 
+                    {% if bake.number_of_stars > 0 %}
+                    <i class="fa-solid fa-star"></i>
+                    {% else %}
+                    <i class="fa-regular fa-star"></i>
+                    {% endif %}
+                    {{ bake.number_of_stars }}
+                </strong>
+                <p class="card-text">
+                    {{ bake.description | safe }}
+                </p>
+                <p class="card-text">
+                    {{ bake.difficulty | safe }}
+                </p>
+                <p class="card-text">
+                    {{ bake.equipment | safe }}
+                </p>
+                <p class="card-text">
+                    {{ bake.ingredients | safe }}
+                </p>
+                <p class="card-text">
+                    {{ bake.method | safe }}
+                </p>
+                <div class="col-1">
+                    {% with comments.count as total_comments %}
+                    <strong class="text-secondary"><i class="far fa-comments"></i>
+                        {{ total_comments }}</strong>
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 card mb-4  mt-3 ">
+            <h3>Comments:</h3>
+            <div class="card-body">
+                
+                {% for comment in comments %}
+                <div class="comments" style="padding: 10px;">
+                    <p class="font-weight-bold">
+                        <!-- The commenter's name goes here. Check the model if you're not sure what that is -->
+                        {{ comment.name }}
+                        <span class=" text-muted font-weight-normal">
+                            <!-- The comment's created date goes here -->
+                            {{ comment.created_on }}
+                        </span> wrote:
+                    </p>
+                    <!-- The body of the comment goes before the | -->
+                    {{ comment.body | linebreaks }}
+                </div>
+                <!-- Our for loop ends here -->
+                {% endfor %}
+            </div>
+        </div>
+</div>
 
 
 
