@@ -22,8 +22,34 @@
     <header>
         <h1>test</h1>
         <!-- Navigation -->
-        <nav class="navbar navbar-expand-md">
-
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <img src="https://res.cloudinary.com/frankiesanjana/image/upload/v1664965811/logo_xijbxy.png" alt="Bake It Better logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-options" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="nav-options">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_logout' %}">Log Out</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_login' %}">Log In</a>
+                        </li>
+                        {% endif %}    
+                    </ul>
+                </div>
+            </div>
         </nav>
     </header>
     {% block content %}
