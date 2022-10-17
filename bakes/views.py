@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
 from .models import Bake
+from .forms import CommentForm
+
 
 class BakeList(generic.ListView):
     """
@@ -30,6 +32,7 @@ class BakeDetail(View):
             {
                 "bake": bake,
                 "comments": comments,
-                "starred": starred
+                "starred": starred,
+                "comment_form": CommentForm()
             },
         )
