@@ -28,10 +28,29 @@
         <div class="col">
             <div class="card-body">
                 <strong class="card-text text-muted h6">{{ bake.author }} | {{ bake.created_on }}
+                    {% if user.is_authenticated %}
+                    <form class="d-inline" action="{% url 'bake-star' bake.slug %}" method="POST">
+                        {% csrf_token %}
+                        {% if starred %}
+                        <button type="submit" name="bake_id" value="{{bake.slug}}">
+                        <i class="user-starred fa-solid fa-star"></i>
+                        </button>
+                        {% elif bake.number_of_stars > 0 %}
+                        <button type="submit" name="bake_id" value="{{bake.slug}}">
+                        <i class="fa-solid fa-star"></i>
+                        </button>
+                        {% else %}
+                        <button type="submit" name="bake_id" value="{{bake.slug}}">
+                        <i class="fa-regular fa-star"></i>
+                        </button>
+                        {% endif %}
+                    </form>
+                    {% else %}
                     {% if bake.number_of_stars > 0 %}
                     <i class="fa-solid fa-star"></i>
                     {% else %}
                     <i class="fa-regular fa-star"></i>
+                    {% endif %}
                     {% endif %}
                     {{ bake.number_of_stars }}
                 </strong>
