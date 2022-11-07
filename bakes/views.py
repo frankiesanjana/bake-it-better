@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
+from django.http import HttpResponseRedirect
 from .models import Bake
 from .forms import CommentForm
 
@@ -67,3 +68,18 @@ class BakeDetail(View):
                 "comment_form": CommentForm()
             },
         )
+
+
+class BakeStar(View):
+    """
+    Creates the view code to allow users to star bakes
+    """
+    def post(self, request, slug):
+        bake = get_object_or_404(Bake, slug=slug)
+
+        if bake.stars.filter(id=request.user.id).exists():
+            bake.stars.remove(request.user)
+        else:
+            bake.stars.add(request.user)
+
+        return HttpResponseRedirect(reverse('bake-detail', args=[slug]))
