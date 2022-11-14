@@ -13,8 +13,7 @@ class BakeList(generic.ListView):
     queryset = Bake.objects.filter(status=1).order_by('-created_on')
     template_name = 'index.html'
     paginate_by = 8
-
-
+    
 class BakeDetail(View):
     """
     Creates the view code to display individual bakes
