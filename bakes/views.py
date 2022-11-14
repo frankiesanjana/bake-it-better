@@ -14,6 +14,7 @@ class BakeList(generic.ListView):
     template_name = 'index.html'
     paginate_by = 8
     
+
 class BakeDetail(View):
     """
     Creates the view code to display individual bakes
@@ -82,3 +83,14 @@ class BakeStar(View):
             bake.stars.add(request.user)
 
         return HttpResponseRedirect(reverse('bake-detail', args=[slug]))
+
+
+class MyStarredBakes(View):
+    """
+    Creates the view code to allow users to view 
+    all the bakes that they have starred
+    """
+    model = Bake
+    queryset = Bake.objects.filter(status=1).order_by('-created_on')
+    template_name = 'my-starred-bakes.html'
+    paginate_by = 8
