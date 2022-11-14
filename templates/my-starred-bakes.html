@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <!-- Bakes List Column -->
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="row">
+                {% for bake in bake_list %}
+                {% if user.is_authenticated %}
+                {% if request.user in bake.stars.all %}
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="image-container">
+                                {% if "placeholder" in bake.featured_image.url %}
+                                <img class="card-img-top"
+                                    src="https://res.cloudinary.com/frankiesanjana/image/upload/v1664720616/cookie-cutter-shapes_wfmdht.jpg" 
+                                        alt="Dough with cookie shapes cut out">
+                                {% else %}
+                                <img class="card-img-top" src=" {{ bake.featured_image.url }}" alt="{{ bake.title }}">
+                                {% endif %}
+                                <div class="image-flash">
+                                    <p class="author">Author: {{ bake.author }}</p>
+                                </div>
+                            </div>
+                            <a href="{% url 'bake-detail' bake.slug %}" class="bake-link">
+                                <h2 class="card-title">{{ bake.title }}</h2>
+                                <p class="card-text">{{ bake.description|safe }}</p>
+                            </a>
+                            <hr />
+                            <p class="card-text text-muted h6">{{ bake.created_on}} 
+                            <i class="user-starred fa-solid fa-star"></i>
+                            {{ bake.number_of_stars }}
+                            </p>
+                        </div>
+                    </div>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Pagination code from Code Institute's I Think Therefore I Blog walkthrough project -->
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+
+{% endblock %}
