@@ -85,7 +85,7 @@ class BakeStar(View):
         return HttpResponseRedirect(reverse('bake-detail', args=[slug]))
 
 
-class MyStarredBakes(View):
+class MyStarredBakes(generic.ListView):
     """
     Creates the view code to allow users to view 
     all the bakes that they have starred
