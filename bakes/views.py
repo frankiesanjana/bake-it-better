@@ -104,6 +104,7 @@ class AddBake(generic.CreateView):
     form_class = BakeForm
     template_name = 'add-bake.html'
 
+
 class UpdateBake(generic.UpdateView):
     """
     Creates the view code to allow users to edit a bake
@@ -112,6 +113,7 @@ class UpdateBake(generic.UpdateView):
     model = Bake
     form_class = BakeForm
     template_name = 'edit-bake.html'
+
 
 class DeleteBake(generic.DeleteView):
     """
