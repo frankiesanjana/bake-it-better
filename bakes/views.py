@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
-from .models import Bake
-from .forms import CommentForm
+from .models import Bake, Comment
+from .forms import BakeForm, CommentForm
 
 
 class BakeList(generic.ListView):
@@ -94,3 +94,30 @@ class MyStarredBakes(generic.ListView):
     queryset = Bake.objects.filter(status=1).order_by('-created_on')
     template_name = 'my-starred-bakes.html'
     paginate_by = 8
+
+
+class AddBake(generic.CreateView):
+    """
+    Creates the view code to allow users to add a new bake
+    """
+    model = Bake
+    form_class = BakeForm
+    template_name = 'add-bake.html'
+
+class UpdateBake(generic.UpdateView):
+    """
+    Creates the view code to allow users to edit a bake
+    that they have previously added
+    """
+    model = Bake
+    form_class = BakeForm
+    template_name = 'edit-bake.html'
+
+class DeleteBake(generic.DeleteView):
+    """
+    Creates the view code to allow users to delete a bake
+    that they have previously added
+    """
+    model = Bake
+    template_name = 'delete-bake.html'
+    success_url = '/home'
