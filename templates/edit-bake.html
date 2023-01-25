@@ -2,5 +2,10 @@
 
 {% block content %}
 {% load crispy_forms_tags %}
-<p>testing</p>
+<form method="POST">
+    {% csrf_token %}
+    {{ form | crispy }}
+    <input type="submit" value="Submit"/>
+    <a class="btn" href="{% url 'home' %}">Cancel</a>
+</form> 
 {% endblock %}
