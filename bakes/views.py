@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Bake, Comment
 from .forms import BakeForm, CommentForm
 
@@ -85,7 +86,7 @@ class BakeStar(View):
         return HttpResponseRedirect(reverse('bake-detail', args=[slug]))
 
 
-class MyStarredBakes(generic.ListView):
+class MyStarredBakes(LoginRequiredMixin, generic.ListView):
     """
     Creates the view code to allow users to view 
     all the bakes that they have starred
@@ -96,7 +97,7 @@ class MyStarredBakes(generic.ListView):
     paginate_by = 8
 
 
-class AddBake(generic.CreateView):
+class AddBake(LoginRequiredMixin, generic.CreateView):
     """
     Creates the view code to allow users to add a new bake
     """
@@ -105,7 +106,7 @@ class AddBake(generic.CreateView):
     template_name = 'add-bake.html'
 
 
-class UpdateBake(generic.UpdateView):
+class UpdateBake(LoginRequiredMixin, generic.UpdateView):
     """
     Creates the view code to allow users to edit a bake
     that they have previously added
@@ -115,7 +116,7 @@ class UpdateBake(generic.UpdateView):
     template_name = 'edit-bake.html'
 
 
-class DeleteBake(generic.DeleteView):
+class DeleteBake(LoginRequiredMixin, generic.DeleteView):
     """
     Creates the view code to allow users to delete a bake
     that they have previously added
