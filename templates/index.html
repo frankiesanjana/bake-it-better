@@ -45,6 +45,10 @@
                             {% endif %}
                             {{ bake.number_of_stars }}
                             </p>
+                            <div>
+                                <a class="btn" href="{% url 'edit-bake' bake.slug %}">Edit</a>
+                                <a class="btn" href="{% url 'delete-bake' bake.slug %}">Delete</a>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
