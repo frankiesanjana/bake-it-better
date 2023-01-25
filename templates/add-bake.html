@@ -4,7 +4,8 @@
 {% load crispy_forms_tags %}
 <form method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form | crispy }}
     <input type="submit" value="Submit"/>
+    <a class="btn" href="{% url 'home' %}">Cancel</a>
 </form> 
 {% endblock %}
