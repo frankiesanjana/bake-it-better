@@ -106,7 +106,7 @@ class AddBake(LoginRequiredMixin, generic.CreateView):
     template_name = 'add-bake.html'
 
 
-class UpdateBake(LoginRequiredMixin, generic.UpdateView):
+class UpdateBake(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     """
     Creates the view code to allow users to edit a bake
     that they have previously added
@@ -114,9 +114,15 @@ class UpdateBake(LoginRequiredMixin, generic.UpdateView):
     model = Bake
     form_class = BakeForm
     template_name = 'edit-bake.html'
+    
+    def test_func(self):
+        """
+        Prevents users from editing bakes written by other users
+        """
+        return Bake.author == self.request.user
 
 
-class DeleteBake(LoginRequiredMixin, generic.DeleteView):
+class DeleteBake(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
     """
     Creates the view code to allow users to delete a bake
     that they have previously added
@@ -124,3 +130,9 @@ class DeleteBake(LoginRequiredMixin, generic.DeleteView):
     model = Bake
     template_name = 'delete-bake.html'
     success_url = '/home'
+
+    def test_func(self):
+        """
+        Prevents users from deleting bakes written by other users
+        """
+        return Bake.author == self.request.user
