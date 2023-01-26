@@ -123,6 +123,7 @@ class UpdateBake(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
         """
         Prevents users from editing bakes written by other users
         """
+        Bake = self.get_object()
         return Bake.author == self.request.user
 
 
@@ -133,10 +134,11 @@ class DeleteBake(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
     """
     model = Bake
     template_name = 'delete-bake.html'
-    success_url = '/home'
+    success_url = "/"
 
     def test_func(self):
         """
         Prevents users from deleting bakes written by other users
         """
+        Bake = self.get_object()
         return Bake.author == self.request.user
