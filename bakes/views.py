@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 from .models import Bake, Comment
 from .forms import BakeForm, CommentForm
 
@@ -73,15 +75,18 @@ class BakeDetail(View):
 
 class BakeStar(View):
     """
-    Creates the view code to allow users to star bakes
+    Creates the view code to allow signed-in users
+    to star bakes
     """
     def post(self, request, slug):
         bake = get_object_or_404(Bake, slug=slug)
 
         if bake.stars.filter(id=request.user.id).exists():
             bake.stars.remove(request.user)
+            messages.success(self.request, "Bake successfully unstarred")
         else:
             bake.stars.add(request.user)
+            messages.success(self.request, "Bake successfully starred")
 
         return HttpResponseRedirect(reverse('bake-detail', args=[slug]))
 
@@ -97,20 +102,30 @@ class MyStarredBakes(LoginRequiredMixin, generic.ListView):
     paginate_by = 8
 
 
-class AddBake(LoginRequiredMixin, generic.CreateView):
+class AddBake(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
     """
     Creates the view code to allow users to add a new bake
     """
     model = Bake
     form_class = BakeForm
     template_name = 'add-bake.html'
+    success_message = "%(title)s was created successfully"
+
+    def get_success_message(self, cleaned_data):
+        """
+        Adds bake name into confirmation message
+        """
+        return self.success_message % dict(
+            cleaned_data,
+            title=self.object.title,
+        )
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
 
-class UpdateBake(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+class UpdateBake(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, generic.UpdateView):
     """
     Creates the view code to allow users to edit a bake
     that they have previously added
@@ -118,6 +133,16 @@ class UpdateBake(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = Bake
     form_class = BakeForm
     template_name = 'edit-bake.html'
+    success_message = "%(title)s was edited successfully"
+
+    def get_success_message(self, cleaned_data):
+        """
+        Adds bake name into confirmation message
+        """
+        return self.success_message % dict(
+            cleaned_data,
+            title=self.object.title,
+        )
     
     def test_func(self):
         """
@@ -127,7 +152,7 @@ class UpdateBake(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
         return Bake.author == self.request.user
 
 
-class DeleteBake(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+class DeleteBake(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, generic.DeleteView):
     """
     Creates the view code to allow users to delete a bake
     that they have previously added
@@ -135,6 +160,17 @@ class DeleteBake(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
     model = Bake
     template_name = 'delete-bake.html'
     success_url = "/"
+    success_message = "Bake %(title)s deleted successfully."
+
+    def delete(self, request, *args, **kwargs):
+        """
+        Adds delete message via custom code (since DeleteView is not form-based)
+        Code adapted from the following Stack Overflow article:
+        https://stackoverflow.com/questions/24822509/success-message-in-deleteview-not-shown
+        """
+        obj = self.get_object()
+        messages.success(self.request, self.success_message % obj.__dict__)
+        return super(DeleteBake, self).delete(request, *args, **kwargs)
 
     def test_func(self):
         """
