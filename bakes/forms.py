@@ -1,6 +1,6 @@
-from .models import Bake, Comment
 from django import forms
-
+from django_summernote.widgets import SummernoteWidget
+from .models import Bake, Comment
 
 class BakeForm(forms.ModelForm):
     """
@@ -24,6 +24,12 @@ class BakeForm(forms.ModelForm):
          'featured_image',
          'status'
       ]
+      widgets = {
+         'description': SummernoteWidget(),
+         'equipment': SummernoteWidget(),
+         'ingredients': SummernoteWidget(),
+         'method': SummernoteWidget(),
+      }
 
 
 class CommentForm(forms.ModelForm):
