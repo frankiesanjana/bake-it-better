@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-from .models import Bake, Comment
+from .models import Bake, Comment, BestFor
 from .forms import BakeForm, CommentForm
 
 
@@ -71,6 +71,16 @@ class BakeDetail(View):
                 "comment_form": CommentForm()
             },
         )
+
+class BestForBakes(LoginRequiredMixin, generic.ListView):
+    """
+    Creates the view code to allow users to view 
+    their saved Best For bakes
+    """
+    model = BestFor
+    queryset = BestFor.objects.filter(best_for=1)[:1]
+    template_name = 'best-for-bakes.html'
+    paginate_by = 8
 
 
 class BakeStar(View):

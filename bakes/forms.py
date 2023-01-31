@@ -1,6 +1,6 @@
 from django import forms
 from django_summernote.widgets import SummernoteWidget
-from .models import Bake, Comment
+from .models import Bake, Comment, BestFor
 
 class BakeForm(forms.ModelForm):
     """
@@ -42,3 +42,15 @@ class CommentForm(forms.ModelForm):
       """
       model = Comment
       fields = ('body',)
+
+
+class BestForForm(forms.ModelForm):
+   """
+   Creates the form to add Best For bakes
+   """
+   class Meta:
+      """
+      Defines the model and form fields
+      """
+      model = BestFor
+      fields = ('best_for',)
