@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from .models import Bake, Comment, BestFor
-from .forms import BakeForm, CommentForm
+from .forms import BakeForm, CommentForm, BestForForm
 
 
 class BakeList(generic.ListView):
@@ -38,7 +38,8 @@ class BakeDetail(View):
                 "comments": comments,
                 "commented": False,
                 "starred": starred,
-                "comment_form": CommentForm()
+                "comment_form": CommentForm(),
+                "best_for_form": BestForForm()
             },
         )
 
@@ -60,6 +61,17 @@ class BakeDetail(View):
         else:
             comment_form = CommentForm()
 
+        best_for_form = BestForForm(data=request.POST)
+
+        if best_for_form.is_valid():
+            user = request.user
+            best_for = request.get('best_for')
+            best_for.bake = bake
+            best_for.save()
+        else:
+            best_for_form = BestForForm()
+
+
         return render(
             request,
             "bake-detail.html",
@@ -68,7 +80,8 @@ class BakeDetail(View):
                 "comments": comments,
                 "commented": True,
                 "starred": starred,
-                "comment_form": CommentForm()
+                "comment_form": CommentForm(),
+                "best_for_form": BestForForm()
             },
         )
 
