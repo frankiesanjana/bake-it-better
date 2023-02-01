@@ -64,10 +64,17 @@ class BakeDetail(View):
         best_for_form = BestForForm(data=request.POST)
 
         if best_for_form.is_valid():
-            user = request.user
-            best_for = request.get('best_for')
-            best_for.bake = bake
-            best_for.save()
+            best_for_bake = BestFor.objects.filter(user=request.user, best_for=request.POST['best_for']).first()
+            
+            try:
+                best_for_bake.bake = bake
+            except NameError:
+                best_for_bake = best_for_form.save(commit=False)
+                best_for_bake.user = request.user
+                best_for_bake.bake = bake
+
+            best_for_bake.save()
+
         else:
             best_for_form = BestForForm()
 
@@ -90,11 +97,23 @@ class BestForBakes(LoginRequiredMixin, generic.ListView):
     Creates the view code to allow users to view 
     their saved Best For bakes
     """
-    model = BestFor
-    queryset = BestFor.objects.filter(best_for=1)[:1]
-    template_name = 'best-for-bakes.html'
-    paginate_by = 8
+    def get(self, request):
+        # get all best for bakes from the signed-in user
+        my_best_for_bakes = BestForBakes.objects.filter(user=request.user)
 
+        # filter by occasion
+
+        # if the occasion has a BF bake associated with it, add bake
+
+        # if not, leave blank (with link to browse recipes to add)
+
+        return render(
+            request, 
+            "best-for-bakes.html",
+            {
+                # add context
+            },
+        )
 
 class BakeStar(View):
     """
