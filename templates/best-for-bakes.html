@@ -13,35 +13,13 @@ for Best For bakes
         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
             <div class="row">
                 {% if user.is_authenticated %}
-                    {% for bake in bake_list %}
-                        {% if request.user in bake.stars.all %}
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    <div class="image-container">
-                                        {% if "placeholder" in bake.featured_image.url %}
-                                        <img class="card-img-top"
-                                            src="https://res.cloudinary.com/frankiesanjana/image/upload/v1664720616/cookie-cutter-shapes_wfmdht.jpg" 
-                                                alt="Dough with cookie shapes cut out">
-                                        {% else %}
-                                        <img class="card-img-top" src=" {{ bake.featured_image.url }}" alt="{{ bake.title }}">
-                                        {% endif %}
-                                        <div class="image-flash">
-                                            <p class="author">Author: {{ bake.author }}</p>
-                                        </div>
-                                    </div>
-                                    <a href="{% url 'bake-detail' bake.slug %}" class="bake-link">
-                                        <h2 class="card-title">{{ bake.title }}</h2>
-                                        <p class="card-text">{{ bake.description|safe }}</p>
-                                    </a>
-                                    <hr />
-                                    <p class="card-text text-muted h6">{{ bake.created_on}} 
-                                    <i class="user-starred fa-solid fa-star"></i>
-                                    {{ bake.number_of_stars }}
-                                    </p>
-                                </div>
-                            </div>
-                        {% endif %}
+                    <h1>TEST</h1>
+                    {% for bake in my_best_for_bakes %}
+                        <p>{{ bake.bake.title }}</p>
                     {% endfor %}
+                    {% if brunch %}
+                    <p>testing testing</p>
+                    {% endif %}
                 {% else %}
                     <p>
                         You are not currently logged in. Please <a href="{% url 'account_login' %}">log in</a> to view your starred bakes.

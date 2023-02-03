@@ -2,13 +2,14 @@ from django import forms
 from django_summernote.widgets import SummernoteWidget
 from .models import Bake, Comment, BestFor
 
+
 class BakeForm(forms.ModelForm):
     """
     Creates the form to add and edit bakes
     """
     def __init__(self, *args, **kwargs):
         super(BakeForm, self).__init__(*args, **kwargs)
-   
+  
     class Meta:
       """
       Displays fields from recipe model

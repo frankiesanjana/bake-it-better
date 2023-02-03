@@ -121,6 +121,7 @@ class BestForBakes(LoginRequiredMixin, generic.ListView):
             request,
             "best-for-bakes.html",
             {
+                "my_best_for_bakes": my_best_for_bakes,
                 "brunch": brunch,
                 "kids": kids,
                 "parties": parties,
