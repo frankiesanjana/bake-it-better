@@ -68,7 +68,7 @@ class BakeDetail(View):
             
             try:
                 best_for_bake.bake = bake
-            except NameError:
+            except AttributeError:
                 best_for_bake = best_for_form.save(commit=False)
                 best_for_bake.user = request.user
                 best_for_bake.bake = bake
