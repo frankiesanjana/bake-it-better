@@ -2,10 +2,8 @@
 
 {% block content %}
 
-{% comment %}
-Copied from my-starred-bakes.html, to be updated
-for Best For bakes
-{% endcomment %}
+
+
 
 <div class="container">
     <div class="row">
@@ -15,6 +13,13 @@ for Best For bakes
                 <h1>
                     My Baking Planner: "Best For" Bakes
                 </h1>
+
+                {% for key, value in my_best_for_bakes.items %}
+                
+                    <p>{{ key }}</p>
+
+                {% endfor %}
+                {% comment %}                
                 {% if user.is_authenticated %}
                     <div class="card mb-4">
                         <div class="card-body">
@@ -23,7 +28,7 @@ for Best For bakes
                             </h2>
                             <div class="image-container">
                                 {% if brunch %}
-                                    {% for bake in my_best_for_bakes %}
+                                    {% for occasion in my_best_for_bakes %}
                                         {% if "placeholder" in bake.bake.featured_image.url %}
                                             <img class="card-img-top"
                                                 src="https://res.cloudinary.com/frankiesanjana/image/upload/v1664720616/cookie-cutter-shapes_wfmdht.jpg" 
@@ -74,7 +79,7 @@ for Best For bakes
                             </h2>
                             <div class="image-container">
                                 {% if kids %}
-                                    {% for bake in my_best_for_bakes %}
+                                    {% for occasion in my_best_for_bakes %}
                                         {% if "placeholder" in bake.bake.featured_image.url %}
                                             <img class="card-img-top"
                                                 src="https://res.cloudinary.com/frankiesanjana/image/upload/v1664720616/cookie-cutter-shapes_wfmdht.jpg" 
@@ -121,7 +126,8 @@ for Best For bakes
                         You are not currently logged in. Please <a href="{% url 'account_login' %}">log in</a> to view your starred bakes.
                     </p>
                 {% endif %}
-                
+                {% endcomment %}
+    
             </div>
         </div>
     </div>

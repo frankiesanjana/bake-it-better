@@ -99,39 +99,51 @@ class BestForBakes(LoginRequiredMixin, generic.ListView):
     """
     def get(self, request):
         # get all best for bakes from the signed-in user
-        my_best_for_bakes = BestFor.objects.filter(user=request.user)
+        user_best_for_bakes = BestFor.objects.filter(user=request.user)
 
         # filter by occasion
         # if the occasion has a BF bake associated with it, add bake
-        try:
-            brunch = my_best_for_bakes.filter(best_for=1).first() or None
-            kids = my_best_for_bakes.filter(best_for=2).first() or None
-            parties = my_best_for_bakes.filter(best_for=3).first() or None
-            sharing = my_best_for_bakes.filter(best_for=4).first() or None
-            birthdays = my_best_for_bakes.filter(best_for=5).first() or None
-            christmas = my_best_for_bakes.filter(best_for=6).first() or None
-            weekend = my_best_for_bakes.filter(best_for=7).first() or None
-            simple = my_best_for_bakes.filter(best_for=8).first() or None
-        except NameError():
-            messages.error(request, "an error occurred")
-        except:
-            print("Something else went wrong")
+        # if no BF bake exists, set occasion BF bake to none
+        
+        best_for = {
+            1: 'Brunch',
+            2: 'Kids',
+            3: 'Parties',
+            4: 'Sharing',
+            5: 'Birthdays',
+            6: 'Christmas',
+            7: 'Weekend Baking',
+            8: 'Simple Baking'
+        }
+
+        my_best_for_bakes = {
+            "Brunch": user_best_for_bakes.filter(best_for=1).first() or None,
+            "Kids": user_best_for_bakes.filter(best_for=2).first() or None,
+            "Parties": user_best_for_bakes.filter(best_for=3).first() or None,
+            "Sharing": user_best_for_bakes.filter(best_for=4).first() or None,
+            "Birthdays": user_best_for_bakes.filter(best_for=5).first() or None,
+            "Christmas": user_best_for_bakes.filter(best_for=6).first() or None,
+            "Weekend": user_best_for_bakes.filter(best_for=7).first() or None,
+            "Simple": user_best_for_bakes.filter(best_for=8).first() or None
+        }
 
         return render(
             request,
             "best-for-bakes.html",
             {
                 "my_best_for_bakes": my_best_for_bakes,
-                "brunch": brunch,
-                "kids": kids,
-                "parties": parties,
-                "sharing": sharing,
-                "birthdays": birthdays,
-                "christmas": christmas,
-                "weekend": weekend,
-                "simple": simple,
             },
         )
+
+""""
+        for key in best_for.keys():
+            print(key)
+            occasion_best = user_best_for_bakes.filter(best_for=key).first()
+            if occasion_best:
+                my_best_for_bakes['best_for'] = occasion_best
+
+        print(my_best_for_bakes)
+"""
 
 class BakeStar(View):
     """
