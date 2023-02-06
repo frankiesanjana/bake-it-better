@@ -15,17 +15,54 @@
         {% if user.is_authenticated %}
             <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                 <div class="row">
-                    
-                    
+                    <div class="card mb-4"></div>
                         {% for key, value in my_best_for_bakes.items %}
-                        
-                            <p>{{ key }}</p>
-                            <br>
-                            <p>{{ value.bake }}</p>
-                            <br>
-
+                        <div class="card-body">
+                            <h2>
+                                Best For {{ key }}
+                            </h2>
+                            {% if value is not None %}
+                                {% if "placeholder" in value.bake.featured_image.url %}
+                                    <img class="card-img-top"
+                                        src="https://res.cloudinary.com/frankiesanjana/image/upload/v1664720616/cookie-cutter-shapes_wfmdht.jpg" 
+                                            alt="Dough with cookie shapes cut out">
+                                {% else %}
+                                    <img class="card-img-top" src=" {{ value.bake.featured_image.url }}" alt="{{ value.bake.title }}">
+                                {% endif %}
+                                <div class="image-flash">
+                                    <p class="author">Author: {{ value.bake.author }}</p>
+                                </div>                                
+                                <a href="{% url 'bake-detail' value.bake.slug %}" class="bake-link">
+                                    <h2 class="card-title">{{ value.bake.title }}</h2>
+                                    <p class="card-text">{{ value.bake.description|safe }}</p>
+                                </a>
+                                <hr>
+                                <p class="card-text text-muted h6">{{ value.bake.created_on}} 
+                                    {% if user.is_authenticated %}
+                                        {% if request.user in value.bake.stars.all %}
+                                        <i class="user-starred fa-solid fa-star"></i>
+                                        {% elif value.bake.number_of_stars > 0 %}
+                                        <i class="fa-solid fa-star"></i>
+                                        {% else %}
+                                        <i class="fa-regular fa-star"></i>
+                                        {% endif %}
+                                    {% else %}
+                                        {% if value.bake.number_of_stars > 0 %}
+                                        <i class="fa-solid fa-star"></i>
+                                        {% else %}
+                                        <i class="fa-regular fa-star"></i>
+                                        {% endif %}
+                                    {% endif %}
+                                    {{ value.bake.number_of_stars }}
+                                </p>
+                            {% else %}
+                                <a href="{% url 'home' %}">
+                                    Add a Bake
+                                </a>
+                            {% endif %}
+                        </div>
                         {% endfor %}
-                    
+                    </div>
                 </div>
             </div>
         {% else %}
@@ -34,119 +71,7 @@
             </p>
         {% endif %}
     </div>
-</div>      
-    {% comment %}                
-                
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h2>
-                                Best For Brunch
-                            </h2>
-                            <div class="image-container">
-                                {% if brunch %}
-                                    {% for occasion in my_best_for_bakes %}
-                                        {% if "placeholder" in bake.bake.featured_image.url %}
-                                            <img class="card-img-top"
-                                                src="https://res.cloudinary.com/frankiesanjana/image/upload/v1664720616/cookie-cutter-shapes_wfmdht.jpg" 
-                                                    alt="Dough with cookie shapes cut out">
-                                        {% else %}
-                                            <img class="card-img-top" src=" {{ bake.bake.featured_image.url }}" alt="{{ bake.bake.title }}">
-                                        {% endif %}
-                                            <div class="image-flash">
-                                                <p class="author">Author: {{ bake.bake.author }}</p>
-                                            </div>
-                                        </div>
-                                        <a href="{% url 'bake-detail' bake.bake.slug %}" class="bake-link">
-                                            <h2 class="card-title">{{ bake.bake.title }}</h2>
-                                            <p class="card-text">{{ bake.bake.description|safe }}</p>
-                                        </a>
-                                        <hr />
-                                        <p class="card-text text-muted h6">{{ bake.bake.created_on}} 
-                                            {% if user.is_authenticated %}
-                                                {% if request.user in bake.bake.stars.all %}
-                                                <i class="user-starred fa-solid fa-star"></i>
-                                                {% elif bake.bake.number_of_stars > 0 %}
-                                                <i class="fa-solid fa-star"></i>
-                                                {% else %}
-                                                <i class="fa-regular fa-star"></i>
-                                                {% endif %}
-                                            {% else %}
-                                                {% if bake.bake.number_of_stars > 0 %}
-                                                <i class="fa-solid fa-star"></i>
-                                                {% else %}
-                                                <i class="fa-regular fa-star"></i>
-                                                {% endif %}
-                                            {% endif %}
-                                            {{ bake.bake.number_of_stars }}
-                                        </p>
-                                    {% endfor %}
-                                {% else %}
-                                    <p>
-                                        Add a Bake
-                                    </p>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h2>
-                                Best For Kids
-                            </h2>
-                            <div class="image-container">
-                                {% if kids %}
-                                    {% for occasion in my_best_for_bakes %}
-                                        {% if "placeholder" in bake.bake.featured_image.url %}
-                                            <img class="card-img-top"
-                                                src="https://res.cloudinary.com/frankiesanjana/image/upload/v1664720616/cookie-cutter-shapes_wfmdht.jpg" 
-                                                    alt="Dough with cookie shapes cut out">
-                                        {% else %}
-                                            <img class="card-img-top" src=" {{ bake.bake.featured_image.url }}" alt="{{ bake.bake.title }}">
-                                        {% endif %}
-                                            <div class="image-flash">
-                                                <p class="author">Author: {{ bake.bake.author }}</p>
-                                            </div>
-                                        </div>
-                                        <a href="{% url 'bake-detail' bake.bake.slug %}" class="bake-link">
-                                            <h2 class="card-title">{{ bake.bake.title }}</h2>
-                                            <p class="card-text">{{ bake.bake.description|safe }}</p>
-                                        </a>
-                                        <hr />
-                                        <p class="card-text text-muted h6">{{ bake.bake.created_on}} 
-                                            {% if user.is_authenticated %}
-                                                {% if request.user in bake.bake.stars.all %}
-                                                <i class="user-starred fa-solid fa-star"></i>
-                                                {% elif bake.bake.number_of_stars > 0 %}
-                                                <i class="fa-solid fa-star"></i>
-                                                {% else %}
-                                                <i class="fa-regular fa-star"></i>
-                                                {% endif %}
-                                            {% else %}
-                                                {% if bake.bake.number_of_stars > 0 %}
-                                                <i class="fa-solid fa-star"></i>
-                                                {% else %}
-                                                <i class="fa-regular fa-star"></i>
-                                                {% endif %}
-                                            {% endif %}
-                                            {{ bake.bake.number_of_stars }}
-                                        </p>
-                                    {% endfor %}
-                                {% else %}
-                                    <a href="{% url 'home' %}">Add A Bake</a>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                {% else %}
-                    <p>
-                        You are not currently logged in. Please <a href="{% url 'account_login' %}">log in</a> to view your starred bakes.
-                    </p>
-                {% endif %}
-                {% endcomment %}
-    
-            </div>
-        </div>
-    </div>
+
     <!-- Pagination code from Code Institute's I Think Therefore I Blog walkthrough project -->
     {% if is_paginated %}
     <nav aria-label="Page navigation">
