@@ -22,3 +22,8 @@ urlpatterns = [
     path('', include('bakes.urls'), name='bakes-urls'),
     path('accounts/', include('allauth.urls')),
 ]
+
+handler404 = 'bakeitbetter.views.page_not_found_view'
+handler500 = 'bakeitbetter.views.server_error_view'
+handler403 = 'bakeitbetter.views.permission_denied_view'
+handler400 = 'bakeitbetter.views.bad_request_view'

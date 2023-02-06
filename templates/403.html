@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>
+                Error 403: Forbidden
+            </h2>
+            <p>
+                You do not have permission to access this page. Click <a href="{% url 'home' %}">here</a> to return home.
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

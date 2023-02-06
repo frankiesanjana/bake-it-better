@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>
+                Error 500: Internal Server Error
+            </h2>
+            <p>
+                Sorry, there is a problem with the page you are trying to access. Click <a href="{% url 'home' %}">here</a> to return home.
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
