@@ -106,14 +106,14 @@ class BestForBakes(LoginRequiredMixin, generic.ListView):
         # if no BF bake exists, set occasion BF bake to none
         
         best_for = {
-            1: 'Brunch',
-            2: 'Kids',
-            3: 'Parties',
-            4: 'Sharing',
-            5: 'Birthdays',
-            6: 'Christmas',
-            7: 'Weekend Baking',
-            8: 'Simple Baking'
+            1: "Brunch",
+            2: "Kids",
+            3: "Parties",
+            4: "Sharing",
+            5: "Birthdays",
+            6: "Christmas",
+            7: "Weekend Baking",
+            8: "Simple Baking"
         }
 
         my_best_for_bakes = {
@@ -135,15 +135,6 @@ class BestForBakes(LoginRequiredMixin, generic.ListView):
             },
         )
 
-""""
-        for key in best_for.keys():
-            print(key)
-            occasion_best = user_best_for_bakes.filter(best_for=key).first()
-            if occasion_best:
-                my_best_for_bakes['best_for'] = occasion_best
-
-        print(my_best_for_bakes)
-"""
 
 class BakeStar(View):
     """
