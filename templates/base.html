@@ -3,9 +3,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tags and title -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="baking, bake, recipe, share, bread, cake, biscuits">
+    <meta name="description" content="Bake It Better bake recipe sharing website. Share your baking recipes and learn from others">
     <title>Bake It Better | Learn, share and be inspired by baking experience</title>
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
@@ -30,38 +33,40 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="nav-options">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                         </li>
                         {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'account_logout' %}">Log Out</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'my-starred-bakes' %}">My Starred Bakes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'best-for-bakes' %}">Best For Bakes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'add-bake' %}">Add a Bake</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                                  </svg>
-                                {{ user.username }}
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'add-bake' %}">Add a Bake</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                    </svg>
+                                    {{ user.username }}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="{% url 'my-starred-bakes' %}">My Starred Bakes</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{% url 'best-for-bakes' %}">Best For Bakes</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{% url 'account_logout' %}">Log Out</a>
+                                    </li>
+                                </ul>
+                            </li>
                         {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'account_login' %}">Log In</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'account_login' %}">Log In</a>
+                            </li>
                         {% endif %}    
                     </ul>
                 </div>
@@ -86,9 +91,19 @@
     {% block content %}
 
     {% endblock %}
-    <!-- Footer -->
+    <!-- Footer, including links to social media pages. These currently link to the respective homepages since Bake It Better does not yet have social media sites -->
     <footer>
-
+        <ul>
+            <li>
+                <a href="https://www.facebook.com/" target="_fb" aria-label="Visit our Facebook page (opens in a new tab)" rel="noopener"><i class="fa-brands fa-facebook"></i></a>
+            </li>
+            <li>
+                <a href="https://www.instagram.com/" target="_insta" aria-label="Visit our Instagram page (opens in a new tab)" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+            </li>
+            <li>
+                <a href="https://www.twitter.com/" target="_twitter" aria-label="Visit our Twitter page (opens in a new tab)" rel="noopener"><i class="fa-brands fa-twitter"></i></a>
+            </li>
+        </ul>
     </footer>
     <!-- Script for messages to fade from Code Institute's I Think Therefore I Blog walkthrough project -->
     <script>
