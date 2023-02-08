@@ -1,3 +1,33 @@
+/* link to import Google Fonts */
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@300&display=swap');
+
+/* styles to apply to all elements */
+
+body {
+    background-color: #E9DCBE;
+    color: #000;
+}
+
+/* heading styling */
+
+h1, h2 {
+    font-family: 'Lobster', sans-serif;
+}
+
+/* navbar styling */
+
+.navbar ul a {
+    color: #000;
+}
+
+#site-logo {
+    max-width: 33%;
+    height: auto;
+}
+
+/* style for user-starred bakes */
+
 .user-starred {
     color: gold;
 }
