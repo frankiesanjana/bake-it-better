@@ -33,7 +33,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="nav-options">
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav justify-content-end">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                         </li>
@@ -48,7 +48,7 @@
                                     </svg>
                                     {{ user.username }}
                                 </a>
-                                <ul class="dropdown-menu">
+                                <ul class="dropdown-menu dropdown-menu-right">
                                     <li>
                                         <a class="dropdown-item" href="{% url 'my-starred-bakes' %}">My Starred Bakes</a>
                                     </li>

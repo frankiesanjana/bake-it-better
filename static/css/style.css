@@ -19,15 +19,44 @@ h1, h2 {
 
 .navbar ul a {
     color: #000;
+    font-family: 'Poppins', sans-serif;
 }
 
 #site-logo {
-    max-width: 33%;
+    max-width: 25%;
     height: auto;
+}
+
+#nav-options {
+    display: flex;
+    justify-content: flex-end;
 }
 
 /* style for user-starred bakes */
 
 .user-starred {
     color: gold;
+}
+
+/* style for footer */
+
+footer {
+    position: relative;
+    bottom: 0;
+    height: 75px;
+    width: 100%;
+}
+
+footer ul {
+    text-align: center;
+    }
+
+footer li {
+    display: inline;
+    font-size: 150%;
+    }
+
+footer i {
+    color: black;
+    margin: 1.25%;
 }
