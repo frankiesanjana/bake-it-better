@@ -105,17 +105,6 @@ class BestForBakes(LoginRequiredMixin, generic.ListView):
         # if the occasion has a BF bake associated with it, add bake
         # if no BF bake exists, set occasion BF bake to none
         
-        best_for = {
-            1: "Brunch",
-            2: "Kids",
-            3: "Parties",
-            4: "Sharing",
-            5: "Birthdays",
-            6: "Christmas",
-            7: "Weekend Baking",
-            8: "Simple Baking"
-        }
-
         my_best_for_bakes = {
             "Brunch": user_best_for_bakes.filter(best_for=1).first() or None,
             "Kids": user_best_for_bakes.filter(best_for=2).first() or None,
@@ -123,8 +112,8 @@ class BestForBakes(LoginRequiredMixin, generic.ListView):
             "Sharing": user_best_for_bakes.filter(best_for=4).first() or None,
             "Birthdays": user_best_for_bakes.filter(best_for=5).first() or None,
             "Christmas": user_best_for_bakes.filter(best_for=6).first() or None,
-            "Weekend": user_best_for_bakes.filter(best_for=7).first() or None,
-            "Simple": user_best_for_bakes.filter(best_for=8).first() or None
+            "Weekend Baking": user_best_for_bakes.filter(best_for=7).first() or None,
+            "Simple Baking": user_best_for_bakes.filter(best_for=8).first() or None
         }
 
         return render(
