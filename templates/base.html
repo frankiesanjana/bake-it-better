@@ -31,21 +31,21 @@
                         <img id="site-logo" src="https://res.cloudinary.com/frankiesanjana/image/upload/v1664965811/logo_xijbxy.png" alt="Bake It Better logo">
                     </a>
                 </div>
-                <div class="col">
+                <div class="col menu-options">
                     <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#nav-options" aria-controls="nav-options" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="nav-options">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                                <a class="nav-link active text-dark" aria-current="page" href="{% url 'home' %}">Home</a>
                             </li>
                             {% if user.is_authenticated %}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'add-bake' %}">Add a Bake</a>
+                                    <a class="nav-link text-dark" href="{% url 'add-bake' %}">Add a Bake</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <a class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" href="#">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                                         </svg>
@@ -53,22 +53,22 @@
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-right">
                                         <li>
-                                            <a class="dropdown-item" href="{% url 'my-starred-bakes' %}">My Starred Bakes</a>
+                                            <a class="dropdown-item text-dark" href="{% url 'my-starred-bakes' %}">My Starred Bakes</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="{% url 'best-for-bakes' %}">Best For Bakes</a>
+                                            <a class="dropdown-item text-dark" href="{% url 'best-for-bakes' %}">Best For Bakes</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="{% url 'account_logout' %}">Log Out</a>
+                                            <a class="dropdown-item text-dark" href="{% url 'account_logout' %}">Log Out</a>
                                         </li>
                                     </ul>
                                 </li>
                             {% else %}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a>
+                                    <a class="nav-link text-dark" href="{% url 'account_signup' %}">Sign Up</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'account_login' %}">Log In</a>
+                                    <a class="nav-link text-dark" href="{% url 'account_login' %}">Log In</a>
                                 </li>
                             {% endif %}    
                         </ul>

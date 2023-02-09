@@ -17,8 +17,7 @@ h1, h2 {
 
 /* navbar styling */
 
-.navbar ul a {
-    color: #000;
+.text-dark {
     font-family: 'Poppins', sans-serif;
 }
 
@@ -27,9 +26,11 @@ h1, h2 {
     height: auto;
 }
 
-#nav-options .navbar-toggler .navbar-toggler-icon {
+.menu-options {
     display: flex;
+    flex-direction: column;
     justify-content: flex-end;
+    align-items: flex-end;
 }
 
 /* style for user-starred bakes */
