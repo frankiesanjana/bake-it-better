@@ -2,55 +2,37 @@
 
 {% block content %}
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <!-- Bakes List Column -->
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="col">
             <div class="row">
                 {% for bake in bake_list %}
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="image-container">
-                                {% if "placeholder" in bake.featured_image.url %}
-                                <img class="card-img-top"
-                                    src="https://res.cloudinary.com/frankiesanjana/image/upload/v1664720616/cookie-cutter-shapes_wfmdht.jpg" 
-                                        alt="Dough with cookie shapes cut out">
-                                {% else %}
-                                <img class="card-img-top" src=" {{ bake.featured_image.url }}" alt="{{ bake.title }}">
-                                {% endif %}
-                                <div class="image-flash">
-                                    <p class="author">Author: {{ bake.author }}</p>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <div class="image-container mb-2">
+                                    {% if "placeholder" in bake.featured_image.url %}
+                                    <img class="card-img-top"
+                                        src="https://res.cloudinary.com/frankiesanjana/image/upload/v1664720616/cookie-cutter-shapes_wfmdht.jpg" 
+                                            alt="Dough with cookie shapes cut out">
+                                    {% else %}
+                                    <img class="card-img-top" src=" {{ bake.featured_image.url }}" alt="{{ bake.title }}">
+                                    {% endif %}
                                 </div>
+                                <a href="{% url 'bake-detail' bake.slug %}" class="bake-link">
+                                    <h2 class="card-title text-truncate">{{ bake.title }}</h2>
+                                </a>
+                                <hr />
+                                <p class="author h6">Author: {{ bake.author }}</p>
+                                <p class="card-text">{{ bake.created_on}}</p> 
                             </div>
-                            <a href="{% url 'bake-detail' bake.slug %}" class="bake-link">
-                                <h2 class="card-title">{{ bake.title }}</h2>
-                                <p class="card-text">{{ bake.description|safe }}</p>
-                            </a>
-                            <hr />
-                            <p class="card-text text-muted h6">{{ bake.created_on}} 
-                                {% if user.is_authenticated %}
-                                    {% if request.user in bake.stars.all %}
-                                    <i class="user-starred fa-solid fa-star"></i>
-                                    {% elif bake.number_of_stars > 0 %}
-                                    <i class="fa-solid fa-star"></i>
-                                    {% else %}
-                                    <i class="fa-regular fa-star"></i>
-                                    {% endif %}
-                                {% else %}
-                                    {% if bake.number_of_stars > 0 %}
-                                    <i class="fa-solid fa-star"></i>
-                                    {% else %}
-                                    <i class="fa-regular fa-star"></i>
-                                    {% endif %}
-                                {% endif %}
-                                {{ bake.number_of_stars }}
-                            </p>
-                            <div>
-                                {% if user.is_authenticated and request.user == bake.author %}
-                                    <a class="btn" href="{% url 'edit-bake' bake.slug %}">Edit</a>
-                                    <a class="btn" href="{% url 'delete-bake' bake.slug %}">Delete</a>
-                                {% endif %}
-                            </div>
+                        </div>
+                        <div>
+                            {% if user.is_authenticated and request.user == bake.author %}
+                                <a class="btn" href="{% url 'edit-bake' bake.slug %}">Edit</a>
+                                <a class="btn" href="{% url 'delete-bake' bake.slug %}">Delete</a>
+                            {% endif %}
                         </div>
                     </div>
                 {% endfor %}
