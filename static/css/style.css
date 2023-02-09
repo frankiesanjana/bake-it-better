@@ -23,11 +23,11 @@ h1, h2 {
 }
 
 #site-logo {
-    max-width: 25%;
+    max-width: 100%;
     height: auto;
 }
 
-#nav-options {
+#nav-options .navbar-toggler .navbar-toggler-icon {
     display: flex;
     justify-content: flex-end;
 }
@@ -59,4 +59,16 @@ footer li {
 footer i {
     color: black;
     margin: 1.25%;
+}
+
+/* media queries */
+
+/* large to xl screen sizes above 992 pixels */
+
+@media screen and (min-width: 992px) {
+    #site-logo {
+        max-width: 50%;
+        height: auto;
+    }
+
 }
