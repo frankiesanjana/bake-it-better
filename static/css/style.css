@@ -39,7 +39,11 @@ h1, h2 {
     color: gold;
 }
 
-/* style for bake cards */
+/* style for bake cards and container */
+
+.bakes-container {
+    padding: 0 30px 0 45px;
+}
 
 .card-img-top {
     width: 100%;
@@ -55,7 +59,19 @@ h1, h2 {
 .card {
     border-color: #8B0000;
     border-width: 2px;
-    background-color: lightgray;
+    background-color: #d3d3d3;
+    margin: 25px 0 5px 0;
+}
+
+/* style for buttons */
+
+.btn {
+    color: #8B0000;
+    border-color: #8B0000;
+    border-width: 1px;
+    font-family: 'Poppins', sans-serif;
+    background-color: #d3d3d3;
+    margin: 2px 5px 0 0;
 }
 
 /* style for footer */
@@ -73,12 +89,12 @@ footer ul {
 
 footer li {
     display: inline;
-    font-size: 150%;
+    font-size: 200%;
     }
 
 footer i {
     color: #8B0000;
-    margin: 1.25%;
+    margin: 5%;
 }
 
 /* media queries */
@@ -89,6 +105,10 @@ footer i {
     #site-logo {
         max-width: 50%;
         height: auto;
+    }
+
+    .bakes-container {
+        padding: 0 40px 0 40px;
     }
 
 }

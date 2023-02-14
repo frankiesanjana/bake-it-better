@@ -2,21 +2,21 @@
 
 {% block content %}
 
-<div class="container">
+<div class="container-fluid bakes-container">
     <div class="row">
         <!-- Bakes List Column -->
         <div class="col">
             <div class="row">
                 {% for bake in bake_list %}
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div class="card mb-2">
+                    <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                        <div class="card">
                             <div class="card-body">
                                 <div class="image-container mb-2">
                                     {% if "placeholder" in bake.featured_image.url %}
                                     <img class="card-img-top"
                                         src="https://res.cloudinary.com/frankiesanjana/image/upload/v1664720616/cookie-cutter-shapes_wfmdht.jpg" 
                                             alt="Dough with cookie shapes cut out">
-                                    {% else %}
+                                     {% else %}
                                     <img class="card-img-top" src=" {{ bake.featured_image.url }}" alt="{{ bake.title }}">
                                     {% endif %}
                                 </div>
