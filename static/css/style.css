@@ -13,6 +13,7 @@ body {
 
 h1, h2 {
     font-family: 'Lobster', sans-serif;
+    color: #8B0000;
 }
 
 /* navbar styling */
@@ -65,13 +66,26 @@ h1, h2 {
 
 /* style for buttons */
 
-.btn {
+.btn, .custom-file-upload {
     color: #8B0000;
     border-color: #8B0000;
     border-width: 1px;
     font-family: 'Poppins', sans-serif;
     background-color: #d3d3d3;
     margin: 2px 5px 0 0;
+}
+
+/* form styling */
+
+.form-label {
+    color: #8B0000;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    margin: 10px 0 0;
+}
+
+input[type="file"] {
+    display: none;
 }
 
 /* style for footer */

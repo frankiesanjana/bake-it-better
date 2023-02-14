@@ -2,10 +2,23 @@
 
 {% block content %}
 {% load crispy_forms_tags %}
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form | crispy }}
-    <input type="submit" value="Submit"/>
-    <a class="btn" href="{% url 'home' %}">Cancel</a>
-</form> 
+<div class="container form-container">
+        <h1>Add a Bake</h1>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-label"> {{ field.label }} </div>
+                <div class="form-input"> {{ field }} </div>
+                {% if field.label == "Image" %}
+                    <label for="id_featured_image" class="custom-file-upload btn">
+                        Choose File
+                    </label>
+                    <input id="file-upload" type="file"/>
+                {% endif %}
+            {% endfor %}
+            
+            <input type="submit" value="Submit" class="btn"/>
+            <a class="btn" href="{% url 'home' %}">Cancel</a>
+        </form>
+</div>
 {% endblock %}
