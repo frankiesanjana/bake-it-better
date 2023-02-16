@@ -77,14 +77,31 @@ h1, h2 {
 
 /* form styling */
 
-.form-label {
+label {
     color: #8B0000;
     font-weight: bold;
     font-family: 'Poppins', sans-serif;
     margin: 10px 0 0;
 }
 
-input[type="file"] {
+input[type=submit] {
+    color: #8B0000;
+    border-color: #8B0000;
+    border-width: 1px;
+    font-family: 'Poppins', sans-serif;
+    background-color: #d3d3d3;
+    margin: 2px 5px 0 0;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+#div_id_featured_image .asteriskField {
     display: none;
 }
 
@@ -112,6 +129,14 @@ footer i {
 }
 
 /* media queries */
+
+/* screen sizes up to 768 pixels */
+
+@media screen and (max-width: 768px) {
+    .form-group {
+        width: 90vw;
+    }
+}
 
 /* large to xl screen sizes above 992 pixels */
 

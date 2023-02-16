@@ -62,6 +62,12 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
+SUMMERNOTE_CONFIG = {
+    'summernote': {
+        'width': '100%',
+    },
+}
+
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
     messages.INFO: 'alert-info',
