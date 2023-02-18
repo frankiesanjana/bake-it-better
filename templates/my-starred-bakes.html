@@ -6,6 +6,9 @@
     <div class="row">
         <!-- Bakes List Column -->
         <div class="col">
+            <h1 class="page-heading">
+                My Starred Bakes
+            </h1>
             <div class="row">
                 {% if user.is_authenticated %}
                     {% for bake in bake_list %}

@@ -24,6 +24,10 @@ h1, h2, h3 {
     color: #8B0000;
 }
 
+.page-heading {
+    text-align: center;
+}
+
 /* navbar styling */
 
 .text-dark {
