@@ -11,7 +11,7 @@ body {
 
 /* heading styling */
 
-h1, h2 {
+h1, h2, h3 {
     font-family: 'Lobster', sans-serif;
     color: #8B0000;
 }
@@ -75,7 +75,7 @@ h1, h2 {
     margin: 2px 5px 0 0;
 }
 
-/* form styling */
+/* style for add, edit forms */
 
 label {
     color: #8B0000;
@@ -103,6 +103,34 @@ input[type=submit] {
 
 #div_id_featured_image .asteriskField {
     display: none;
+}
+
+/* style for sign in, sign up, sign out forms */
+
+.prompt {
+    margin-top: 20px;
+}
+
+.prompt a {
+    color: #000;
+    text-decoration: underline;
+}
+
+.prompt a:hover {
+    font-weight: 600;
+}
+
+.signup input, .login input {
+    display: block;
+    margin-top: 5px;
+}
+
+#id_remember {
+    display: inline;
+}
+
+.btn-signup {
+    margin-top: 20px;
 }
 
 /* style for footer */
