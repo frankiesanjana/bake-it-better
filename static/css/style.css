@@ -7,6 +7,14 @@
 body {
     background-color: #E9DCBE;
     color: #000;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+main {
+    flex-grow: 1;
 }
 
 /* heading styling */
@@ -140,9 +148,6 @@ input[type=submit] {
 /* style for footer */
 
 footer {
-    position: relative;
-    bottom: 0;
-    height: 75px;
     width: 100%;
 }
 
@@ -157,7 +162,7 @@ footer li {
 
 footer i {
     color: #8B0000;
-    margin: 5%;
+    margin: 50px;
 }
 
 /* media queries */
@@ -181,5 +186,5 @@ footer i {
     .bakes-container {
         padding: 0 40px 0 40px;
     }
-
+    
 }
