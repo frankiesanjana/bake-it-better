@@ -105,6 +105,10 @@ input[type=submit] {
     display: none;
 }
 
+.delete-bake {
+    margin-bottom: 20px;
+}
+
 /* style for sign in, sign up, sign out forms */
 
 .prompt {
