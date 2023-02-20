@@ -6,6 +6,9 @@
     <div class="row">
         <!-- Bakes List Column -->
         <div class="col">
+            <h1 class="page-heading">
+                Welcome to Bake It Better!
+            </h1>
             <div class="row">
                 {% for bake in bake_list %}
                     <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
@@ -13,17 +16,17 @@
                             <div class="card-body">
                                 <div class="image-container mb-2">
                                     {% if "placeholder" in bake.featured_image.url %}
-                                    <img class="card-img-top"
-                                        src="https://res.cloudinary.com/frankiesanjana/image/upload/v1664720616/cookie-cutter-shapes_wfmdht.jpg" 
-                                            alt="Dough with cookie shapes cut out">
-                                     {% else %}
-                                    <img class="card-img-top" src=" {{ bake.featured_image.url }}" alt="{{ bake.title }}">
+                                        <img class="card-img-top"
+                                            src="https://res.cloudinary.com/frankiesanjana/image/upload/v1664720616/cookie-cutter-shapes_wfmdht.jpg" 
+                                                alt="Dough with cookie shapes cut out">
+                                    {% else %}
+                                        <img class="card-img-top" src=" {{ bake.featured_image.url }}" alt="{{ bake.title }}">
                                     {% endif %}
                                 </div>
                                 <a href="{% url 'bake-detail' bake.slug %}" class="bake-link">
                                     <h2 class="card-title text-truncate">{{ bake.title }}</h2>
                                 </a>
-                                <hr />
+                                <hr>
                                 <p class="author h6">Author: {{ bake.author }}</p>
                                 <p class="card-text">{{ bake.created_on}}</p> 
                             </div>
@@ -48,7 +51,6 @@
             {% endif %}
             {% if page_obj.has_next %}
             <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
-
             {% endif %}
         </ul>
     </nav>

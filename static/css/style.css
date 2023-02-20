@@ -81,7 +81,8 @@ h1, h2, h3 {
     text-decoration: underline;
 }
 
-.best-for-link:hover {
+.best-for-link:hover,
+.best-for-link:focus {
     color: #000;
     font-weight: 600;
     text-decoration: underline;
@@ -143,7 +144,8 @@ input[type=submit] {
     text-decoration: underline;
 }
 
-.prompt a:hover {
+.prompt a:hover,
+.prompt a:focus {
     font-weight: 600;
 }
 
@@ -201,5 +203,4 @@ footer i {
     .bakes-container {
         padding: 0 40px 0 40px;
     }
-    
 }

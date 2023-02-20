@@ -2,9 +2,6 @@
 
 {% block content %}
 
-
-
-
 <div class="container-fluid bakes-container">
     <div class="row">
         <div class="col">
@@ -14,6 +11,7 @@
         </div>
     </div>
     <br>
+    <!-- Best For Bakes cards -->
     <div class="row">
         {% if user.is_authenticated %}
             {% for key, value in my_best_for_bakes.items %}
@@ -75,7 +73,6 @@
             {% endif %}
             {% if page_obj.has_next %}
             <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
-
             {% endif %}
         </ul>
     </nav>
