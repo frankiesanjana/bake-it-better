@@ -4,105 +4,103 @@
 
 {% load crispy_forms_tags %}
 
-<!-- Page adapted from post-detail template in Code Institute's I Think Therefore I Blog project -->
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <h1 class="bake-title">{{ bake.title }}</h1>
-        </div>
-        <hr>
-        <div class="col-md-6">
-            {% if "placeholder" in bake.featured_image.url %}
-            <img class="card-img-top"
-                src="https://res.cloudinary.com/frankiesanjana/image/upload/v1664720616/cookie-cutter-shapes_wfmdht.jpg" 
-                    alt="Dough with cookie shapes cut out">
-            {% else %}
-            <img class="card-img-top" src=" {{ bake.featured_image.url }}" alt="{{ bake.title }}">
-            {% endif %}
-        </div>
-    </div>
-</div>
-
+<!-- The post-detail template in Code Institute's I Think Therefore I Blog project was used as a starting point for this page -->
 <div class="container">
     <div class="row">
         <div class="col">
-            <div class="card-body">
-                <strong class="card-text text-muted h6">{{ bake.author }} | {{ bake.created_on }}
-                    {% if user.is_authenticated %}
+            <h1 class="page-heading">{{ bake.title }}</h1>
+            {% if "placeholder" in bake.featured_image.url %}
+                <img class="bake-detail-image card-img-top"
+                    src="https://res.cloudinary.com/frankiesanjana/image/upload/v1664720616/cookie-cutter-shapes_wfmdht.jpg" 
+                        alt="Dough with cookie shapes cut out">
+            {% else %}
+                <img class="bake-detail-image card-img-top" src=" {{ bake.featured_image.url }}" alt="{{ bake.title }}">
+            {% endif %}
+            <div class="headline-items">
+                <p class="author h6">Author: {{ bake.author }}</p>
+                <p class="card-text">{{ bake.created_on }}</p>
+                <p class="card-text">Level: {{ bake.get_difficulty_display | safe }}</p>
+                <!-- Code to colour stars correctly (blank for no stars, grey for stars by other users only, gold for stars by users including signed-in user) -->        
+                {% if user.is_authenticated %}
                     <form class="d-inline" action="{% url 'bake-star' bake.slug %}" method="POST">
                         {% csrf_token %}
                         {% if starred %}
-                        <button type="submit" name="bake_id" value="{{bake.slug}}">
+                        <button type="submit" name="bake_id" value="{{ bake.slug }}">
                         <i class="user-starred fa-solid fa-star"></i>
                         </button>
                         {% elif bake.number_of_stars > 0 %}
-                        <button type="submit" name="bake_id" value="{{bake.slug}}">
+                        <button type="submit" name="bake_id" value="{{ bake.slug }}">
                         <i class="fa-solid fa-star"></i>
                         </button>
                         {% else %}
-                        <button type="submit" name="bake_id" value="{{bake.slug}}">
+                        <button type="submit" name="bake_id" value="{{ bake.slug }}">
                         <i class="fa-regular fa-star"></i>
                         </button>
                         {% endif %}
                     </form>
-                    {% else %}
+                {% else %}
                     {% if bake.number_of_stars > 0 %}
-                    <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
                     {% else %}
-                    <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
                     {% endif %}
-                    {% endif %}
-                    {{ bake.number_of_stars }}
-                </strong>
+                {% endif %}
+                {{ bake.number_of_stars }}
+                <!-- Code to add edit and delete buttons for signed-in author user) -->
                 <div>
                     {% if user.is_authenticated and request.user == bake.author %}
                         <a class="btn" href="{% url 'edit-bake' bake.slug %}">Edit</a>
                         <a class="btn" href="{% url 'delete-bake' bake.slug %}">Delete</a>
                     {% endif %}
                 </div>
+                <!-- Modal to add Best For bakes, created following instructions at https://getbootstrap.com/docs/4.6/components/modal/ -->
                 <div class="dropdown">
                     {% if user.is_authenticated %}
-                        <!-- Modal to add Best For bakes, created following instructions at https://getbootstrap.com/docs/4.6/components/modal/ -->
                         <button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#best-for-modal" aria-expanded="false" aria-labelledby="best-for-modal-title">
                             Add to Plan
                         </button>
                         <div class="modal" id="best-for-modal" tabindex="-1">
                             <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="best-for-modal-title">Add as Best For...</h5>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="best-for-modal-title">Add as Best For...</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="POST">
+                                            {% csrf_token %}
+                                            {{ best_for_form | crispy }}
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-primary">Save</button>
+                                        </form>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                    <form method="POST">
-                                        {% csrf_token %}
-                                        {{ best_for_form | crispy }}
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                        <button type="submit" class="btn btn-primary">Save</button>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                  
-                                </div>
-                              </div>
                             </div>
-                          </div>
+                        </div>
                     {% endif %}
                 </div>
+            </div>            
+            <div class="details-container"></div>
                 <p class="card-text">
                     {{ bake.description | safe }}
                 </p>
-                <p class="card-text">
-                    {{ bake.get_difficulty_display | safe }}
-                </p>
+                <h3>
+                    Equipment you will need:
+                </h3>
                 <p class="card-text">
                     {{ bake.equipment | safe }}
                 </p>
+                <h3>
+                    Ingredients:
+                </h3>
                 <p class="card-text">
                     {{ bake.ingredients | safe }}
                 </p>
+                <h3>
+                    Method:
+                </h3>
                 <p class="card-text">
                     {{ bake.method | safe }}
                 </p>
@@ -114,7 +112,6 @@
                 </div>
             </div>
         </div>
-    </div>
     <div class="row">
         <div class="col-md-8 card mb-4 mt-3 ">
             <h3>Comments:</h3>
@@ -158,8 +155,9 @@
                 </form>
                 {% endif %}
                 {% endif %}
-            </div>
+            
         </div>
+    </div>
 </div>
 
 
