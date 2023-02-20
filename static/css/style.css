@@ -65,6 +65,13 @@ h1, h2, h3 {
     object-fit: cover;
 }
 
+.intro {
+    font-family: 'Lobster', sans-serif;
+    color: #8B0000;
+    text-align: center;
+    margin-top: 25px;
+}
+
 .author, .card-title, .card-text {
     color: #8B0000;
 }
