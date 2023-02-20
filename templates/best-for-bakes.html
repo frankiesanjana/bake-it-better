@@ -20,8 +20,8 @@
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
                     <div class="card">
                         <div class="card-body">
-                            <h2>
-                                Best For {{ key }}
+                            <h2 class="text-truncate">
+                                {{ key }}
                             </h2>
                             {% if value is not None %}
                                 <div class="image-container mb-2">
@@ -45,11 +45,15 @@
                             {% else %}
                             <div class="image-container mb-2">
                                 <img class="card-img-top" 
-                                    src="https://res.cloudinary.com/frankiesanjana/image/upload/v1676882156/add-best-for-bake_ptffhj.png" 
+                                    src="https://res.cloudinary.com/frankiesanjana/image/upload/v1676895592/best-for-bake-add_myc5bk.png" 
                                         alt="Picture of question mark and cracked eggshell">
-                            </div>    
+                            </div>
+                                <h2 class="card-title text-truncate">What bake is best?</h2>
+                            <hr>
+                            <p class="author h6">Pick a bake below</p>
+                            <p class="card-text">This can be replaced later!</p>
                             <a class="best-for-link" href="{% url 'home' %}">
-                                    Add a Bake
+                                    Choose a Bake
                                 </a>
                             {% endif %}
                         </div>
