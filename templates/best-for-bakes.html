@@ -5,18 +5,20 @@
 
 
 
-<div class="container">
+<div class="container-fluid bakes-container">
     <div class="row">
-        <h1>
-            My Baking Planner: "Best For" Bakes
-        </h1>
-        <!-- Bakes List Column -->
-        
+        <div class="col">
+            <h1 class="page-heading">
+                My Baking Planner: "Best For" Bakes
+            </h1>
+        </div>
+    </div>
+    <br>
+    <div class="row">
         {% if user.is_authenticated %}
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                <div class="row">
-                    <div class="card mb-4"></div>
-                        {% for key, value in my_best_for_bakes.items %}
+            {% for key, value in my_best_for_bakes.items %}
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                    <div class="card">
                         <div class="card-body">
                             <h2>
                                 Best For {{ key }}
@@ -64,17 +66,15 @@
                                 </a>
                             {% endif %}
                         </div>
-                        {% endfor %}
                     </div>
                 </div>
-            </div>
+            {% endfor %}
         {% else %}
             <p>
                 You are not currently logged in. Please <a href="{% url 'account_login' %}">log in</a> to view your starred bakes.
             </p>
         {% endif %}
     </div>
-
     <!-- Pagination code from Code Institute's I Think Therefore I Blog walkthrough project -->
     {% if is_paginated %}
     <nav aria-label="Page navigation">
