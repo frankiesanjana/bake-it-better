@@ -11,6 +11,7 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0;
+    font-family: 'Poppins', sans-serif;
 }
 
 main {
@@ -30,10 +31,6 @@ h1, h2, h3 {
 
 /* navbar styling */
 
-.text-dark {
-    font-family: 'Poppins', sans-serif;
-}
-
 #site-logo {
     max-width: 100%;
     height: auto;
@@ -44,6 +41,16 @@ h1, h2, h3 {
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-end;
+}
+
+/* style for bake-detail page */
+
+.headline-items {
+    margin-top: 10px;
+}
+
+.stars {
+    margin-bottom: 18px;
 }
 
 /* style for user-starred bakes */
@@ -66,7 +73,6 @@ h1, h2, h3 {
 }
 
 .intro {
-    font-family: 'Poppins', sans-serif;
     color: #8B0000;
     text-align: center;
     margin-top: 30px;
@@ -74,6 +80,10 @@ h1, h2, h3 {
 
 .author, .card-title, .card-text {
     color: #8B0000;
+}
+
+.author {
+    font-weight: bold;
 }
 
 .card {
@@ -101,7 +111,6 @@ h1, h2, h3 {
     color: #8B0000;
     border-color: #8B0000;
     border-width: 1px;
-    font-family: 'Poppins', sans-serif;
     background-color: #d3d3d3;
     margin: 2px 5px 0 0;
 }
@@ -111,7 +120,6 @@ h1, h2, h3 {
 label {
     color: #8B0000;
     font-weight: bold;
-    font-family: 'Poppins', sans-serif;
     margin: 10px 0 0;
 }
 
@@ -119,7 +127,6 @@ input[type=submit] {
     color: #8B0000;
     border-color: #8B0000;
     border-width: 1px;
-    font-family: 'Poppins', sans-serif;
     background-color: #d3d3d3;
     margin: 2px 5px 0 0;
     display: inline-block;
