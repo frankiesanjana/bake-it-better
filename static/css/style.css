@@ -53,6 +53,14 @@ h1, h2, h3 {
     margin-bottom: 18px;
 }
 
+.comment-card {
+    margin: 0 10px;
+}
+
+.comment-form {
+    margin-top: 1.3em;
+}
+
 /* style for user-starred bakes */
 
 .user-starred {
@@ -70,6 +78,11 @@ h1, h2, h3 {
     height: 300px;
     overflow: hidden;
     object-fit: cover;
+}
+
+.bake-link:hover,
+.bake-link:focus {
+    text-decoration-color: #8B0000;
 }
 
 .intro {
@@ -197,14 +210,6 @@ footer i {
 }
 
 /* media queries */
-
-/* screen sizes up to 768 pixels */
-
-@media screen and (max-width: 768px) {
-    .form-group {
-        width: 90vw;
-    }
-}
 
 /* large to xl screen sizes above 992 pixels */
 
