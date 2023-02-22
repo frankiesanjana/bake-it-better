@@ -84,7 +84,7 @@
                     {% endif %}
                 </div>
             </div>            
-            <div class="details-container"></div>
+            <div class="details-container">
                 <p class="card-text">
                     {{ bake.description | safe }}
                 </p>
@@ -114,25 +114,28 @@
                 </div>
             </div>
         </div>
+    </div>
     <div class="row">
-        
-            <div class="card mb-4 mt-3 comment-card">
+            <div class="col-12 card mb-4 mt-3 comment-card">
                 <div class="card-body">
                     <h3>Comments:</h3>
-                    {% for comment in comments %}
-                    <div class="comments">
-                        <p class="author">                        
-                            {{ comment.name }}
-                            wrote:
-                        </p>
-                        {{ comment.body | linebreaks }}
-                        <p>
-                            <em>
-                            {{ comment.created_on }}
-                            </em>
-                        </p>
-                    </div>
-                    {% endfor %}
+                    {% if comments.count == 0 %}
+                        <p>No comments yet - why not add yours below?</p>
+                    {% else %}
+                        {% for comment in comments %}
+                            <div class="comments">
+                                <p class="author">                        
+                                    {{ comment.name }} wrote:
+                                </p>
+                                    {{ comment.body | linebreaks }}
+                                <p>
+                                    <em>
+                                        {{ comment.created_on }}
+                                    </em>
+                                </p>    
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                     <hr>
                     <br>
                     {% if commented %}
