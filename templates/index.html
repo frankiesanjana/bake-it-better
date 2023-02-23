@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div>
-                            {% if user.is_authenticated and request.user == bake.author %}
+                            {% if user.is_authenticated and request.user == bake.author or user.is_superuser %}
                                 <a class="btn" href="{% url 'edit-bake' bake.slug %}">Edit</a>
                                 <a class="btn" href="{% url 'delete-bake' bake.slug %}">Delete</a>
                             {% endif %}

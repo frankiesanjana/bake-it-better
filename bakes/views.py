@@ -199,9 +199,10 @@ class UpdateBake(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, g
     def test_func(self):
         """
         Prevents users from editing bakes written by other users
+        except for the admin user, who is allowed to edit others' bakes
         """
         Bake = self.get_object()
-        return Bake.author == self.request.user
+        return Bake.author == self.request.user or self.request.user.is_superuser
 
 
 class DeleteBake(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, generic.DeleteView):
@@ -227,6 +228,7 @@ class DeleteBake(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, g
     def test_func(self):
         """
         Prevents users from deleting bakes written by other users
+        except for the admin user, who is allowed to delete others' bakes
         """
         Bake = self.get_object()
-        return Bake.author == self.request.user
+        return Bake.author == self.request.user or self.request.user.is_superuser
