@@ -91,7 +91,7 @@ h1, h2, h3 {
     margin-top: 30px;
 }
 
-.author, .card-title, .card-text {
+.author, .card-title, .card-text, .comment-text {
     color: #8B0000;
 }
 
@@ -120,12 +120,37 @@ h1, h2, h3 {
 
 /* style for buttons */
 
-.btn, .custom-file-upload {
+.btn, .custom-file-upload, .page-link {
     color: #8B0000;
     border-color: #8B0000;
-    border-width: 1px;
+    border-width: 1.5px;
     background-color: #d3d3d3;
     margin: 2px 5px 0 0;
+}
+
+.page-link {
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    margin-top: 20px;
+}
+
+.page-link:hover,
+.page-link:focus {
+    color: #8B0000;
+    border-color: #8B0000;
+    border-width: 1.5px;
+    background-color: #d3d3d3;
+    margin: 2px 5px 0 0;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    margin-top: 20px;
+    font-weight: bold;
 }
 
 /* style for add, edit forms */
@@ -197,19 +222,28 @@ footer {
 
 footer ul {
     text-align: center;
-    }
+    padding: 0;
+}
 
 footer li {
-    display: inline;
+    display: inline-block;
     font-size: 200%;
-    }
+}
 
 footer i {
     color: #8B0000;
-    margin: 50px;
+    margin: 3rem 1rem;
 }
 
 /* media queries */
+
+/* medium to xl screen sizes above 768 pixels */
+
+@media screen and (min-width: 768px) {
+    footer i {
+        margin: 3rem;
+    }
+}
 
 /* large to xl screen sizes above 992 pixels */
 
@@ -222,4 +256,5 @@ footer i {
     .bakes-container {
         padding: 0 40px 0 40px;
     }
+    
 }
