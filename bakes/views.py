@@ -58,6 +58,7 @@ class BakeDetail(View):
             comment = comment_form.save(commit=False)
             comment.bake = bake
             comment.save()
+            messages.success(self.request, "Your comment has been added and is awaiting approval")
         else:
             comment_form = CommentForm()
 
@@ -74,6 +75,7 @@ class BakeDetail(View):
                 best_for_bake.bake = bake
 
             best_for_bake.save()
+            messages.success(self.request, "This bake has been added to your Best For Bakes Plan!")
 
         else:
             best_for_form = BestForForm()
