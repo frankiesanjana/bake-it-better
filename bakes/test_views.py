@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
+from django.urls import reverse
 from .models import Bake
 
 
@@ -10,7 +11,7 @@ class TestViews(TestCase):
         Creates test objects to perform view testing
         """
         self.user = User.objects.create_user(username='test_user', password='test')
-        self.bake = Bake.objects.create(title='title', author=self.user, description='description', difficulty=1, equipment='equipment', ingredients='ingredients', method='method', featured_image='placeholder', status=0)
+        self.bake = Bake.objects.create(title='title', author=self.user, description='description', difficulty=1, equipment='equipment', ingredients='ingredients', method='method', featured_image='placeholder', status=1)
 
     def tearDown(self):
         """
@@ -24,7 +25,6 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'index.html')
 
-    # this one doesn't work
     def test_can_get_bake_detail_page(self):
         response = self.client.get(f'/bake-detail/{self.bake.slug}/')
         self.assertEqual(response.status_code, 200)
@@ -76,3 +76,68 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'account/logout.html')
 
+    def test_can_add_bake(self):
+        self.client.login(username='test_user', password='test')
+        self.client.post(f'/add-bake/', {
+                        'title': 'test title',
+                        'author': self.user,
+                        'description': 'test description',
+                        'difficulty': 1,
+                        'equipment': 'test equipment',
+                        'ingredients': 'test ingredients',
+                        'method': 'test method',
+                        'featured_image': 'placeholder',
+                        'status': 0
+                         })
+        new_bake = Bake.objects.filter(title='test title')
+        self.assertTrue(new_bake)
+        
+
+    def test_can_edit_bake(self):
+        self.client.login(username='test_user', password='test')
+        self.client.get(f'/edit-bake/{self.bake.slug}/', {
+                        'title': 'new title',
+                        'author': self.user,
+                        'description': 'new description',
+                        'difficulty': 2,
+                        'equipment': 'new equipment',
+                        'ingredients': 'new ingredients',
+                        'method': 'new method',
+                        'featured_image': 'placeholder',
+                        'status': 1
+                         })
+        edited_bake = Bake.objects.first()
+        self.assertTrue(edited_bake)
+
+    def test_can_delete_bake(self):
+        self.client.login(username='test_user', password='test')
+        self.client.post(f'/add-bake/', {
+                        'title': 'another title',
+                        'author': self.user,
+                        'description': 'another description',
+                        'difficulty': 1,
+                        'equipment': 'another equipment',
+                        'ingredients': 'another ingredients',
+                        'method': 'another method',
+                        'featured_image': 'placeholder',
+                        'status': 0
+                         })
+        response = self.client.post(f'/delete-bake/another-title/')
+        deleted_bake = Bake.objects.filter(title='another title')
+        self.assertFalse(deleted_bake)
+    
+    def test_page_reloads_correctly_when_bake_is_starred(self):
+        self.client.login(username='test_user', password='test')
+        self.client.post(f'/add-bake/', {
+                        'title': 'star title',
+                        'description': 'star description',
+                        'difficulty': 1,
+                        'equipment': 'star equipment',
+                        'ingredients': 'star ingredients',
+                        'method': 'star method',
+                        'featured_image': 'placeholder',
+                        'status': 1,
+                        'starred': True
+                        })
+        response = self.client.post(f'/star/star-title/')
+        self.assertRedirects(response, f'/bake-detail/star-title/')
