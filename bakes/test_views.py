@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.shortcuts import get_object_or_404
 from .models import Bake
 
 
@@ -126,18 +127,22 @@ class TestViews(TestCase):
         deleted_bake = Bake.objects.filter(title='another title')
         self.assertFalse(deleted_bake)
     
-    def test_page_reloads_correctly_when_bake_is_starred(self):
-        self.client.login(username='test_user', password='test')
-        self.client.post(f'/add-bake/', {
-                        'title': 'star title',
-                        'description': 'star description',
-                        'difficulty': 1,
-                        'equipment': 'star equipment',
-                        'ingredients': 'star ingredients',
-                        'method': 'star method',
-                        'featured_image': 'placeholder',
-                        'status': 1,
-                        'starred': True
-                        })
-        response = self.client.post(f'/star/star-title/')
-        self.assertRedirects(response, f'/bake-detail/star-title/')
+        def test_can_star_bake(self):
+            self.client.login(username='test_user', password='test')
+            self.client.post(f'/add-bake/', {
+                            'title': 'star title',
+                            'description': 'star description',
+                            'difficulty': 1,
+                            'equipment': 'star equipment',
+                            'ingredients': 'star ingredients',
+                            'method': 'star method',
+                            'featured_image': 'placeholder',
+                            'status': 1,
+                            'starred': True
+                            })
+            star_bake = Bake.objects.filter(title='star title')
+            response = self.client.post(f'/star/star-title/')
+            self.assertRedirects(response, f'/bake-detail/star-title/')
+            starred_bake = get_object_or_404(star_bake, slug="star-title")
+            num_stars = len(starred_bake.stars.all())
+            self.assertEqual(num_stars, 1)
