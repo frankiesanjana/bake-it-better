@@ -9,11 +9,9 @@ Testing was carried out from a number of different perspectives:
 - User story testing of the deployed site
 - Automated Django testing
 - Manual testing of the deployed site
+- Testing of the deployed site across a range of screen sizes and devices
 - Colour contrast testing in order to ensure accessibility
 - Validator testing
-
-## Testing
-
 
 ## Manual Testing During Development
 
@@ -37,9 +35,21 @@ For this reason I interviewed users where possible to obtain feedback on the loo
 
 First I ran a “test test” by creating a TestCase class in the sheet `bakes/tests.py`. This initially produced an error with the message “permission denied to create database”. This was because I had not realised that when running tests it is necessary to use the local sqlite db and not the postgres one [add pic of switching commented out database]
 Once I had adjusted this so that the local database was used and the postgres one temporarily commented out, the test ran as intended, giving a fail since I had used assertEqual(1, 0).
-I then ran a second test designed to pass, to ensure that a passing test would be evaluated correctly as passing, and obtained the result I was looking for:
+I then ran a second test designed to pass, to ensure that a passing test would be evaluated correctly as passing, and obtained the result I was looking for. Since these tests were then deleted, they are also shown here:
 
-<img src="docs/readme-images/automated-testing-concept-testing.png" alt="View of 'test tests' for automated testing">
+<img src="readme-images/automated-testing-concept-testing.png" alt="View of 'test tests' for automated testing">
+
+After this, three testing files were created, to test the forms, the views and the models.
+
+The form testing was relatively straightforward, using the examples laid out in Code Institute's Hello Django testing section.
+
+The view testing was, as expected, a little more complicated, and unfortunately in view of time constraints I was not able to test every part of the `views.py` file completely. However, the full CRUD functionality and the ability for a signed-in user to star a bake was tested within the automated tests, and overall I am reasonably satisfied with this approach in combination with thorough manual testing.
+
+Similarly, for the model testing, the automated testing focused around the Bake model, since this is the largest and most complex model, and this is combined with extensive manual testing in order to ensure the models function as intended.
+
+To ensure that I had, in fact, tested a reasonable proportion of the site via automated testing, I created a coverage report. The details of this can be seen below:
+
+<img src="readme-images/automated-testing-coverage.png" alt="View of 'test tests' for automated testing">
 
 ## Validator Testing - SECTION TO UPDATE
 <!-- ### PEP8 Testing
