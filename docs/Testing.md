@@ -37,7 +37,7 @@ First I ran a “test test” by creating a TestCase class in the sheet `bakes/t
 Once I had adjusted this so that the local database was used and the postgres one temporarily commented out, the test ran as intended, giving a fail since I had used assertEqual(1, 0).
 I then ran a second test designed to pass, to ensure that a passing test would be evaluated correctly as passing, and obtained the result I was looking for. Since these tests were then deleted, they are also shown here:
 
-<img src="readme-images/automated-testing-concept-testing.png" alt="View of 'test tests' for automated testing">
+<img src="readme-images/automated-testing-concept-tests.png" alt="View of 'test tests' for automated testing">
 
 After this, three testing files were created, to test the forms, the views and the models.
 
