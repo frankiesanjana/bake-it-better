@@ -94,6 +94,7 @@ class BakeDetail(View):
             },
         )
 
+
 class BestForBakes(LoginRequiredMixin, generic.ListView):
     """
     Creates the view code to allow users to view 
@@ -106,18 +107,11 @@ class BestForBakes(LoginRequiredMixin, generic.ListView):
         # filter by occasion
         # if the occasion has a BF bake associated with it, add bake
         # if no BF bake exists, set occasion BF bake to none
+        my_best_for_bakes = {}
+        for each_category in BestFor.BEST_FOR_CHOICES:
+            result_for_category = user_best_for_bakes.filter(best_for=each_category[0]).first() or None
+            my_best_for_bakes[each_category[1]] = result_for_category
         
-        my_best_for_bakes = {
-            "Brunch": user_best_for_bakes.filter(best_for=1).first() or None,
-            "Kids": user_best_for_bakes.filter(best_for=2).first() or None,
-            "Parties": user_best_for_bakes.filter(best_for=3).first() or None,
-            "Sharing": user_best_for_bakes.filter(best_for=4).first() or None,
-            "Birthdays": user_best_for_bakes.filter(best_for=5).first() or None,
-            "Christmas": user_best_for_bakes.filter(best_for=6).first() or None,
-            "Weekend Baking": user_best_for_bakes.filter(best_for=7).first() or None,
-            "Simple Baking": user_best_for_bakes.filter(best_for=8).first() or None
-        }
-
         return render(
             request,
             "best-for-bakes.html",
