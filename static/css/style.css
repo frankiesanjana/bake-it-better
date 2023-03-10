@@ -106,6 +106,21 @@ h1, h2, h3 {
     margin: 25px 0 5px 0;
 }
 
+.detail-card {
+    border: 2px solid #8B0000;
+    background-color: #fff8e7;
+    margin: 25px 0 5px 0;
+    padding: 20px 0;
+}
+
+.bake-title {
+    padding: 0 0 20px 0
+}
+
+.bake-detail-container {
+    padding: 0 20px;
+}
+
 .best-for-link {
     color: #000;
     text-decoration: underline;
