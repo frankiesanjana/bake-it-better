@@ -31,7 +31,7 @@ class Bake(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     featured_image = CloudinaryField('image', default='placeholder')
-    status = models.IntegerField(choices=STATUS, default=0)
+    status = models.IntegerField(choices=STATUS, default=1)
     stars = models.ManyToManyField(User, related_name='bake_stars', blank=True)
 
     class Meta:
