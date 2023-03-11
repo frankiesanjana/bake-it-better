@@ -22,8 +22,7 @@ class BakeForm(forms.ModelForm):
          'equipment',
          'ingredients',
          'method',
-         'featured_image',
-         'status'
+         'featured_image'
       ]
       widgets = {
          'description': SummernoteWidget(),
