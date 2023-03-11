@@ -67,7 +67,11 @@ h1, h2, h3 {
     color: gold;
 }
 
-/* style for bake cards and container */
+.star-prompt {
+    text-align: center;
+}    
+
+    /* style for bake cards and container */
 
 .bakes-container {
     padding: 0 30px 0 45px;
