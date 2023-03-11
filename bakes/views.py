@@ -145,9 +145,11 @@ class MyStarredBakes(LoginRequiredMixin, generic.ListView):
     all the bakes that they have starred
     """
     model = Bake
-    queryset = Bake.objects.filter(status=1).order_by('-created_on')
     template_name = 'my-starred-bakes.html'
     paginate_by = 8
+
+    def get_queryset(self):
+        return Bake.objects.filter(stars=self.request.user)
 
 
 class AddBake(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):

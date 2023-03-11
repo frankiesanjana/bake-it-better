@@ -11,8 +11,8 @@
             </h1>
             <div class="row">
                 {% if user.is_authenticated %}
-                    {% for bake in bake_list %}
-                        {% if request.user in bake.stars.all %}
+                    {% if bake_list %}     
+                        {% for bake in bake_list %}
                             <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
                                 <div class="card">
                                     <div class="card-body">
@@ -40,8 +40,12 @@
                                     {% endif %}
                                 </div>
                             </div>    
-                        {% endif %}
-                    {% endfor %}
+                        {% endfor %}
+                    {% else %}    
+                        <div class="col-12">
+                            <p class="prompt star-prompt">You have not starred any bakes yet, why not visit our <a class="text-dark" href="{% url 'home' %}">homepage</a> to find your favourites?</p>
+                        </div>    
+                    {% endif %}    
                 {% else %}
                     <p>
                         You are not currently logged in. Please <a href="{% url 'account_login' %}">log in</a> to view your starred bakes.
