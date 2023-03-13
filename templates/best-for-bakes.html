@@ -9,6 +9,7 @@
                 My Baking Planner: "Best For" Bakes
             </h1>
             <h4 class="intro">Welcome to your Best For bakes! Be prepared for any event by saving your favourite bake for that occasion in the planner below.</h4>
+            <h5 class="intro">To select a new bake for any occasion, visit our <a class="best-for-link" href="{% url 'home' %}">homepage</a> to choose a bake.</p>
         </div>
     </div>
     <br>
@@ -38,22 +39,16 @@
                                 <hr>
                                 <p class="author h6">Author: {{ value.bake.author }}</p>
                                 <p class="card-text">{{ value.bake.created_on}}</p>    
-                                <a class="best-for-link" href="{% url 'home' %}">
-                                    Change Bake
-                                </a>
                             {% else %}
-                            <div class="image-container mb-2">
-                                <img class="card-img-top" 
-                                    src="https://res.cloudinary.com/frankiesanjana/image/upload/v1676895592/best-for-bake-add_myc5bk.png" 
-                                        alt="Picture of question mark and cracked eggshell">
-                            </div>
-                                <h2 class="card-title text-truncate">What bake is best?</h2>
-                            <hr>
-                            <p class="author h6">Pick a bake below</p>
-                            <p class="card-text">This can be replaced later!</p>
-                            <a class="best-for-link" href="{% url 'home' %}">
-                                    Choose a Bake
-                                </a>
+                                <div class="image-container mb-2">
+                                    <img class="card-img-top" 
+                                        src="https://res.cloudinary.com/frankiesanjana/image/upload/v1676895592/best-for-bake-add_myc5bk.png" 
+                                            alt="Picture of question mark and cracked eggshell">
+                                </div>
+                                    <h2 class="card-title text-truncate">What bake is best?</h2>
+                                <hr>
+                                <p class="author h6">Pick a bake at our <a class="best-for-link" href="{% url 'home' %}">homepage</a></p>
+                                <p class="card-text">This can be replaced later!</p>
                             {% endif %}
                         </div>
                     </div>
