@@ -32,7 +32,7 @@
                                         <img class="card-img-top" src=" {{ value.bake.featured_image.url }}" alt="{{ value.bake.title }}">
                                     {% endif %}
                                 </div> 
-                                <a href="{% url 'bake-detail' value.bake.slug %}" class="bake-link">
+                                <a href="{% url 'bake-detail' value.bake.slug %}" class="bake-link stretched-link">
                                     <h2 class="card-title text-truncate">{{ value.bake.title }}</h2>
                                 </a>
                                 <hr>

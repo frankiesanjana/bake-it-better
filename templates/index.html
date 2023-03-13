@@ -4,7 +4,7 @@
 
 <div class="container-fluid bakes-container">
     <div class="row">
-        <!-- Bakes List Column -->
+        <!-- All Bakes List -->
         <div class="col">
             <h1 class="page-heading">
                 Welcome to Bake It Better!
@@ -24,7 +24,7 @@
                                         <img class="card-img-top" src=" {{ bake.featured_image.url }}" alt="{{ bake.title }}">
                                     {% endif %}
                                 </div>
-                                <a href="{% url 'bake-detail' bake.slug %}" class="bake-link">
+                                <a href="{% url 'bake-detail' bake.slug %}" class="bake-link stretched-link">
                                     <h2 class="card-title text-truncate">{{ bake.title }}</h2>
                                 </a>
                                 <hr>
