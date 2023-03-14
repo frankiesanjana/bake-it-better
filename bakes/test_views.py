@@ -10,8 +10,12 @@ class TestViews(TestCase):
         """
         Creates test objects to perform view testing
         """
-        self.user = User.objects.create_user(username='test_user', password='test')
-        self.bake = Bake.objects.create(title='title', author=self.user, description='description', difficulty=1, equipment='equipment', ingredients='ingredients', method='method', featured_image='placeholder', status=1)
+        self.user = User.objects.create_user(
+            username='test_user', password='test')
+        self.bake = Bake.objects.create(
+            title='title', author=self.user, description='description',
+            difficulty=1, equipment='equipment', ingredients='ingredients',
+            method='method', featured_image='placeholder', status=1)
 
     def tearDown(self):
         """
@@ -63,7 +67,7 @@ class TestViews(TestCase):
         response = self.client.get('/bestforbakes/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'best-for-bakes.html')
-    
+
     def test_can_get_my_starred_bakes_page(self):
         self.client.login(username='test_user', password='test')
         response = self.client.get('/mystarredbakes/')
@@ -91,7 +95,6 @@ class TestViews(TestCase):
                          })
         new_bake = Bake.objects.filter(title='test title')
         self.assertTrue(new_bake)
-        
 
     def test_can_edit_bake(self):
         self.client.login(username='test_user', password='test')
@@ -105,7 +108,7 @@ class TestViews(TestCase):
                         'method': 'new method',
                         'featured_image': 'placeholder',
                         'status': 1
-                         })
+                        })
         edited_bake = Bake.objects.first()
         self.assertTrue(edited_bake)
 
@@ -125,7 +128,7 @@ class TestViews(TestCase):
         response = self.client.post(f'/delete-bake/another-title/')
         deleted_bake = Bake.objects.filter(title='another title')
         self.assertFalse(deleted_bake)
-    
+
         def test_can_star_bake(self):
             self.client.login(username='test_user', password='test')
             self.client.post(f'/add-bake/', {

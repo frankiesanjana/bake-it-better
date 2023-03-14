@@ -12,7 +12,7 @@ STATUS = ((0, "Draft"), (1, "Published"))
 
 class Bake(models.Model):
     """
-       Defines the main model for bakes
+    Defines the main model for bakes
     """
     LEVEL = [
         (1, 'easy'),

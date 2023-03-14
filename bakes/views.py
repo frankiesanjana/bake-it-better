@@ -16,7 +16,7 @@ class BakeList(generic.ListView):
     queryset = Bake.objects.filter(status=1).order_by('-created_on')
     template_name = 'index.html'
     paginate_by = 8
-    
+
 
 class BakeDetail(View):
     """
@@ -58,15 +58,18 @@ class BakeDetail(View):
             comment = comment_form.save(commit=False)
             comment.bake = bake
             comment.save()
-            messages.success(self.request, "Your comment has been added and is awaiting approval")
+            messages.success(
+                self.request,
+                "Your comment has been added and is awaiting approval")
         else:
             comment_form = CommentForm()
 
         best_for_form = BestForForm(data=request.POST)
 
         if best_for_form.is_valid():
-            best_for_bake = BestFor.objects.filter(user=request.user, best_for=request.POST['best_for']).first()
-            
+            best_for_bake = BestFor.objects.filter(
+                user=request.user, best_for=request.POST['best_for']).first()
+
             try:
                 best_for_bake.bake = bake
             except AttributeError:
@@ -75,11 +78,12 @@ class BakeDetail(View):
                 best_for_bake.bake = bake
 
             best_for_bake.save()
-            messages.success(self.request, "This bake has been added to your Best For Bakes Plan!")
+            messages.success(
+                self.request,
+                "This bake has been added to your Best For Bakes Plan!")
 
         else:
             best_for_form = BestForForm()
-
 
         return render(
             request,
@@ -97,7 +101,7 @@ class BakeDetail(View):
 
 class BestForBakes(LoginRequiredMixin, generic.ListView):
     """
-    Creates the view code to allow users to view 
+    Creates the view code to allow users to view
     their saved Best For bakes
     """
     def get(self, request):
@@ -109,9 +113,10 @@ class BestForBakes(LoginRequiredMixin, generic.ListView):
         # if no BF bake exists, set occasion BF bake to none
         my_best_for_bakes = {}
         for each_category in BestFor.BEST_FOR_CHOICES:
-            result_for_category = user_best_for_bakes.filter(best_for=each_category[0]).first() or None
+            result_for_category = user_best_for_bakes.filter(
+                best_for=each_category[0]).first() or None
             my_best_for_bakes[each_category[1]] = result_for_category
-        
+
         return render(
             request,
             "best-for-bakes.html",
@@ -141,7 +146,7 @@ class BakeStar(View):
 
 class MyStarredBakes(LoginRequiredMixin, generic.ListView):
     """
-    Creates the view code to allow users to view 
+    Creates the view code to allow users to view
     all the bakes that they have starred
     """
     model = Bake
@@ -175,7 +180,8 @@ class AddBake(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
         return super().form_valid(form)
 
 
-class UpdateBake(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, generic.UpdateView):
+class UpdateBake(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin,
+                 generic.UpdateView):
     """
     Creates the view code to allow users to edit a bake
     that they have previously added
@@ -193,17 +199,19 @@ class UpdateBake(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, g
             cleaned_data,
             title=self.object.title,
         )
-    
+
     def test_func(self):
         """
         Prevents users from editing bakes written by other users
         except for the admin user, who is allowed to edit others' bakes
         """
         Bake = self.get_object()
-        return Bake.author == self.request.user or self.request.user.is_superuser
+        return (
+            Bake.author == self.request.user or self.request.user.is_superuser)
 
 
-class DeleteBake(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, generic.DeleteView):
+class DeleteBake(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin,
+                 generic.DeleteView):
     """
     Creates the view code to allow users to delete a bake
     that they have previously added
@@ -215,7 +223,7 @@ class DeleteBake(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, g
 
     def delete(self, request, *args, **kwargs):
         """
-        Adds delete message via custom code (since DeleteView is not form-based)
+        Adds delete message via custom code (since DeleteView isn't form-based)
         Code adapted from the following Stack Overflow article:
         https://stackoverflow.com/questions/24822509/success-message-in-deleteview-not-shown
         """
@@ -229,4 +237,5 @@ class DeleteBake(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, g
         except for the admin user, who is allowed to delete others' bakes
         """
         Bake = self.get_object()
-        return Bake.author == self.request.user or self.request.user.is_superuser
+        return (
+            Bake.author == self.request.user or self.request.user.is_superuser)

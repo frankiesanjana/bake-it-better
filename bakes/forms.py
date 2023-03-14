@@ -9,13 +9,13 @@ class BakeForm(forms.ModelForm):
     """
     def __init__(self, *args, **kwargs):
         super(BakeForm, self).__init__(*args, **kwargs)
-  
+
     class Meta:
-      """
-      Displays fields from recipe model
-      """
-      model = Bake
-      fields = [
+        """
+        Displays fields from recipe model
+        """
+        model = Bake
+        fields = [
          'title',
          'description',
          'difficulty',
@@ -23,34 +23,34 @@ class BakeForm(forms.ModelForm):
          'ingredients',
          'method',
          'featured_image'
-      ]
-      widgets = {
+        ]
+        widgets = {
          'description': SummernoteWidget(),
          'equipment': SummernoteWidget(),
          'ingredients': SummernoteWidget(),
          'method': SummernoteWidget(),
-      }
+        }
 
 
 class CommentForm(forms.ModelForm):
-   """
-   Creates the form to add and edit comments
-   """
-   class Meta:
-      """
-      Defines the model and form fields
-      """
-      model = Comment
-      fields = ('body',)
+    """
+    Creates the form to add and edit comments
+    """
+    class Meta:
+        """
+        Defines the model and form fields
+        """
+        model = Comment
+        fields = ('body',)
 
 
 class BestForForm(forms.ModelForm):
-   """
-   Creates the form to add Best For bakes
-   """
-   class Meta:
-      """
-      Defines the model and form fields
-      """
-      model = BestFor
-      fields = ('best_for',)
+    """
+    Creates the form to add Best For bakes
+    """
+    class Meta:
+        """
+        Defines the model and form fields
+        """
+        model = BestFor
+        fields = ('best_for',)

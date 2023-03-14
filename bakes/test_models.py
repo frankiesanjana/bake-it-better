@@ -13,8 +13,12 @@ class TestModels(TestCase):
         """
         Creates test objects to perform model testing
         """
-        self.user = User.objects.create_user(username='test_user', password='test')
-        self.bake = Bake.objects.create(title='title', author=self.user, description='description', difficulty=1, equipment='equipment', ingredients='ingredients', method='method', featured_image='placeholder', status=0)
+        self.user = User.objects.create_user(
+            username='test_user', password='test')
+        self.bake = Bake.objects.create(
+            title='title', author=self.user, description='description',
+            difficulty=1, equipment='equipment', ingredients='ingredients',
+            method='method', featured_image='placeholder', status=0)
 
     def tearDown(self):
         """
