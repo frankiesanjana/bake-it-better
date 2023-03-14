@@ -43,15 +43,32 @@ For this reason I interviewed users where possible to obtain feedback on the loo
 
 ## User Testing of the Deployed Site
 
+I sought user feedback on the deployed site once it was tested as working correctly and obtained a number of feedback items that have been implemented:
+
+Add text to My Starred Bakes page if no bakes have been starred yet - initially this was displaying as a blank page if no bakes had been starred, which was confusing for the user. I added a message to be shown in the eventuality that no bakes had yet been starred, linking users to the homepage so they can browse and star bakes:
+
+<img src="readme-images/my-starred-bakes-message.png" alt="View of new My Starred Bakes page with message displayed">
+
+Add cancel button on signout form - I had originally set up the Sign Out form without a Cancel button, reasoning that this was purely a confirmation screen and users could use the navigation links in the navbar if they decided to remain signed in after all:
+
+<img src="readme-images/old-signout-page.png" alt="View of original signout page with no Cancel button">
+
+However, it was deemed a better user experience to have the option to click the Cancel button to cancel signout as well, so this was added:
+
+<img src="readme-images/new-signout-page.png" alt="View of new signout page with Cancel button">
+
+Make the whole Bake card clickable rather than just the title.
+- I was initially concerned that this could end up being complex to implement, but it was extremely easy to do by adding `stretched-link` to the link tags since [Bootstrap have built this functionality in](https://getbootstrap.com/docs/4.6/utilities/stretched-link/).
+
+Remove the stars display on the bake-detail page for users who are not signed in, since they need to be signed in to star the bake themselves and this could be too confusing. I had initially thought that this would be fairly self-explanatory (compare Instagram or Facebook for example where it is possible to see the number of likes on a post without being logged in, but users must be logged in to like the post themselves). However, following discussion with users, to ensure a smooth experience for all users it was ultimately decided to remove this view for users who are not signed in.
+
 ## User Story Testing of the Deployed Site
 
-## Automated Testing
+## Automated Django Testing
 
-The first step in the automated testing process was to check everything worked via a “test test” by creating a TestCase class in the sheet `bakes/tests.py`. This initially produced an error with the message “permission denied to create database”. This was because I had not realised that when running tests it is necessary to use the local sqlite db and not the postgres one, which is used in the deployed project as shown below:
+The first step in the automated testing process was to check everything worked via a “test test” by creating a TestCase class in the sheet `bakes/tests.py`. This initially produced an error with the message “permission denied to create database”. This was because I had not realised that when running tests it is necessary to use the local sqlite db and not the postgres one. Conditional formatting has now been applied to the databases so that when Debug is set to True the local database is selected and tests can be performed, but otherwise the postgres database is used so that the site works correctly.
 
-<img src="readme-images/automated-testing-databases.png" alt="View of alternative databases in settings.py file">
-
-Once I had adjusted this so that the local database was used and the postgres one temporarily commented out, the test ran as intended, giving a fail since I had used `assertEqual(1, 0)`.
+Once I had adjusted this so that the local database was used and the postgres one temporarily disabled, the test ran as intended, giving a fail since I had used `assertEqual(1, 0)`.
 I then ran a second test designed to pass, to ensure that a passing test would be evaluated correctly as passing, and obtained the result I was looking for. Since these tests were then deleted, they are also shown here:
 
 <img src="readme-images/automated-testing-concept-tests.png" alt="View of 'test tests' for automated testing">
@@ -101,6 +118,20 @@ Again, `setUp` and `tearDown` classes were created, to create and destroy the te
 To ensure that I had, in fact, tested a reasonable proportion of the site via automated testing, I created a coverage report. The details of this can be seen below:
 
 <img src="readme-images/automated-testing-coverage.png" alt="View of automated testing coverage report">
+
+## Manual Testing of the Deployed Site
+
+Manual testing results are displayed in the images below:
+
+<img src="readme-images/manual-testing-1.png" alt="View of manual testing image 1">
+<br>
+<img src="readme-images/manual-testing-2.png" alt="View of manual testing image 2">
+<br>
+<img src="readme-images/manual-testing-3.png" alt="View of manual testing image 3">
+<br>
+<img src="readme-images/manual-testing-4.png" alt="View of manual testing image 4">
+<br>
+<img src="readme-images/manual-testing-5.png" alt="View of manual testing image 5">
 
 ## Colour contrast testing in order to ensure accessibility
 

@@ -24,7 +24,7 @@ The site has been created for the fourth portfolio project for Code Institute's 
 - model schema
 
 ## Testing
-- link to Testing.md
+- The testing undertaken for this project is described in detail in separate [Testing documentation](https://github.com/frankiesanjana/bake-it-better/blob/main/docs/Testing.md).
 - include bugs in Testing.md
 
 ## Features
@@ -64,10 +64,36 @@ I made extensive use of various online resources to improve my understanding and
 - using [Stack Overflow](https://stackoverflow.com/) for troubleshooting and debugging a number of issues, the more project-specific of which are highlighted in the following section
 - reminding myself of some HTML and, in particular, CSS basics at [W3 Schools](https://www.w3schools.com/)
 
+I also referred frequently to both the Hello Django and I Think Therefore I Blog tutorials on [Code Institute](https://codeinstitute.net/)
+
 ### Specific to the Project
-- pics from Pexels
-- baking recipes from GBBO and BBC Good Food
-- wireframes using Balsamiq
-- specific Stack Overflow articles
+#### Coding
+
+Firstly, thanks to the team at Code Institute Tutor Support for providing just the right level of help and hints to enable me to figure out answers for myself!
+
+I used [Code Institute](https://codeinstitute.net/)'s I Think Therefore I Blog walkthrough project to help me get started on this project. There are a few sections of code that are taken from the walkthrough project and remain relatively or completely unchanged. These are noted in the code and are also listed below:
+- The Django code used to provide success messages to confirm user actions in base.html, rows 79-93
+- The JavaScript code used to fade out these success messages in base.html, rows 114-121
+- The pagination code used in index.html rows 46-58, best-for-bakes.html rows 68-80 and my-starred-bakes.html rows 53-65
+
+A number of articles and blog posts were useful to help me for specifics of this project:
+
+- The success message for deleting a bake adapted the code from a [Stack Overflow post](https://stackoverflow.com/questions/24822509/success-message-in-deleteview-not-shown).
+- The modal on the bake-detail.html page where a user can add Best For bakes used Bootstrap's [modal documentation](https://getbootstrap.com/docs/4.6/components/modal/).
+- Automated testing was informed by this [list of Python assert methods](https://www.mattcrampton.com/blog/a_list_of_all_python_assert_methods/) and the [Python unit testing documentation](https://docs.python.org/3/library/unittest.html).
+
+#### Other 
+
+- Images for the bakes are from [Pexels](https://www.pexels.com/) and [Pixabay](https://pixabay.com/).
+- Baking recipes are taken from the [Great British Bake Off](https://thegreatbritishbakeoff.co.uk/) and [BBC Good Food](https://www.bbcgoodfood.com/) websites.
+- The Bake It Better logo was developed using [Hatchful](https://www.shopify.com/tools/logo-maker) and converted into a favicon using [Favicon](https://favicon.io/favicon-converter/).
+- [Font Awesome](https://fontawesome.com/) and [Bootstrap](https://icons.getbootstrap.com/) icons were used to add decoration to the text.
+- Wireframes were created using [Balsamiq](https://balsamiq.com/wireframes/).
+- My secret key for Django was generated using [Djecrety](https://djecrety.ir/).
+- The option for users to add custom styles for text uses [Summernote](https://summernote.org/).
 
 ### Acknowledgements
+
+- Thank you to my mentor Akshat Garg for project guidance and review.
+- Thanks to my fellow students for support, advice and encouragement via Slack.
+- Thanks to Ed Stanley for providing user feedback during development.
