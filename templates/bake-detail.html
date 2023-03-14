@@ -151,6 +151,10 @@
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-signup btn-lg">Submit</button>
                             </form>
+                        {% else %}
+                            <p class="comment-text">
+                                <a class="best-for-link" href="{% url 'account_login' %}">Log In</a> to add your comment!
+                            </p>
                         {% endif %}
                     {% endif %}
                 </div>
