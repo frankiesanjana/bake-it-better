@@ -145,21 +145,33 @@ The colour contrast of the website was tested by using the [Coolors colour check
 
 <img src="readme-images/text-on-secondary-background.png" alt="View of testing report for text colour on secondary background">
 
-## Lighthouse testing
+## Lighthouse Testing
 
-## Validator Testing - SECTION TO UPDATE
-<!-- ### PEP8 Testing
+Lighthouse testing was undertaken in Chrome's Developer Tools. The Lighthouse reports brought to light several issues, most notably relating to the Performance metric. The initial testing on the homepage was as follows:
 
-The Python code was run through [PEP8 online](http://pep8online.com/):
+<img src="readme-images/lighthouse-testing.png" alt="View of homepage Lighthouse testing">
 
-<img src="" alt="View of PEP8 testing, first screen">
+The images were a potential source of the performance issue. However, testing on the Add Bake page showed an even poorer performance score:
 
-Initially I obtained a large number of "line too long" errors, as well as one place where a function did not have two blank lines before it but only one, and one "trailing whitespace" error that was part of the ASCII art:
+<img src="readme-images/lighthouse-test-add-bake.png" alt="View of Add Bake page Lighthouse testing">
 
-<img src="assets/images/validator-two.png" alt="View of PEP8 testing, second screen">
-<br>
-<img src="assets/images/validator-three.png" alt="View of PEP8 testing, third screen">
+And the Best For Bakes page, which always contains eight images, returned a better score:
 
-I spent some time adjusting the code so that the lines were shorter than 80 characters, inserted an extra blank line before the function, and was able to adjust the ASCII art without affecting the way it displayed. The code then passed through the validator successfully:
+<img src="readme-images/lighthouse-test-best-for.png" alt="View of Best For Bakes page Lighthouse testing">
 
-<img src="assets/images/validator-four.png" alt="View of PEP8 testing, fourth screen"> -->
+The image size is difficult to control because the images are uploaded by the site users. Ideally a future feature of the website could be to resize them automatically when they are uploaded, although it is not certain how much difference this would make. It is also possible that part of the issue is caused by using free hosting for the site on Heroku, since this is likely to be slower than paid hosting.
+
+Other issues that were brought to light by the testing include some accessibility issues, where not all buttons had `aria-label` attributes (now rectified), and the issue that headings were not used in descending order (beginning at `h1`, then `h2` and so on). This has also now been rectified using a combination of adjusting the headings to appear in the correct order and where appropriate using `p` elements with classes and applying styling to these instead.
+
+## Validator Testing
+
+### PEP8 Testing
+
+The Python code was run through [CI's Python Linter](https://pep8ci.herokuapp.com/). Several files returned no errors, but some examples of those that did are shown below:
+
+<img src="readme-images/python-forms-testing.png" alt="View of Python forms linter testing">
+<img src="readme-images/python-views-testing.png" alt="View of Python views linter testing">
+
+Initially I obtained a number of "line too long" errors, trailing whitespace at ends of lines and some line spacing errors, as well as one place in the forms.py file where the indentation had not worked correctly. These issues were fairly simple to rectify, and all files then returned the "All clear, no errors found" message:
+
+<img src="readme-images/python-testing-complete.png" alt="View of Python views linter testing finished">
