@@ -93,6 +93,7 @@ h1, h2, h3 {
     color: #8B0000;
     text-align: center;
     margin-top: 30px;
+    font-size: 120%;
 }
 
 .author, .card-title, .card-text, .comment-text {
