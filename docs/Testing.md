@@ -9,7 +9,7 @@ Testing was carried out from a number of different perspectives:
 - User story testing of the deployed site
 - Automated Django testing
 - Manual testing of the deployed site
-- Testing of the deployed site across a range of screen sizes and devices
+- Testing of the deployed site across a range of browsers, screen sizes and devices
 - Colour contrast testing in order to ensure accessibility
 - Validator testing
 - Resolved Bugs
@@ -133,6 +133,11 @@ Manual testing results are displayed in the images below:
 <br>
 <img src="readme-images/manual-testing-5.png" alt="View of manual testing image 5">
 
+## Testing of the deployed site across a range of browsers, screen sizes and devices
+
+- Chrome, Safari, Firefox on iPhone 14 Pro
+- Chrome, MS Edge on ASUS Vivobook Pro 14 OLED: website displays as intended in browser and adjusts correctly as browser screen is resized
+
 ## Colour contrast testing in order to ensure accessibility
 
 The colour contrast of the website was tested by using the [Coolors colour checker](https://coolors.co/contrast-checker). The results are as follows:
@@ -163,6 +168,10 @@ The image size is difficult to control because the images are uploaded by the si
 
 Other issues that were brought to light by the testing include some accessibility issues, where not all buttons had `aria-label` attributes (now rectified), and the issue that headings were not used in descending order (beginning at `h1`, then `h2` and so on). This has also now been rectified using a combination of adjusting the headings to appear in the correct order and where appropriate using `p` elements with classes and applying styling to these instead.
 
+Following correction of these issues, the homepage Accessibility score has now improved to 100%:
+
+<img src="readme-images/after-lighthouse-edits.png" alt="View of homepage Lighthouse testing after adjustments">
+
 ## Validator Testing
 
 ### PEP8 Testing
@@ -175,3 +184,32 @@ The Python code was run through [CI's Python Linter](https://pep8ci.herokuapp.co
 Initially I obtained a number of "line too long" errors, trailing whitespace at ends of lines and some line spacing errors, as well as one place in the forms.py file where the indentation had not worked correctly. These issues were fairly simple to rectify, and all files then returned the "All clear, no errors found" message:
 
 <img src="readme-images/python-testing-complete.png" alt="View of Python views linter testing finished">
+
+### HTML Testing
+
+The HTML source code was checked using the [W3C HTML Validator](https://validator.w3.org/). Note that to do this for pages containing Django templating language, one way to do this without the templating language causing errors is:
+- Navigate to the deployed webpage to be tested
+- Right click on the webpage and select "View Page Source". A new tab should open containing the HTML source code.
+- Select the new tab. Highlight all the code (in Windows, use Crtl + A) and copy it (Ctrl + C).
+- Open the W3C validator page and select "Validate by Direct Input".
+- Paste the code into the textbox (Ctrl + V) and click on the "Check" button below.
+
+The validator initially produced two errors:
+- In the footer in `base.html`, I had previously been advised to use `_fb`, `_twitter` and `_insta` in place of `_blank` for the `target` attribute. The validator returned an error for these, so I have replaced them with `_blank`.
+- The validator also found an instance of an opening and closing tag not matching, where I had opened a section of text with an `<h5>` tag and closed with a `</p>` tag in `best-for-bakes.html`. This has now been adjusted.
+
+The validator then returned all pages with no errors:
+
+<img src="readme-images/html-test-complete.png" alt="View of HTML testing finished">
+
+### CSS Testing
+
+The CSS code was copied from the stylesheet and pasted into the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/validator). It returned with no errors found:
+
+<img src="readme-images/css-testing.png" alt="View of CSS testing results">
+
+### JavaScript Testing
+
+Although the only JavaScript used in the project, in `base.html`, is taken from the CI Walkthrough Project, I ran it through the [JSHint validator](https://jshint.com/) for completeness. Unsurprisingly, the testing returned no errors. It does note an undefined bootstrap variable, but this is due to it not being able to access the Bootstrap CDN import that is contained within the `script` tag and does not cause problems:
+
+<img src="readme-images/JS-testing.png" alt="View of CSS testing results">
