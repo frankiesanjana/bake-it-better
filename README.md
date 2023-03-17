@@ -12,6 +12,37 @@ The site has been created for the fourth portfolio project for Code Institute's 
 
 ## User Experience
 ### Personas
+
+Following interviews with actual and potential users of baking recipes and websites, user personas were developed:
+
+#### Toby
+Toby bakes regularly when he has time, mostly to relax in between his busy and irregular work schedule. He has a number of staple bakes that he comes back to time and time again, but he is also interested in trying new recipes. He tries to eat healthily most of the time, so he would be interested in a feature where he can save a baking recipe and come back to it when he can make a cake, cookies or pie to share with friends or family or take to a party rather than eating it all himself! He would be interested in features such as:
+- Being able to bookmark or save a baking recipe, and potentially tag it as being suitable for a particular occasion
+- Clear instructions, and the ability to switch the units of a bake since he has lost count of the number of times he has found what appears to be the perfect recipe, only to find that everything is measured in cups and ounces!
+- Feedback and comments from other users: what worked well, what did they like, what would they improve?
+
+#### Dawn
+Dawn doesn't bake much, but she would like to start. She enjoys watching baking shows to relax and unwind after work - she and her partner don't have much overlap in TV genres that they both enjoy, but they do both enjoy watching baking and cookery programmes together. She could see herself baking a birthday cake for herself or her partner, making bread for Sunday brunch or taking a day at the weekend to bake something more complex such as croissants or macarons. She would like to see the following in a baking site:
+- Simple and clear instructions, ideally with pictures of how the finished bakes should look
+- A list of ingredients, so she can see at a glance if she has everything she needs in the house before she starts baking
+- Some sort of metric of how much other people enjoyed a baking recipe
+- How complicated a bake is to make
+- Recommendations of other bakes: "If you liked this, you might also want to consider baking xyz"
+
+#### Fred
+Fred loves to bake, whether that's for himself or his family and friends; he enjoys baking various different types of bread to have with a main meal, pancakes for a Sunday brunch or his favourite Yorkshire puddings, which remind him and his family of home since they no longer live in the UK. His bakes have been painstakingly honed over time; he has adjusted them over months or years to see what works best: a touch more butter in the mixture here, or five minutes longer in the oven there. His baking creations are always appreciated by everyone who gets to taste them, and he would like to publish his lovingly developed recipes on a website so that others can also reap the benefit of the time and effort he has put into creating and refining them. He would like a site that includes:
+- An easy way of adding baking recipes, including the possibility to add photos so that others can see the finished bake that they are aiming for
+- The ability to edit recipes that he has previously added, so that when he improves them he can adjust them accordingly
+- User comments, so that he can receive feedback on his bakes and make suggestions if other people are having difficulty with them
+- The ability to give a realistic indication of how complex the bakes are to make: his Yorkshire puddings, for example, are super simple and would be great for a beginner, but he thinks it would be better to mark some of his bakes as "challenging" so that newer bakers do not become disheartened if they struggle!
+
+#### Beth
+Beth is retired and loves to spend time with her grandchildren. They often bake biscuits together since the kids can mix the dough and ice the biscuits at the end, but as they get older they are keen to try out some new bakes. Beth isn't sure what would be suitable but she would also find it more interesting if they could try out some new recipes together! When she has a whole day free, she also enjoys attempting new and more complex recipes herself and taking them to a family event or party, or keeping them for lunch with friends the next day. She would like to be able to:
+- See at a glance how complicated a bake is to make, since she would prefer to stick to easy recipes with her grandkids but wants to challenge herself when she is alone
+- Bookmark bakes for making herself or with the children
+- Read other users' feedback or reviews of bakes
+- Search by occasion for suitable recipes
+
 ### User Stories
 
 ### Design
