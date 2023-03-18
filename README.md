@@ -124,8 +124,14 @@ Further notes about the Agile development are described in the [Agile documentat
 - starred bakes list
 - Best For baking planner, plus modal to add a bake to planner on bake-detail page
 ### UX features for the future
-- the ones that ended up Won't Have on the Agile board
-- others eg unit conversion for different bakes
+- Two features were ultimately marked as Won't Have on the Agile project board due to time constraints and would be good features to develop in the future:
+    - Enable editing and deleting of comments
+    - Build the functionality for the admin user to approve or discard other users' comments from the front end, rather than having to log into the admin panel
+- Other desired features that have not been included in the current website are:
+    - Enable unit conversion between metric and imperial
+    - Incorporate the ability for users to apply filters to the website (e.g. filter for only bakes with a difficulty rating of "easy", etc.)
+    - Add functionality for users to search all bakes using keywords
+    - Expand the Best For page into separate pages so that a user can save bakes for multiple occasions, as well as being able to customise what those occasions are
 
 ### Security
 - database security (env.py file)
@@ -183,3 +189,4 @@ A number of articles and blog posts were useful to help me for specifics of this
 - Thank you to my mentor Akshat Garg for project guidance and review.
 - Thanks to my fellow students for support, advice and encouragement via Slack.
 - Thanks to Ed Stanley for providing user feedback during development.
+- Thank you to Jenna Fields and Josh Stanley for testing the website on different devices.
