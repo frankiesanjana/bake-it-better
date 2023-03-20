@@ -6,7 +6,7 @@ Bake It Better is a blog-style website for users to share baking recipes (also r
 
 - In addition, when a user creates an account they can access their own "Best For" Bakes section. This provides the user with what is essentially a planner function, where they can plan in bakes for a particular occasion e.g. a bake to take to a party or a recipe that is good for kids to bake.
 
-Bake It Better has been developed using Agile methodology, and is written using Python + Django, HTML, CSS and Bootstrap. It is currently deployed via [Heroku](https://www.heroku.com/).
+Bake It Better has been developed using Agile methodology, and is written using Python + Django, HTML, CSS and Bootstrap. It is currently deployed via Heroku.
 
 [View the live project here](https://bake-it-better.herokuapp.com/).
 
@@ -98,32 +98,95 @@ Site owner goals were also noted. These do not map to user stories but were neve
 - As a site owner, I can provide an option for bakers to comment on each others' bakes, so that their experience is enhanced by sharing useful information with others.
 - As a site owner, I can discover new bakes myself and potentially receive feedback on my own bakes in the form of user comments, so that my own baking knowledge and experience also benefits.
 
-### Design
-5 planes - does this fit here?
+## Design
+The website was designed according to the five planes of content strategy. Using this structure provided a framework to develop the website. This is explained in more detail below.
 
-## Agile Methodology
-For each sprint, the user stories for that sprint were added to the project board. Each user story is marked as belonging to its parent Epic, and has acceptance criteria that had to be met before it could be marked as complete. Associated developer tasks are listed below the acceptance criteria for each user story, and Story Points (an estimate made before work is begun that reflect the amount of work needed to complete a user story) have also been noted.
+### Plane 1: Strategy
+The strategy of the website is largely defined by the user and owner goals listed above in the User Experience section. The strategy is simply to provide solutions to the goals of the website's users and owners.
 
-Further notes about the Agile development are described in the [Agile documentation here](https://github.com/frankiesanjana/bake-it-better/blob/main/docs/Agile.md) and the user stories can be seen on the [project board](https://github.com/users/frankiesanjana/projects/6/views/1) that was used to manage Agile development.
+### Plane 2: Scope and Features
+The site includes the following features:
 
-## Data Model
-- model schema
+#### Header
 
-## Testing
-- The testing undertaken for this project is described in detail in separate [Testing documentation](https://github.com/frankiesanjana/bake-it-better/blob/main/docs/Testing.md).
-- include bugs in Testing.md
+<img src="docs/readme-images/features/header-not-logged-in.png" alt="Header image for non-signed-in user">
 
-## Features
-### UX features included
-- header (logo, navbar, responsive navbar)
-- footer
-- call to action
-- main page / list
-- bake detail page, incl comments and number of stars display
+##### Logo
+
+I created a custom logo for the site using [Hatchful](https://www.shopify.com/tools/logo-maker). The logo is positioned to the top left of the navigation bar and resizes as the screen size is adjusted, so that it does not dominate smaller screens or appear too small to see on larger screens.
+- The logo links to the homepage for ease of navigation.
+
+##### Navigation Bar
+This appears on every page and includes links to the other pages.
+- For users who are not signed in, only the main page, Sign Up and Log In links are displayed (as shown above), since all other pages require sign-in to access
+- When users are signed in, the navigation bar automatically adjusts to the following view:
+
+<img src="docs/readme-images/features/header.png" alt="Header image for signed-in user">
+
+- This includes the user's username to confirm at a glance that they are signed in, and the Sign Up and Log In links are also removed.
+- The Add a Bake link is displayed in the header, since this is judged to be an option that users may want to use most frequently.
+- The links to My Starred Bakes, My Best For Bakes and the Log Out page are nested into a dropdown menu that can be accessed by clicking on the arrow next to the username as follows:
+
+<img src="docs/readme-images/features/navbar-popout.png" alt="Navbar popout for signed-in user">
+
+- Clicking on the arrow again, or elsewhere on the page, removes the dropdown menu.
+- Hovering over the dropdown links shades the background for ease of navigation.
+- The navigation bar collapses into a hamburger icon on smaller screens:
+
+<img src="docs/readme-images/features/header-mobile.png" alt="Header display on mobile devices">
+
+#### Footer
+
+The footer is deliberately kept very simple so as not to detract from the main content of the site. It includes links out to Facebook, Instagram and Twitter:
+
+<img src="docs/readme-images/features/footer.png" alt="Image showing footer of website">
+
+- The links in the footer will open in a new tab, to avoid directing the user away from the site.
+- The footer resizes in order to display in an aesthetically pleasing and consistent manner as screen size is adjusted.
+
+#### Homepage
+
+- The homepage begins with a welcome message and intro text, to enable new users to see at a glance what the site is about and briefly explain its functionality. Users are notified in the welcome message that signup will allow access to much more functionality, but are able to continue to browse without being pushed to sign up.
+
+<img src="docs/readme-images/features/intro-text.png" alt="Image showing welcome message and introduction">
+
+- Users are deliberately not presented with a signup button at this point. New users to a website are unlikely to sign up at this stage even if presented with a signup button, since they are still becoming familiar with the site and do not yet have a compelling reason to do so.
+- Visitors who are forced to sign up to a website before they are sufficiently familiar with it are highly likely to simply navigate away from the site: [Nielsen Norman Group](https://www.nngroup.com/articles/login-walls/) research notes this, saying "In our many usability tests, we rarely have seen users more annoyed than when they come across a login wall" and "Demanding that users register or log in before they can use an app or see website information has high interaction cost".
+
+- For this reason, and given that users can choose to sign up at any time using the links in the navigation bar, the homepage continues straight to the main content:
+
+<img src="docs/readme-images/features/homepage.png" alt="Image showing homepage">
+
+- All published bakes are displayed as cards, with the most recent first.
+- Each bake card displays the bake's image, title, author and date of publication.
+- Clicking on a bake card redirects the user to the detailed page for that bake.
+- The cards are paginated every eight recipes.
+- A single card is displayed per row on the smallest screens, and this increases gradually to two cards per row, three and then four on the largest screen sizes.
+
+#### Bake Detail page
+
+- The Bake Detail page is displayed differently for non-signed-in and signed-in users.
+- For non-signed-in users, who are likely to be new users, the page is kept simple. Since they cannot star a bake without being in, the star information for the bake is not shown. Buttons to edit and delete the bake are shown only for signed-in author users and the admin user, so these are not shown, and the "Add to Plan" option is not displayed either unless a user is signed in. Many users to a baking site are not interested in the initial functionality that Bake It Better has to offer and simply want to find a recipe. This approach allows these users to find what they are looking for easily and without distraction, and will hopefully mean they are more likely to return to the site in the future.
+- The page as displayed to non-signed-in users begins as follows:
+
+<img src="docs/readme-images/features/bake-detail-non-signed-in-user.png" alt="Image showing bake-detail page for non-signed-in user">
+
+and continues:
+
+<img src="docs/readme-images/features/bake-detail-non-signed-in-user-2.png" alt="Image showing second part of bake-detail page for non-signed-in user">
+
+- The author, publication date and level of difficulty are published at the top of the bake's recipe, in response to users' comments that they like to follow particular authors, keep up with newly published bakes and know at a glance how difficult they can expect a bake to be.
+- The description follows next, to give a high-level overview of the bake.
+- The equipment needed, ingredients and method are then listed.
+- The number of comments is noted at the bottom of the bake to provide this information briefly without detracting from the main content; interested users can continue to the comments box below.
+- The comments box is separate from the main bake, since many users may not be interested in this. However, for those who are, there are links to sign up and log in. This also serves as a reminder for users who may have forgotten that there is additional functionality available for those who do create an account.
+
+- [ADD bake detail page FOR SIGNED IN USERS], incl comments and number of stars display
 - CRUD functionality
 - starred bakes list
 - Best For baking planner, plus modal to add a bake to planner on bake-detail page
-### UX features for the future
+
+A number of features were identified that were desirable but were ultimately not included in the project:
 - Two features were ultimately marked as Won't Have on the Agile project board due to time constraints and would be good features to develop in the future:
     - Enable editing and deleting of comments
     - Build the functionality for the admin user to approve or discard other users' comments from the front end, rather than having to log into the admin panel
@@ -132,6 +195,24 @@ Further notes about the Agile development are described in the [Agile documentat
     - Incorporate the ability for users to apply filters to the website (e.g. filter for only bakes with a difficulty rating of "easy", etc.)
     - Add functionality for users to search all bakes using keywords
     - Expand the Best For page into separate pages so that a user can save bakes for multiple occasions, as well as being able to customise what those occasions are
+
+### Plane 3: Structure and Data Model
+## Data Model
+- model schema
+
+### Plane 4: Skeleton and Wireframes
+
+### Plane 5: Surface
+
+## Agile Methodology
+For each sprint, the user stories for that sprint were added to the project board. Each user story is marked as belonging to its parent Epic, and has acceptance criteria that had to be met before it could be marked as complete. Associated developer tasks are listed below the acceptance criteria for each user story, and Story Points (an estimate made before work is begun that reflect the amount of work needed to complete a user story) have also been noted.
+
+Further notes about the Agile development are described in the [Agile documentation here](https://github.com/frankiesanjana/bake-it-better/blob/main/docs/Agile.md) and the user stories can be seen on the [project board](https://github.com/users/frankiesanjana/projects/6/views/1) that was used to manage Agile development.
+
+## Testing
+- The testing undertaken for this project is described in detail in separate [Testing documentation](https://github.com/frankiesanjana/bake-it-better/blob/main/docs/Testing.md).
+- include bugs in Testing.md
+
 
 ### Security
 - database security (env.py file)
