@@ -163,7 +163,7 @@ The footer is deliberately kept very simple so as not to detract from the main c
 <img src="docs/readme-images/features/intro-text.png" alt="Image showing welcome message and introduction">
 
 - Users are deliberately not presented with a signup button at this point. New users to a website are unlikely to sign up at this stage even if presented with a signup button, since they are still becoming familiar with the site and do not yet have a compelling reason to do so.
-- Visitors who are forced to sign up to a website before they are sufficiently familiar with it are highly likely to simply navigate away from the site: [Nielsen Norman Group](https://www.nngroup.com/articles/login-walls/) research notes this, saying "In our many usability tests, we rarely have seen users more annoyed than when they come across a login wall" and "Demanding that users register or log in before they can use an app or see website information has high interaction cost".
+- Visitors who are pushed to sign up to a website before they are sufficiently familiar with it are highly likely to simply navigate away from the site: [Nielsen Norman Group](https://www.nngroup.com/articles/login-walls/) research notes this, saying "In our many usability tests, we rarely have seen users more annoyed than when they come across a login wall" and "Demanding that users register or log in before they can use an app or see website information has high interaction cost".
 
 - For this reason, and given that users can choose to sign up at any time using the links in the navigation bar, the homepage continues straight to the main content:
 
@@ -216,9 +216,93 @@ For signed-in users, the comments section appears as follows, with any comments 
 
 <img src="docs/readme-images/features/bake-detail-signed-in-user-2.png" alt="Image showing second part of bake-detail page for signed-in user">
 
-- CRUD functionality
+#### User Account Pages
+
+- The user account pages use Django allauth to create the Sign Up, Sign In and Sign Out functionality.
+- Each of these actions is confirmed to the user via a success message.
+
+##### Sign Up
+
+<img src="docs/readme-images/features/sign-up.png" alt="Image showing signup screen">
+
+##### Sign In
+
+<img src="docs/readme-images/features/sign-in.png" alt="Image showing sign in screen">
+
+##### Sign Out
+
+<img src="docs/readme-images/features/sign-out.png" alt="Image showing sign out screen">
+
+##### Success Message
+
+- An example success message is shown below.
+- Success messages display for three seconds before automatically disappearing, or can be removed sooner by the user if they click the cross on the right-hand side of the success message.
+
+<img src="docs/readme-images/features/success-message.png" alt="Image showing success message">
+
+#### Add Bake Form
+
+- Logged in users can add a bake via the Add a Bake link shown above in the navigation bar.
+- The Add Bake form is enhanced by applying a [Summernote](https://summernote.org/) widget to the Description, Equipment, Ingredients and Method fields. This allows the user to format text, should they wish to do so. For example, a user might choose to add headings, make text a different colour, add bullet points or change the font.
+    - Summernote describes itself as a WYSIWYG editor, meaning "what you see is what you get", i.e., it lets the user make changes and immediately see how they will look on the live website.
+- The Description field is optional, since a user might have a great bake to share but not immediately be able to think of a creative description that adds significantly to the title.
+
+<img src="docs/readme-images/features/add-bake.png" alt="Image showing Add Bake form">
+
+- The Image field is also optional, since a user may not have an image of the bake. If the user does not upload an image, a placeholder image is used instead.
+- When no image has been selected, the form displays a message saying "No file chosen":
+
+<img src="docs/readme-images/features/image-empty.png" alt="Image showing form without image">
+
+- Clicking the "Choose File" button opens the file explorer and allows the user to select an image.
+- When an image has been selected and uploaded, the filename of the image is displayed to confirm to the user that it has been added successfully:
+
+<img src="docs/readme-images/features/image-added.png" alt="Image showing form with image">
+
+- If a user does not complete all of the Title, Equipment, Ingredients and Method fields, the form will not submit and a warning will display.
+- The Difficulty field is also mandatory, but "easy" is selected as a default, so the form will still submit if a user does not interact with this field.
+- As shown above, for ease of identification of compulsory fields, an asterisk (*) is used next to these fields.
+- If a user attempts to add a bake when they are not signed in, by either altering or copying and pasting the URL, the user will be redirected to the login page.
+- When a user successfully adds a bake, a success message is displayed to confirm this.
+
+#### Edit Bake Form
+
+- Logged in users who are the author of a given bake can edit the bake via the Edit Bake button shown above on the Bake Detail page.
+- The Edit Bake form uses Summernote in the same fields as the Add Bake form as described above.
+- When the Edit Bake form is opened, all fields are pre-populated with the existing content:
+
+<img src="docs/readme-images/features/edit-bake.png" alt="Image showing Edit Bake form">
+
+- If a user attempts to edit a bake when they are not signed in, by either altering or copying and pasting the URL, the user will be redirected to the login page.
+- If a user attempts to edit another user's bake, they will receive a custom 403 error page.
+- When a user successfully edits a bake, a success message is displayed to confirm this.
+
+#### Delete Bake 
+
+- Logged in users who are the author of a given bake can delete the bake via the Delete Bake button shown above on the Bake Detail page.
+- When a user clicks on the Delete Bake button, they are taken to a confirmation form.
+- The form includes the name of the bake, so that the user can be sure that they are deleting the correct bake:
+- When a user successfully deletes a bake, a success message is displayed to confirm this.
+
+<img src="docs/readme-images/features/delete-bake.png" alt="Image showing Delete Bake form">
+
+
 - starred bakes list
 - Best For baking planner, plus modal to add a bake to planner on bake-detail page
+
+#### Custom Error Pages
+
+- Custom error pages have been provided to give users more information on errors they may encounter and help them navigate back to the site.
+- 403 error: Forbidden - "You do not have permission to access this page. Click here to return home."
+
+<img src="docs/readme-images/features/403-error.png" alt="Image showing 403 error page">
+
+- 404 error: Page Not Found - "Sorry, the page you are trying to access cannot be found. Click here to return home."
+
+<img src="docs/readme-images/features/404-error.png" alt="Image showing 404 error page">
+
+- 400 error: Bad Request - "Sorry, the page you are trying to access cannot be found. Click here to return home."
+- 500 error: Internal Server Error - "Sorry, there is a problem with the page you are trying to access. Click here to return home."
 
 A number of features were identified that were desirable but were ultimately not within the scope of the project:
 - Two features were marked as Won't Have on the Agile project board due to time constraints and would be good features to develop in the future:
@@ -245,8 +329,6 @@ Further notes about the Agile development are described in the [Agile documentat
 
 ## Testing
 - The testing undertaken for this project is described in detail in separate [Testing documentation](https://github.com/frankiesanjana/bake-it-better/blob/main/docs/Testing.md).
-- include bugs in Testing.md
-
 
 ### Security
 - database security (env.py file)
