@@ -51,6 +51,7 @@ h1, h2, h3 {
 
 .stars {
     margin-bottom: 18px;
+    color: #8B0000;
 }
 
 .comment-card {
@@ -76,7 +77,7 @@ h1, h2, h3 {
     color: #8B0000;
 }
 
-    /* style for bake cards and container */
+/* style for bake cards and container */
 
 .bakes-container {
     padding: 0 30px 0 45px;

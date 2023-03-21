@@ -1,6 +1,6 @@
 # Bake It Better
 
-Bake It Better is a blog-style website for users to share baking recipes (also referred to as "bakes"). All users are able to browse bakes, and once users have created an account and signed in they can add, edit and delete their own.
+Bake It Better is a blog-style website for users to share baking recipes (generally referred to in this project as "bakes"). All users are able to browse bakes, and once users have created an account and signed in they can add, edit and delete their own.
 
 - Signed-in users are also able to 'star' baking recipes. The star functions as both a like and a bookmark; users can view a list of all the bakes that they have starred.
 
@@ -17,7 +17,7 @@ The site has been created for the fourth portfolio project for Code Institute's 
 ## User Experience
 ### Personas
 
-Following interviews with actual and potential users of baking recipes and websites, user personas were developed:
+Following interviews with actual and potential users of baking recipes and websites, user personas were developed to guide the development of the site:
 
 #### Toby
 
@@ -61,7 +61,17 @@ Beth is retired and loves to spend time with her grandchildren. They often bake 
 
 ### User Stories and Owner Goals
 
-Once I had developed the user personas above, considering their needs helped me to formulate a number of Epics. These were then broken down into User Stories:
+Once I had developed the user personas above, considering their needs helped me to formulate a number of Epics:
+
+- Site Administration: this Epic is for the admin user to manage the site from the admin panel.
+- User Navigation: this covers ease of navigation for general site users, both in terms of being physically able to navigate between pages and also points such as being easily able to identify the site's purpose on a first visit.
+- User Profile: this Epic is for user stories relating to authentication of users such as creating and logging into and out of accounts.
+- My Bakes: covers the CRUD functionality on bakes that a general site user adds themselves from the front end.
+- Interaction with Other Users: for users to comment on or "star" (functioning as both a "like" and a bookmark-type functionality) others' bakes.
+- Top Bakes: allows users to save bakes for different occasions to a planner-style database, termed "Best For Bakes" since the intention is for a user to be able to save bakes as being "best for" a certain occasion category (e.g. a bake to make with kids, a recipe for something to take to a party, etc.).
+- Site Usability: this relates to the overall look, feel and ease of use of the website, including basic features such as correct display of the site header and footer, as well as custom error pages, consistent confirmation of actions via success messages and enabling admin capabilities for the admin user from the front end.
+
+These were then broken down into User Stories:
 
 - As a site admin, I can manage bakes so that I can control what appears on the site.
 - As a site admin, I can create new bakes so that I can contribute my own content to the site; the bake can be completed in one go or saved as a draft in the admin panel so that I can finish writing the content later.
@@ -97,6 +107,8 @@ Site owner goals were also noted. These do not map to user stories but were neve
 - As a site owner, I can provide a website for bakers to discover new bakes and share their favourite bakes, so that they find a solution to help them enjoy baking.
 - As a site owner, I can provide an option for bakers to comment on each others' bakes, so that their experience is enhanced by sharing useful information with others.
 - As a site owner, I can discover new bakes myself and potentially receive feedback on my own bakes in the form of user comments, so that my own baking knowledge and experience also benefits.
+
+For more information about the Epics and User Stories and how the creation of the content for these took place, please see the [Agile Development](https://github.com/frankiesanjana/bake-it-better/blob/main/docs/Agile.md) documentation of this project.
 
 ## Design
 The website was designed according to the five planes of content strategy. Using this structure provided a framework to develop the website. This is explained in more detail below.
@@ -166,7 +178,10 @@ The footer is deliberately kept very simple so as not to detract from the main c
 #### Bake Detail page
 
 - The Bake Detail page is displayed differently for non-signed-in and signed-in users.
-- For non-signed-in users, who are likely to be new users, the page is kept simple. Since they cannot star a bake without being in, the star information for the bake is not shown. Buttons to edit and delete the bake are shown only for signed-in author users and the admin user, so these are not shown, and the "Add to Plan" option is not displayed either unless a user is signed in. Many users to a baking site are not interested in the initial functionality that Bake It Better has to offer and simply want to find a recipe. This approach allows these users to find what they are looking for easily and without distraction, and will hopefully mean they are more likely to return to the site in the future.
+
+##### Non-signed-in users
+
+- For non-signed-in users, who are likely to be new users, the page is kept simple. Since they cannot star a bake without being signed in, the star information for the bake is not shown. Buttons to edit and delete the bake are shown only for signed-in author users and the admin user, so these are not shown in any case, and the "Add to Plan" option is not displayed either unless a user is signed in. Many users to a baking site are not interested in the additional functionality that Bake It Better has to offer and simply want to find a recipe. This approach allows these users to find what they are looking for easily and without distraction, and will hopefully mean they are more likely to return to the site in the future.
 - The page as displayed to non-signed-in users begins as follows:
 
 <img src="docs/readme-images/features/bake-detail-non-signed-in-user.png" alt="Image showing bake-detail page for non-signed-in user">
@@ -181,14 +196,33 @@ and continues:
 - The number of comments is noted at the bottom of the bake to provide this information briefly without detracting from the main content; interested users can continue to the comments box below.
 - The comments box is separate from the main bake, since many users may not be interested in this. However, for those who are, there are links to sign up and log in. This also serves as a reminder for users who may have forgotten that there is additional functionality available for those who do create an account.
 
-- [ADD bake detail page FOR SIGNED IN USERS], incl comments and number of stars display
+##### Signed-in users
+
+- For signed-in users, more information and options are displayed as follows:
+
+<img src="docs/readme-images/features/bake-detail-signed-in-user.png" alt="Image showing bake-detail page for signed-in user">
+
+- The bake's number of stars is displayed together with the star icon. Since the logged-in user is also the author of this recipe the Edit and Delete buttons are displayed, and the Add to Plan button is displayed.
+- The star icon shown in the view above is solid red. This style is for bakes that have stars, but have not been starred by the current user.
+- Bakes with no stars have the following icon, with an empty star:
+
+<img src="docs/readme-images/features/unstarred.png" alt="Image showing star icon without stars">
+
+- Bakes that have been starred by the current user have stars coloured gold:
+
+<img src="docs/readme-images/features/user-starred.png" alt="Image showing user-starred star icon">
+
+For signed-in users, the comments section appears as follows, with any comments that have already been left first, followed by an invitation to leave a comment, a textbox in which to type a comment, and a Submit button:
+
+<img src="docs/readme-images/features/bake-detail-signed-in-user-2.png" alt="Image showing second part of bake-detail page for signed-in user">
+
 - CRUD functionality
 - starred bakes list
 - Best For baking planner, plus modal to add a bake to planner on bake-detail page
 
-A number of features were identified that were desirable but were ultimately not included in the project:
-- Two features were ultimately marked as Won't Have on the Agile project board due to time constraints and would be good features to develop in the future:
-    - Enable editing and deleting of comments
+A number of features were identified that were desirable but were ultimately not within the scope of the project:
+- Two features were marked as Won't Have on the Agile project board due to time constraints and would be good features to develop in the future:
+    - Enable editing and deleting of comments by the author of the comment
     - Build the functionality for the admin user to approve or discard other users' comments from the front end, rather than having to log into the admin panel
 - Other desired features that have not been included in the current website are:
     - Enable unit conversion between metric and imperial
