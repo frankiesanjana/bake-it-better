@@ -171,9 +171,18 @@ The footer is deliberately kept very simple so as not to detract from the main c
 
 - All published bakes are displayed as cards, with the most recent first.
 - Each bake card displays the bake's image, title, author and date of publication.
+- Hovering over a bake card underlines the title of the bake on the card.
 - Clicking on a bake card redirects the user to the detailed page for that bake.
 - The cards are paginated every eight recipes.
 - A single card is displayed per row on the smallest screens, and this increases gradually to two cards per row, three and then four on the largest screen sizes.
+
+- When a user is signed in, if that user is the author of a bake, the bake card will have Edit and Delete buttons underneath it to allow users to edit or delete their bakes:
+
+<img src="docs/readme-images/features/homepage-buttons.png" alt="Image showing homepage with Edit & Delete buttons for author">
+
+- Since the admin user is authorised to edit and delete all bakes, the admin user's homepage view includes Edit and Delete buttons for all bake cards:
+
+<img src="docs/readme-images/features/homepage-admin.png" alt="Image showing homepage with Edit & Delete buttons for admin user">
 
 #### Bake Detail page
 
@@ -267,7 +276,7 @@ For signed-in users, the comments section appears as follows, with any comments 
 
 #### Edit Bake Form
 
-- Logged in users who are the author of a given bake can edit the bake via the Edit Bake button shown above on the Bake Detail page.
+- Logged in users who are the author of a given bake can edit the bake via the Edit Bake button shown above on the Bake Detail page or via the Edit Bake button that appears under the bake cards on the bake cards displays (shown above for the homepage and also displayed in the My Starred Bakes page for any relevant bakes).
 - The Edit Bake form uses Summernote in the same fields as the Add Bake form as described above.
 - When the Edit Bake form is opened, all fields are pre-populated with the existing content:
 
@@ -279,16 +288,60 @@ For signed-in users, the comments section appears as follows, with any comments 
 
 #### Delete Bake 
 
-- Logged in users who are the author of a given bake can delete the bake via the Delete Bake button shown above on the Bake Detail page.
+- Logged in users who are the author of a given bake can delete the bake via the Delete Bake button shown above on the Bake Detail page or via the Delete Bake button that appears under the bake cards on the bake cards displays (shown above for the homepage and also displayed in the My Starred Bakes page for any relevant bakes).
 - When a user clicks on the Delete Bake button, they are taken to a confirmation form.
 - The form includes the name of the bake, so that the user can be sure that they are deleting the correct bake:
 - When a user successfully deletes a bake, a success message is displayed to confirm this.
 
 <img src="docs/readme-images/features/delete-bake.png" alt="Image showing Delete Bake form">
 
+#### My Starred Bakes Page
 
-- starred bakes list
-- Best For baking planner, plus modal to add a bake to planner on bake-detail page
+- The My Starred Bakes page allows a user to see all the bakes that they have starred. Starring a bake functions as both a "Like" and as a bookmark, since it adds the starred bake to this list.
+- If a user visits the My Starred Bakes page without having starred any bakes yet, they will be shown a message to explain this and invite them to visit the homepage to browse all bakes:
+
+<img src="docs/readme-images/features/starred-bakes-prompt.png" alt="Image showing empty My Starred Bakes page">
+
+- When a user has starred one or more bakes, the bakes will be displayed on their My Starred Bakes page as bake cards.
+    - The cards are displayed, ordered and paginated in the same way as on the homepage, to maintain a consistent experience.
+    - Also similarly to the homepage, Edit and Delete buttons are displayed by a bake card for the author or admin users:
+
+<img src="docs/readme-images/features/my-starred-bakes.png" alt="Image showing My Starred Bakes page with bakes">
+
+- If a user attempts to view their starred bakes when they are not signed in, by either altering or copying and pasting the URL, the user will be redirected to the login page.
+
+#### Best For Bakes Plan
+
+- The Best For Bakes section provides signed in users with a planner where they can plan in bakes for a particular occasion e.g. a bake to take to a party or a recipe that is good for kids to bake.
+- If a user visits their Best For Bakes plan before having added any bakes to the plan, they will see the list of occasions with placeholder cards as follows:
+
+<img src="docs/readme-images/features/best-for-new.png" alt="Image showing Best For Bakes page with placeholder cards">
+
+- If a user adds a bake to their plan for a particular occasion, the placeholder card for that occasion will be replaced by the bake that they have added.
+    - If a user updates the plan, the new bake replaces the existing bake in that slot (each slot only displays a single bake):
+
+<img src="docs/readme-images/features/best-for-bakes.png" alt="Image showing Best For Bakes page with bakes and placeholder cards">
+
+- The bake cards in the Best For section do not display Edit and Delete buttons. It was felt that this could be too confusing for users, who might think that this referred to deleting them from the plan, rather than deleting the bake itself.
+    - Otherwise, they display the same as the bake cards on the homepage.
+- Clicking anywhere on a bake card redirects to the detailed page for that bake.
+- Clicking anywhere on a placeholder card redirects to home.
+- To add a bake to their Best For bake plan, a user can click on the "Add to Plan" button on the detailed page for that bake.
+    - Doing so brings up a modal:
+
+<img src="docs/readme-images/features/best-for-modal.png" alt="Image showing modal to add bake to Best For Bakes plan">
+
+- The modal includes a dropdown list, from which the user can select the occasion that they would like to add the bake for.
+- Hovering over options in the list shades the background and changes the text colour to provide visual guidance for users:
+
+<img src="docs/readme-images/features/best-for-dropdown.png" alt="Image showing modal dropdown to add bake to Best For Bakes plan">
+
+- Clicking Save will save the bake to the chosen occasion slot in the Best For plan and display a confirmation message to the user:
+
+<img src="docs/readme-images/features/best-for-confirmation.png" alt="Image showing confirmation of adding bake to Best For Bakes plan">
+
+- Returning to the Best For page will then display the selected bake in the chosen occasion slot.
+- If a user attempts to access their Best For page when they are not signed in, by either altering or copying and pasting the URL, the user will be redirected to the login page.
 
 #### Custom Error Pages
 
@@ -315,8 +368,22 @@ A number of features were identified that were desirable but were ultimately not
     - Expand the Best For page into separate pages so that a user can save bakes for multiple occasions, as well as being able to customise what those occasions are
 
 ### Plane 3: Structure and Data Model
-## Data Model
-- model schema
+
+The program uses Object Oriented Programming and Django's Class-Based Generic Views.
+
+The user authentication system uses Django AllAuth.
+
+The standard Django User model is used.
+
+Custom models for Bake It Better are:
+
+- Bake: represents a baking recipe created by a user and saved to the database. The bake author is a foreign key from the Bake to the User model, since a bake only has one author.
+- Comment: represents a comment created by a user to comment on an individual bake. Since a comment is only applicable to a single recipe, the Bake is a foreign key in the Comment model.
+- Best For: allows users to add a Bake to their Best For plan for a given occasion. Each Best For instance saved to the database has a specified single user and bake. As such, the Best For model is linked via foreign keys to the User and Bake models.
+
+The structure of the database schema is detailed in the diagram below, which was created using Microsoft PowerPoint:
+
+<img src="docs/readme-images/data-model.png" alt="Image showing data model">
 
 ### Plane 4: Skeleton and Wireframes
 
