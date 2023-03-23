@@ -387,7 +387,25 @@ The structure of the database schema is detailed in the diagram below, which was
 
 ### Plane 4: Skeleton and Wireframes
 
+Wireframes for the project can be seen below. These were developed on mobile, since due to the nature of the site and the way it is likely to be used, Bake It Better is very much a mobile-first site:
+
+<img src="docs/readme-images/wireframes-1.png" alt="Image showing wireframes, first set">
+<br>
+<img src="docs/readme-images/wireframes-2.png" alt="Image showing wireframes, second set">
+<br>
+<img src="docs/readme-images/wireframes-3.png" alt="Image showing wireframes, third set">
+
 ### Plane 5: Surface
+
+#### Colour Scheme
+
+A simple colour scheme was developed using the [Coolors](https://coolors.co/) colour palette, in combination with iterations of user testing and feedback. The intention was to provide an attractive background to the website without detracting from the content. Since the website has a relatively large number of media items and images can be uploaded by users, it was important to select neutral background colours that will fit well with a wide range of other colours.
+
+The combination of the text and background colours used on the website have also been checked for sufficient contrast to ensure accessibility; for further details on this, please see the separate [Testing documentation](https://github.com/frankiesanjana/bake-it-better/blob/main/docs/Testing.md).
+
+#### Typography
+
+The Poppins font has been used for the main text in the body of the website; this is a simple font chosen for its ease of readability. The Lobster font has been used for headings. This is a slightly more artistic style of font intended to add a touch of style to the site. I was wary of choosing a font that was too complex or difficult to read and so user testing and feedback has been obtained to ensure that it remains sufficiently clear, including for one user who has dyslexia but assured me that they still found it both perfectly readable and aesthetically pleasing. The Sans Serif font is set as a backup in case the main fonts are not being imported correctly into the site.
 
 ## Agile Methodology
 For each sprint, the user stories for that sprint were added to the project board. Each user story is marked as belonging to its parent Epic, and has acceptance criteria that had to be met before it could be marked as complete. Associated developer tasks are listed below the acceptance criteria for each user story, and Story Points (an estimate made before work is begun that reflect the amount of work needed to complete a user story) have also been noted.
@@ -405,7 +423,152 @@ Further notes about the Agile development are described in the [Agile documentat
 
 ## Technologies / Languages / Frameworks
 
+### Languages
+
+- [Python](https://www.python.org/)
+- [HTML](https://en.wikipedia.org/wiki/HTML)
+- [CSS](https://en.wikipedia.org/wiki/CSS)
+- [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
+
+### Frameworks and Libraries
+
+- [Django 3.2](https://www.djangoproject.com/) is a Python-based web framework that follows the model–template–views architectural pattern.
+- [Django AllAuth](http://www.intenct.nl/projects/django-allauth/) is an integrated set of Django applications addressing authentication, registration, account management.
+- [Django Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/) controls the rendering behaviour of Django forms.
+- [Psycopg2](https://pypi.org/project/psycopg2/) is a PostgreSQL database adapter for the Python programming language.
+- [Gunicorn](https://gunicorn.org/) is a Python WSGI HTTP server, used to run the project.
+- [Cloudinary](https://cloudinary.com/) enables storage of media and static files in conjunction with [Django Cloudinary Storage](https://pypi.org/project/django-cloudinary-storage/).
+- [Bootstrap 4.6](https://getbootstrap.com/docs/4.6/getting-started/introduction/) is a front-end CSS and JavaScript framework.
+
+### Other Technologies and Resources
+
+- [Balsamiq](https://balsamiq.com/) was used to create wireframes for the project.
+- [Gitpod](https://www.gitpod.io/) is an online integrated development environment that was used to write my code.
+- [Git](https://git-scm.com/) was used for version control by committing changes via Gitpod. Changes are then stored by pushing them to GitHub.
+- [GitHub](https://github.com/) was used to store the project code after pushing it from Git.
+- [Heroku](https://www.heroku.com/) is a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud, and was used to deploy the live project.
+- [https://www.elephantsql.com/] is used to host the project database.
+- [Google Fonts](https://fonts.google.com/) was used to provide the fonts used in this project.
+- [Amiresponsive](http://ami.responsivedesign.is/) was used to create the image at the top of this document.
+- [MS PowerPoint](https://www.microsoft.com/en-us/microsoft-365/powerpoint) was used to draw out the data schema for the program.
+- [MS Excel](https://www.microsoft.com/en-ww/microsoft-365/excel) was used for general project planning and for manual testing documentation.
+- [W3C HTML Validator](https://validator.w3.org/) was used to validate HTML code.
+- [W3C CSS Validator](https://jigsaw.w3.org/css-validator/validator) was used to validate CSS code.
+- [CI's Python Linter](https://pep8ci.herokuapp.com/) was used to test Python code.
+- [JSHint validator](https://jshint.com/) was used to test JavaScript code.
+- Images for the bakes are from [Pexels](https://www.pexels.com/) and [Pixabay](https://pixabay.com/).
+- Baking recipes are taken from the [Great British Bake Off](https://thegreatbritishbakeoff.co.uk/) and [BBC Good Food](https://www.bbcgoodfood.com/) websites.
+- The Bake It Better logo was developed using [Hatchful](https://www.shopify.com/tools/logo-maker) and converted into a favicon using [Favicon](https://favicon.io/favicon-converter/).
+- [Font Awesome](https://fontawesome.com/) and [Bootstrap](https://icons.getbootstrap.com/) icons were used to add decoration to the text.
+- My secret key for Django was generated using [Djecrety](https://djecrety.ir/).
+- The option for users to add custom styles for text uses [Summernote](https://summernote.org/).
+- [Coolors](https://coolors.co/) was used to develop and accessibility test the colour palette.
+
 ## Build & Deployment
+
+### Build
+
+#### Create the repository
+
+- Sign into GitHub and navigate to [Code Institute's Gitpod Template](https://github.com/Code-Institute-Org/gitpod-full-template):
+
+<img src="docs/readme-images/build-and-deployment/ci-gitpod-template.png" alt="Image showing CI Gitpod template">
+
+- Using the button at the top of the repo, click "Use this template" and then select "Create a new repository":
+
+<img src="docs/readme-images/build-and-deployment/use-this-template.png" alt="Image showing use this template button">
+
+- Create a name and, optionally, a description for the repository, then click on the green "Create repository" button below.
+
+<img src="docs/readme-images/build-and-deployment/create-new-repo.png" alt="Image showing repo creation">
+
+- Your repository will be generated within a few seconds and you will be automatically taken to the repository. Click the green "Gitpod" button to open in Gitpod and begin editing.
+
+<img src="docs/readme-images/build-and-deployment/new-repo.png" alt="Image showing new repo with Gitpod button">
+
+#### Install Django and supporting libraries
+
+Note that at the time this project is being created, Django 3.2 is the LTS (Long Term Support) version of Django and is therefore preferable to use over the newest beta Django 4.
+
+- Install Django and gunicorn: `pip3 install 'django<4' gunicorn`
+- Install supporting libraries: `pip3 install dj_database_url==0.5.0 psycopg2`
+- Install Cloudinary libraries: `pip3 install dj3-cloudinary-storage`
+- Create a requirements file: `pip3 freeze --local > requirements.txt`
+    - This file saves a list of all the dependencies (libraries, packages, modules) that are needed for the project.
+- Create the project: `django-admin startproject PROJ_NAME . `
+    - For this project, the project name is bake-it-better
+    - Remember to include the `.` after the project name - this tells Django admin to create the project in the current directory
+    - A new directory should be created with the project name, including a number of files
+    - A `manage.py` file should also be created
+- Create an app witin the project: `python3 manage.py startapp 'APP_NAME'`
+    - For this project, the app name is bakes
+    - A project can have multiple apps, which will all need to be added to the `settings.py` installed apps (see next step)
+- Within `settings.py` in the project directory, add it to your `INSTALLED_APPS`:
+- `INSTALLED_APPS = [
+    …
+    'APP_NAME',
+]`
+- Save the changes.
+- Within the terminal:
+    - Migrate the changes: `python3 manage.py migrate`
+    - Note that if you create another app within the project, migrations will be automatically created for the new app and this comment will need to be run again so that new changes are also added to the database
+- Run the server: `python3 manage.py runserver`
+    - A popup should appear in the bottom right-hand corner of your Gitpod window:
+
+<img src="docs/readme-images/build-and-deployment/run-server.png" alt="Image showing server running popup">    
+
+- Click on "Open Browser" and a new tab will open to preview the project. You should see the following message:
+
+<img src="docs/readme-images/build-and-deployment/project-success.png" alt="Image showing success message">
+
+#### Create a new external database
+
+On elephantsql.com:
+- Log in to your ElephantSQL account to view your dashboard
+
+<img src="docs/readme-images/build-and-deployment/elephant-sql-dashboard.png" alt="Image showing Elephant SQL Dashboard">
+
+- Click the green button on the top left-hand side of the screen, “Create New Instance”:
+
+<img src="docs/readme-images/build-and-deployment/create-new-instance.png" alt="Image showing Create New Instance button">
+
+- Set up your plan:
+    - Give your plan a Name (usually the name of the project)
+    - Select the Tiny Turtle (Free) plan
+    - You can leave the Tags field blank
+
+<img src="docs/readme-images/build-and-deployment/set-up-plan.png" alt="Image showing Set Up Plan screen">
+
+- Click “Select Region”:
+
+<img src="docs/readme-images/build-and-deployment/region-button.png" alt="Image showing Select Region button">
+
+- Select a data center near you:
+    - Note: If you receive a message saying "Error: No cluster available in your-chosen-data-center yet", choose another region
+
+<img src="docs/readme-images/build-and-deployment/select-region.png" alt="Image showing Select Region screen">
+
+- Click “Review”:
+
+<img src="docs/readme-images/build-and-deployment/review-button.png" alt="Image showing Review button">
+
+- Check that your details are correct. Then click “Create instance”:
+
+<img src="docs/readme-images/build-and-deployment/confirm-create-instance.png" alt="Image showing Confirm Create Instance screen & button">
+
+- Return to the ElephantSQL dashboard and click on the database instance name for this project
+
+<img src="docs/readme-images/build-and-deployment/populated dashboard" alt="Image showing dashboard with project">
+
+- Copy your ElephantSQL database URL using the Copy icon. It will start with postgres://
+
+
+
+
+
+
+
+
 
 ## Credits
 
@@ -438,15 +601,9 @@ A number of articles and blog posts were useful to help me for specifics of this
 - The modal on the bake-detail.html page where a user can add Best For bakes used Bootstrap's [modal documentation](https://getbootstrap.com/docs/4.6/components/modal/).
 - Automated testing was informed by this [list of Python assert methods](https://www.mattcrampton.com/blog/a_list_of_all_python_assert_methods/) and the [Python unit testing documentation](https://docs.python.org/3/library/unittest.html).
 
-#### Other 
+#### Other
 
-- Images for the bakes are from [Pexels](https://www.pexels.com/) and [Pixabay](https://pixabay.com/).
-- Baking recipes are taken from the [Great British Bake Off](https://thegreatbritishbakeoff.co.uk/) and [BBC Good Food](https://www.bbcgoodfood.com/) websites.
-- The Bake It Better logo was developed using [Hatchful](https://www.shopify.com/tools/logo-maker) and converted into a favicon using [Favicon](https://favicon.io/favicon-converter/).
-- [Font Awesome](https://fontawesome.com/) and [Bootstrap](https://icons.getbootstrap.com/) icons were used to add decoration to the text.
-- Wireframes were created using [Balsamiq](https://balsamiq.com/wireframes/).
-- My secret key for Django was generated using [Djecrety](https://djecrety.ir/).
-- The option for users to add custom styles for text uses [Summernote](https://summernote.org/).
+- Some of the screenshots of images in the Build and Deployment section of this document are taken from [Code Institute's](https://codeinstitute.net/) student guide on [deployment](https://code-institute-students.github.io/deployment-docs/80-migrating-databases-for-heroku/migrating-databases-01-create-a-database)
 
 ### Acknowledgements
 
