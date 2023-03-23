@@ -521,6 +521,8 @@ Note that at the time this project is being created, Django 3.2 is the LTS (Long
 
 <img src="docs/readme-images/build-and-deployment/project-success.png" alt="Image showing success message">
 
+### Deployment
+
 #### Create a new external database
 
 On elephantsql.com:
@@ -535,7 +537,7 @@ On elephantsql.com:
 - Set up your plan:
     - Give your plan a Name (usually the name of the project)
     - Select the Tiny Turtle (Free) plan
-    - You can leave the Tags field blank
+    - The Tags field can be left blank
 
 <img src="docs/readme-images/build-and-deployment/set-up-plan.png" alt="Image showing Set Up Plan screen">
 
@@ -558,17 +560,39 @@ On elephantsql.com:
 
 - Return to the ElephantSQL dashboard and click on the database instance name for this project
 
-<img src="docs/readme-images/build-and-deployment/populated dashboard" alt="Image showing dashboard with project">
+<img src="docs/readme-images/build-and-deployment/populated-dashboard.png" alt="Image showing dashboard with project">
 
-- Copy your ElephantSQL database URL using the Copy icon. It will start with postgres://
+- Copy your ElephantSQL database URL using the Copy icon (see red arrow in the picture below). It will start with postgres://
+    - This URL can now be used when linking the database to the project's GitHub repository.
 
+<img src="docs/readme-images/build-and-deployment/database-detail.png" alt="Image showing project with link">
 
+#### Create the Heroku app
 
+- Sign up / log in to Heroku.
+- Create a new app from the Heroku dashboard:
 
+<img src="docs/readme-images/build-and-deployment/heroku-new.png" alt="Image showing Heroku new app button">
 
+- Choose a unique name for your app and select your region, then click "Create app":
 
+<img src="docs/readme-images/build-and-deployment/heroku-create-app.png" alt="Image showing Heroku new app data">
 
+- From your new app, select the Settings tab:
 
+<img src="docs/readme-images/build-and-deployment/heroku-tabs.png" alt="Image showing Heroku tabs">
+
+- Scroll down to the Config Vars section and click on "Reveal Config Vars":
+
+<img src="docs/readme-images/build-and-deployment/reveal-config-vars.png" alt="Image showing Config Vars button on Heroku">
+
+- Add a Config Var with a key of DATABASE_URL and a value of the ElephantSQL database url you copied in the previous step above:
+
+<img src="docs/readme-images/build-and-deployment/config-vars.png" alt="Image showing Config Vars on Heroku">
+
+- Once you have entered the key and value, click the Add button to confirm the Config Var:
+
+<img src="docs/readme-images/build-and-deployment/add-button.png" alt="Image showing Add button on Heroku">
 
 ## Credits
 
