@@ -574,7 +574,7 @@ On elephantsql.com:
 
 <img src="docs/readme-images/build-and-deployment/heroku-new.png" alt="Image showing Heroku new app button">
 
-- Choose a unique name for your app and select your region, then click "Create app":
+- Choose a unique name for your app and select your region, then click "Create app". Note that unlike GitHub, the name must be unique across all of Heroku, not just unique to your own account:
 
 <img src="docs/readme-images/build-and-deployment/heroku-create-app.png" alt="Image showing Heroku new app data">
 
@@ -593,6 +593,150 @@ On elephantsql.com:
 - Once you have entered the key and value, click the Add button to confirm the Config Var:
 
 <img src="docs/readme-images/build-and-deployment/add-button.png" alt="Image showing Add button on Heroku">
+
+#### Attach the Database
+
+- In Gitpod, create a new file `env.py` in the top level directory.
+- In `env.py`:
+    - Import os library - `import os`
+    - Set environment variables - `os.environ["DATABASE_URL"] = "Paste in ElephantSQL database URL"`
+    - Add in secret key - `os.environ["SECRET_KEY"] = "Make up your own randomSecretKey"`
+- In Heroku:
+    - Add Secret Key to Config Vars:
+        - key - SECRET_KEY
+        - value - randomSecretKey (as entered in the `env.py` file)
+- In Gitpod, in your `settings.py` file:
+    - Reference env.py with the following code:
+        - `import os`
+        - `import dj_database_url`
+        - `if os.path.isfile("env.py"): import env`
+    - Remove the insecure secret key and replace it as follows:
+        - `SECRET_KEY = os.environ.get('SECRET_KEY')`
+    - Comment out the existing Databases section:
+        - `#DATABASES = {`
+        - `#'default': {`
+        - `#'ENGINE': 'django.db.backends.sqlite3',`
+        - `#'NAME': BASE_DIR / 'db.sqlite3',`
+        - `#}`
+        - `#}`
+    - Add new Databases section:
+        - `DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}`
+- Save all files, and make migrations in the terminal: `python3 manage.py migrate`
+
+#### Get static and media files stored on Cloudinary
+
+- Log in / sign up to [Cloudinary](https://cloudinary.com/)
+- From your Cloudinary dashboard, copy the API Environment Variable with CLOUDINARY_URL:
+
+<img src="docs/readme-images/build-and-deployment/cloudinary-url.png" alt="Image showing Cloudinary dashboard with API Environment variable">
+
+- In Gitpod, in your `env.py` file, add the Cloudinary URL; be sure to paste in the correct section of the link
+    - `os.environ["CLOUDINARY_URL"] = "cloudinary://************************"`
+
+- In Heroku, add the Cloudinary URL to the Config Vars; be sure to paste in the correct section of the link
+    - key: CLOUDINARY_URL
+    - value: cloudinary://************************
+
+- Still in Heroku, add DISABLE_COLLECTSTATIC to the Config Vars
+    - key: DISABLE_COLLECTSTATIC
+    - value: 1
+    - <strong>NOTE: this is a temporary step for the moment and this will be removed before deployment.</strong>
+
+- In Gitpod, in your `settings.py` file, add the Cloudinary Libraries to installed apps
+    - `INSTALLED_APPS = [`
+    - `…,`
+    - `'cloudinary_storage',`
+    - `'django.contrib.staticfiles',`
+    - `'cloudinary',`
+    - `…,`
+    - `]`
+    - <strong>NOTE: the order of these is important.</strong>
+
+- Tell Django to use Cloudinary to store media and static files with the following code - <em>Place under the Static files</em>:
+
+<img src="docs/readme-images/build-and-deployment/static-files-code.png" alt="Image showing code in settings.py for static files">
+
+#### Deploying to Heroku
+
+- Link file to the templates directory in Heroku - <em>Place under the `BASE_DIR` line</em>:
+    - `TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')`
+
+- Change the templates directory to `TEMPLATES_DIR` - <em>Place within the `TEMPLATES` array</em>:
+    - `TEMPLATES = [`
+    - `{`
+    - `…,`
+    - `'DIRS': [TEMPLATES_DIR],`
+    - `…,`
+    - `],`
+    - `},`
+    - `},`
+    - `]`
+
+- Add Heroku Hostname to `ALLOWED_HOSTS` (e.g. bake-it-better): `ALLOWED_HOSTS = ["PROJ_NAME.herokuapp.com", "localhost"]`
+
+- In Gitpod:
+    - Create three new folders in the top level directory - `media`, `static` & `templates`.
+    - Create a file named Procfile in the top level directory - `Procfile`
+        - Note that this file must live in the root directory and does not function if placed elsewhere.
+        - The Procfile specifies the commands that are executed by a Heroku app on startup.
+
+- In the Procfile, add the code: `web: gunicorn PROJ_NAME.wsgi`
+
+- Save all files, then in the terminal, add, commit and push all files:
+    - `git add .`
+    - `git commit -m “Deployment Commit”`
+    - `git push`
+
+- In Heroku, in your app's Settings tab, below the Config Vars section there is a Buildpacks section.
+    - Click the "Add Buildpack" button:
+
+<img src="docs/readme-images/build-and-deployment/add-buildpack.png" alt="Image showing buildpacks section in Heroku">
+
+    - Select the Python buildpack and click "Save Changes":
+
+<img src="docs/readme-images/build-and-deployment/buildpacks.png" alt="Image showing available buildpacks in Heroku">
+
+- In Heroku, in the Deploy tab:
+    - Select "Connect to GitHub" from the deployment methods section.
+    - Search for the name of the GitHub repository to connect to.
+    - Click Connect.
+    - Your Heroku app should now be connected to your GitHub account:
+
+<img src="docs/readme-images/build-and-deployment/deployment-connected.png" alt="Image showing connected app in Heroku">
+
+- Further down the Deploy tab, you have the option to choose to Enable Automatic Deploys or, if you would prefer to deploy manually, select Deploy Branch.
+    - Note that if you deploy manually, you will need to re-deploy each time the repository is updated.
+    - Note that if you deploy automatically, it is not uncommon to receive a notification that automatic deployment has failed. For this project, this has so far always been successfully fixed by going to Heroku and manually redeploying.
+
+<img src="docs/readme-images/build-and-deployment/auto-manual-deploy.png" alt="Image showing deployment options in Heroku">
+
+- The build log will update and when the app has deployed successfully, you can click on View to view the deployed site.
+
+## Forking this repository
+It is possible to copy the repository in order to experiment with your own changes without affecting the original project. The steps to do this as as follows:
+
+- Navigate to the GitHub website.
+- Log in if necessary.
+- Navigate to the repository that you want to fork - the repo for this project is [Bake It Better](https://github.com/frankiesanjana/bake-it-better).
+- In the top right-hand corner of the page, click on "fork".
+- You will be taken to a page to create your own fork. You can edit the project name and add a description (optional).
+- Click on "create fork" to complete the process.
+
+## Cloning this repository
+It is also possible to copy the repository onto your own local machine. In practice, this might be done to make it easier to fix merge conflicts, add or remove files, and push larger commits. To do this, follow these steps:
+
+- Navigate to the GitHub website.
+- Log in if necessary.
+- Navigate to the repository that you want to clone - the repo for this project is [Bake It Better](https://github.com/frankiesanjana/bake-it-better).
+- Above the list of files, find the "Code" button and click on it:
+
+<img src="docs/readme-images/build-and-deployment/code-button.png" alt="Picture of code button on GitHub">
+
+- To clone the repository using HTTPS, under "Clone with HTTPS", click the clipboard icon. To clone the repository using an SSH key, including a certificate issued by your organization's SSH certificate authority, click Use SSH, then click the clipboard icon. To clone a repository using GitHub CLI, click Use GitHub CLI, then click the clipboard icon.
+- Open your computer terminal.
+- Change the current working directory to the location where you want the cloned directory.
+- Type "git clone" and then paste the location that you have copied.
+- Press "enter" and your local clone will be created.
 
 ## Credits
 
