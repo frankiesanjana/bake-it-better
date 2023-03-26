@@ -43,7 +43,7 @@
                             {{ bake.number_of_stars }}
                         {% endif %}
                     </div>
-                    <!-- Code to add edit and delete buttons for signed-in author user) -->
+                    <!-- Code to add edit and delete buttons for signed-in author or admin user -->
                     <div>
                         {% if user.is_authenticated and request.user == bake.author or user.is_superuser %}
                             <a class="btn" href="{% url 'edit-bake' bake.slug %}">Edit</a>
@@ -112,53 +112,54 @@
         </div>
     </div>
     <div class="row">
-            <div class="col-12 card mb-4 mt-3 comment-card">
-                <div class="card-body">
-                    <h2>Comments:</h2>
-                    {% if comments.count == 0 %}
-                        <p>No comments yet - why not add yours below?</p>
-                    {% else %}
-                        {% for comment in comments %}
-                            <div class="comments">
-                                <p class="author">                        
-                                    {{ comment.name }} wrote:
-                                </p>
-                                    {{ comment.body | linebreaks }}
-                                <p>
-                                    <em>
-                                        {{ comment.created_on }}
-                                    </em>
-                                </p>    
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                    <hr>
-                    <br>
-                    {% if commented %}
-                    <div class="alert alert-success" role="alert">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                            <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
-                        </svg>
-                        Your comment is waiting for approval.
-                    </div>
-                    {% else %}
-                        {% if user.is_authenticated %}
-                            <h3>Leave a comment:</h3>
-                            <p>Posting as: {{ user.username }}</p>
-                            <form method="post" class="comment-form">
-                                {{ comment_form | crispy }}
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-signup btn-lg" aria-label="comment-submit-button">Submit</button>
-                            </form>
-                        {% else %}
-                            <p class="comment-text">
-                                <a class="best-for-link" href="{% url 'account_signup' %}">Sign Up</a> or <a class="best-for-link" href="{% url 'account_login' %}">Log In</a> to add your comment!
+        <!-- Code for users to view comments and either to add their own, or login link for non-signed-in users -->
+        <div class="col-12 card mb-4 mt-3 comment-card">
+            <div class="card-body">
+                <h2>Comments:</h2>
+                {% if comments.count == 0 %}
+                    <p>No comments yet - why not add yours below?</p>
+                {% else %}
+                    {% for comment in comments %}
+                        <div class="comments">
+                            <p class="author">                        
+                                {{ comment.name }} wrote:
                             </p>
-                        {% endif %}
-                    {% endif %}
+                                {{ comment.body | linebreaks }}
+                            <p>
+                                <em>
+                                    {{ comment.created_on }}
+                                </em>
+                            </p>    
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <hr>
+                <br>
+                {% if commented %}
+                <div class="alert alert-success" role="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                    </svg>
+                    Your comment is waiting for approval.
                 </div>
+                {% else %}
+                    {% if user.is_authenticated %}
+                        <h3>Leave a comment:</h3>
+                        <p>Posting as: {{ user.username }}</p>
+                        <form method="post" class="comment-form">
+                            {{ comment_form | crispy }}
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-signup btn-lg" aria-label="comment-submit-button">Submit</button>
+                        </form>
+                    {% else %}
+                        <p class="comment-text">
+                            <a class="best-for-link" href="{% url 'account_signup' %}">Sign Up</a> or <a class="best-for-link" href="{% url 'account_login' %}">Log In</a> to add your comment!
+                        </p>
+                    {% endif %}
+                {% endif %}
             </div>
+        </div>
     </div>
 </div>
 

@@ -381,7 +381,9 @@ Custom models for Bake It Better are:
 - Comment: represents a comment created by a user to comment on an individual bake. Since a comment is only applicable to a single recipe, the Bake is a foreign key in the Comment model.
 - Best For: allows users to add a Bake to their Best For plan for a given occasion. Each Best For instance saved to the database has a specified single user and bake. As such, the Best For model is linked via foreign keys to the User and Bake models.
 
-The structure of the database schema is detailed in the diagram below, which was created using Microsoft PowerPoint:
+#### Database Schema
+
+The structure of the database schema is detailed in the diagram below, which was created using Microsoft PowerPoint (click image to enlarge):
 
 <img src="docs/readme-images/data-model.png" alt="Image showing data model">
 
@@ -784,7 +786,7 @@ Firstly, thanks to the team at Code Institute Tutor Support for providing just t
 I used [Code Institute](https://codeinstitute.net/)'s I Think Therefore I Blog walkthrough project to help me get started on this project. There are a few sections of code that are taken from the walkthrough project and remain relatively or completely unchanged. These are noted in the code and are also listed below:
 - The Django code used to provide success messages to confirm user actions in `base.html`, rows 79-93
 - The JavaScript code used to fade out these success messages in `base.html`, rows 114-121
-- The pagination code used in `index.html` rows 46-58, `best-for-bakes.html` rows 66-78 and `my-starred-bakes.html` rows 57-69
+- The pagination code used in `index.html` rows 47-59, `best-for-bakes.html` rows 66-78 and `my-starred-bakes.html` rows 58-70
 
 A number of articles and blog posts were useful to help me for specifics of this project:
 

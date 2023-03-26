@@ -56,7 +56,7 @@ class Bake(models.Model):
 
 class Comment(models.Model):
     """
-       Defines the model for comments
+    Defines the model for comments
     """
     bake = models.ForeignKey(Bake, on_delete=models.CASCADE,
                              related_name='comments')
@@ -78,7 +78,7 @@ class Comment(models.Model):
 
 class BestFor(models.Model):
     """
-       Defines the model for Best For bakes
+    Defines the model for Best For bakes
     """
     # Defines the choices for Best For bakes
     BEST_FOR_CHOICES = [

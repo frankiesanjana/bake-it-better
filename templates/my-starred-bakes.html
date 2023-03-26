@@ -33,6 +33,7 @@
                                         <p class="card-text">{{ bake.created_on}}</p> 
                                     </div>
                                 </div>
+                                <!-- Code to add edit and delete buttons for signed-in author or admin user -->
                                 <div>
                                     {% if user.is_authenticated and request.user == bake.author or user.is_superuser %}
                                         <a class="btn" href="{% url 'edit-bake' bake.slug %}">Edit</a>
