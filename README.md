@@ -165,7 +165,7 @@ The footer is deliberately kept very simple so as not to detract from the main c
 - Users are deliberately not presented with a signup button at this point. New users to a website are unlikely to sign up at this stage even if presented with a signup button, since they are still becoming familiar with the site and do not yet have a compelling reason to do so.
 - Visitors who are pushed to sign up to a website before they are sufficiently familiar with it are highly likely to simply navigate away from the site: [Nielsen Norman Group](https://www.nngroup.com/articles/login-walls/) research notes this, saying "In our many usability tests, we rarely have seen users more annoyed than when they come across a login wall" and "Demanding that users register or log in before they can use an app or see website information has high interaction cost".
 
-- For this reason, and given that users can choose to sign up at any time using the links in the navigation bar, the homepage continues straight to the main content:
+- For this reason, and given that users can choose to sign up at any time by using the links in the navigation bar, the homepage continues straight to the main content:
 
 <img src="docs/readme-images/features/homepage.png" alt="Image showing homepage">
 
@@ -190,7 +190,8 @@ The footer is deliberately kept very simple so as not to detract from the main c
 
 ##### Non-signed-in users
 
-- For non-signed-in users, who are likely to be new users, the page is kept simple. Since they cannot star a bake without being signed in, the star information for the bake is not shown. Buttons to edit and delete the bake are shown only for signed-in author users and the admin user, so these are not shown in any case, and the "Add to Plan" option is not displayed either unless a user is signed in. Many users to a baking site are not interested in the additional functionality that Bake It Better has to offer and simply want to find a recipe. This approach allows these users to find what they are looking for easily and without distraction, and will hopefully mean they are more likely to return to the site in the future.
+- For non-signed-in users, who are likely to be new users, the page is kept simple. Since they cannot star a bake without being signed in, the star information for the bake is not shown. Buttons to edit and delete the bake are shown only for signed-in author users and the admin user, so these are not shown in any case, and the "Add to Plan" option is not displayed either unless a user is signed in.
+    - Many users to a baking site are not interested in the additional functionality that Bake It Better has to offer and simply want to find a recipe. This approach allows these users to find what they are looking for easily and without distraction, and will hopefully mean they are more likely to return to the site in the future.
 - The page as displayed to non-signed-in users begins as follows:
 
 <img src="docs/readme-images/features/bake-detail-non-signed-in-user.png" alt="Image showing bake-detail page for non-signed-in user">
@@ -199,7 +200,7 @@ and continues:
 
 <img src="docs/readme-images/features/bake-detail-non-signed-in-user-2.png" alt="Image showing second part of bake-detail page for non-signed-in user">
 
-- The author, publication date and level of difficulty are published at the top of the bake's recipe, in response to users' comments that they like to follow particular authors, keep up with newly published bakes and know at a glance how difficult they can expect a bake to be.
+- The author, publication date and level of difficulty are published at the top of the bake's recipe, in response to users' comments during interviews that they like to follow particular authors, keep up with newly published bakes and know at a glance how difficult they can expect a bake to be.
 - The description follows next, to give a high-level overview of the bake.
 - The equipment needed, ingredients and method are then listed.
 - The number of comments is noted at the bottom of the bake to provide this information briefly without detracting from the main content; interested users can continue to the comments box below.
@@ -365,7 +366,7 @@ A number of features were identified that were desirable but were ultimately not
     - Enable unit conversion between metric and imperial
     - Incorporate the ability for users to apply filters to the website (e.g. filter for only bakes with a difficulty rating of "easy", etc.)
     - Add functionality for users to search all bakes using keywords
-    - Expand the Best For page into separate pages so that a user can save bakes for multiple occasions, as well as being able to customise what those occasions are
+    - Expand the Best For page into separate pages so that a user can save multiple bakes for each occasion, as well as being able to customise what the occasions are
 
 ### Plane 3: Structure and Data Model
 
@@ -503,7 +504,7 @@ Custom error pages have been created to provide more information to the user if 
 
 <img src="docs/readme-images/build-and-deployment/use-this-template.png" alt="Image showing use this template button">
 
-- Create a name and, optionally, a description for the repository, then click on the green "Create repository" button below.
+- Create a name and, optionally, a description for the repository, then click on the green "Create repository from template" button below.
 
 <img src="docs/readme-images/build-and-deployment/create-new-repo.png" alt="Image showing repo creation">
 
@@ -536,7 +537,7 @@ Note that at the time this project is being created, Django 3.2 is the LTS (Long
 - Save the changes.
 - Within the terminal:
     - Migrate the changes: `python3 manage.py migrate`
-    - Note that if you create another app within the project, migrations will be automatically created for the new app and this comment will need to be run again so that new changes are also added to the database
+    - Note that if you create another app within the project, migrations will be automatically created for the new app and this command will need to be run again so that new changes are also added to the database
 - Run the server: `python3 manage.py runserver`
     - A popup should appear in the bottom right-hand corner of your Gitpod window:
 

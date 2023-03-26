@@ -11,6 +11,7 @@ Testing was carried out from a number of different perspectives:
 - Manual testing of the deployed site
 - Testing of the deployed site across a range of browsers, screen sizes and devices
 - Colour contrast testing in order to ensure accessibility
+- Lighthouse testing
 - Validator testing
 - Resolved Bugs
 - Unresolved Bugs
@@ -29,7 +30,7 @@ The concept of the site was tested by interviewing actual and potential users of
 
 In particular, the "Best For" concept was based on user comments, for example:
 - "Cookbooks often group recipes by type (e.g. for a baking book, bread, cakes, biscuits etc.). However, I would find it useful to have the option to sort recipes by occasion - for example if my grandkids are coming over, I'd like to have a collection of recipes that are easy and fun for them to make."
-- "Sometimes I would love to see options that are great for taking to a party: bakes that are easy to make but look impressive and are easily divided into portions to share while still looking good"
+- "Sometimes I would love to see options that are great for taking to a party: bakes that are easy to make but look impressive and are easily divided into portions to share while still looking good."
 - "What about a section of bakes that are a bit more complicated but could be really rewarding to make at the weekend or on a bank holiday when you have the whole day free?"
 
 The ability to star bakes both as a bookmark-style function and to show appreciation of other users' recipes was also identified as a desired capability in the user interviews; for this reason it serves to fulfil both these functions in Bake It Better.
@@ -62,7 +63,9 @@ However, it was deemed a better user experience to have the option to click the 
 Make the whole Bake card clickable rather than just the title.
 - I was initially concerned that this could end up being complex to implement, but it was extremely easy to do by adding `stretched-link` to the link tags since [Bootstrap have built this functionality in](https://getbootstrap.com/docs/4.6/utilities/stretched-link/).
 
-Remove the stars display on the bake-detail page for users who are not signed in, since they need to be signed in to star the bake themselves and this could be too confusing. I had initially thought that this would be fairly self-explanatory (compare Instagram or Facebook for example where it is possible to see the number of likes on a post without being logged in, but users must be logged in to like the post themselves). However, following discussion with users, to ensure a smooth experience for all users it was ultimately decided to remove this view for users who are not signed in.
+Remove the stars display on the bake-detail page for users who are not signed in, since they need to be signed in to star the bake themselves and this could be too confusing.
+- I had initially thought that this would be fairly self-explanatory (compare Instagram or Facebook for example where it is possible to see the number of likes on a post without being logged in, but users must be logged in to like the post themselves).
+- However, following discussion with users, to ensure a smooth experience for all users it was ultimately decided to remove this view for users who are not signed in.
 
 ## User Story Testing
 
@@ -71,12 +74,12 @@ Each user story had clearly defined acceptance criteria, which made it easy to v
 <img src="readme-images/user-story-example.png" alt="View of a user story, including acceptance criteria and dev tasks">
 
 Thus for this example, I checked that:
-- For a logged-in user's Best For plan, the plan loaded correctly and contained links by each slot to add a bake (for empty slots) or change the bake (for currently filled slots)
-- Both of these links worked correctly and redirected to the homepage
-- When a bake appeared in a Best For plan slot, clicking on the bake card correctly redirected to the `bake-detail` page for that bake
-- When a bake is viewed in its `bake-detail` page and the user is signed in, a button appears before the bake description with an option "Add to Plan"
-- Clicking the "Add to Plan" button causes a modal to appear so that the user can add the bake to their Best For plan
-- Clicking "Cancel" or clicking outside the modal removes the modal
+- For a logged-in user's Best For plan, the plan loaded correctly and contained links by each slot to add a bake (for empty slots) or change the bake (for currently filled slots).
+- Both of these links worked correctly and redirected to the homepage.
+- When a bake appeared in a Best For plan slot, clicking on the bake card correctly redirected to the `bake-detail` page for that bake.
+- When a bake is viewed in its `bake-detail` page and the user is signed in, a button appears before the bake description with an option "Add to Plan".
+- Clicking the "Add to Plan" button causes a modal to appear so that the user can add the bake to their Best For plan.
+- Clicking "Cancel" or clicking outside the modal removes the modal.
 - Selecting an occasion and clicking "Save" saves the bake to the correct occasion, removing the modal.
 - Following this, navigating to the Best For Bakes page displays the saved bake correctly in the selected occasion. It will replace whichever of the template card or an existing bake was previously present in that slot.
 
@@ -84,7 +87,7 @@ This process has been repeated for each of the user stories that are marked as D
 
 ## Automated Django Testing
 
-The first step in the automated testing process was to check everything worked via a “test test” by creating a TestCase class in the sheet `bakes/tests.py`. This initially produced an error with the message “permission denied to create database”. This was because I had not realised that when running tests it is necessary to use the local sqlite db and not the postgres one. Conditional formatting has now been applied to the databases so that when Debug is set to True the local database is selected and tests can be performed, but otherwise the postgres database is used so that the site works correctly.
+The first step in the automated testing process was to check everything worked via a “test test” by creating a TestCase class in the sheet `bakes/tests.py`. This initially produced an error with the message “permission denied to create database”. This was because I had not realised that when running tests it is necessary to use the local sqlite db and not the postgres one. Conditional formatting has now been applied to the databases so that if Debug is set to True the local database is selected and tests can be performed, but otherwise the postgres database is used so that the site works correctly.
 
 Once I had adjusted this so that the local database was used and the postgres one temporarily disabled, the test ran as intended, giving a fail since I had used `assertEqual(1, 0)`.
 I then ran a second test designed to pass, to ensure that a passing test would be evaluated correctly as passing, and obtained the result I was looking for. Since these tests were then deleted, they are also shown here:
@@ -256,7 +259,7 @@ Although the only JavaScript used in the project, in `base.html`, is taken from 
 ## Bugs
 ### Resolved Bugs
 
-- The first bug I encountered provided an excellent example of why we should deploy early! In the first sprint of the project, my goal was to set up the Django project and deploy it to Heroku. At the deployment stage, I initially received an error message. I first wondered if I’d entered the wrong version of the filename in the Procfile and tried adjusting this; however, this did not solve the problem. Re-reading the code in the settings.py file revealed a simple typo, with a `/` instead of a `.` in the following line of code: `STATIC_ROOT = os/path.join(BASE_DIR, 'staticfiles')` `STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') ` Fixing this and then reverting the filename in the Procfile to what I had originally written fixed the problem and I was able to deploy the project successfully. Although this was a relatively trivial bug to resolve, I include it here for two reasons.
+- The first bug I encountered provided an excellent example of why we should deploy early! In the first sprint of the project, my goal was to set up the Django project and deploy it to Heroku. At the deployment stage, I initially received an error message. I first wondered if I’d entered the wrong version of the filename in the Procfile and tried adjusting this; however, this did not solve the problem. Re-reading the code in the settings.py file revealed a simple typo, with a `/` instead of a `.` in the following line of code: `STATIC_ROOT = os/path.join(BASE_DIR, 'staticfiles')` rather than `STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')`. Fixing this and then reverting the filename in the Procfile to what I had originally written fixed the problem and I was able to deploy the project successfully. Although this was a relatively trivial bug to resolve, I include it here for two reasons.
     - Firstly, as mentioned above, it reinforces the message about early deployment, since if I had waited to deploy until my code was much more complete it could have taken a lot longer to find the error.
     - Secondly, since I needed to commit and push changes several times to test the fix, it has impacted my early commit history for the project.
 
@@ -277,7 +280,8 @@ Although the only JavaScript used in the project, in `base.html`, is taken from 
     - Add Bake wasn’t working because I had not defined the `get_absolute_url` for bake submission in the model.
     - Edit Bake and Delete Bake were failing to allow even the signed-in user who had created them to modify them. This needed a line of code adding to each class view in `views.py` to define the `Bake` before attempting to return its author: `Bake = self.get_object()`.
     - Finally, Delete Bake was not working because I had incorrectly defined the `success_url`.
-    - For another, I was able to find the answer online. The issue was that success messages were not working when a bake was deleted. This is because the SuccessMessageMixin in Django is form-based and the DeleteView I was trying to combine it with is not a form-based view. However, I was able to find a solution to this on [Stack Overflow](https://stackoverflow.com/questions/24822509/success-message-in-deleteview-not-shown) and adapted this code to use for my own site.
+
+- For another of the CRUD issues, I was able to find the answer online. The issue was that success messages were not working when a bake was deleted. This is because the SuccessMessageMixin in Django is form-based and the DeleteView I was trying to combine it with is not a form-based view. However, I was able to find a solution to this on [Stack Overflow](https://stackoverflow.com/questions/24822509/success-message-in-deleteview-not-shown) and adapted this code to use for my own site.
 
 - Some of the issues with CRUD functionality required further help from Tutor Support:
     - When the admin user logged in via the site to edit a post created in the admin panel, the html tags around the content were pulled into the form to be edited, as well as the actual content itself. However, if admin or other users create a post via the CRUD functionality on the site itself and then try to edit it, it worked correctly (no html tags appear in the form, just the previously created content). This was because Summernote was used and this saves the entry as a string of HTML text. When this is rendered in the HTML, the tags are therefore included. This was solved by using a Summernote widget for Summernote fields within the `BakeForm` class in `forms.py`.
